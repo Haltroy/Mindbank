@@ -31,7 +31,7 @@ jobs:
           sudo apt install clang llvm zlib1g-dev:arm64 zlib1g-dev gcc-aarch64-linux-gnu g++-aarch64-linux-gnu binutils-aarch64-linux-gnu -y
 
       - name: Setup workloads
-        run: dotnet workload restore ./src/Mindbank.sln
+        run: dotnet workload restore ./Mindbank.sln
       - name: Restore dependencies
         run: dotnet restore ./src/Mindbank.Linux/Mindbank.Linux.csproj
       - name: Build

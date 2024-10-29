@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Setup workloads
-        run: dotnet workload restore ./src/Mindbank.sln
+        run: dotnet workload restore ./Mindbank.sln
       - name: Restore dependencies
         run: dotnet restore ./src/Mindbank.Linux/Mindbank.Linux.csproj
       - name: Build
