@@ -1,0 +1,47 @@
+name: Mindbank Linux x64
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Setup workloads
+        run: dotnet workload restore ./src/Mindbank.sln
+      - name: Restore dependencies
+        run: dotnet restore ./src/Mindbank.Linux/Mindbank.Linux.csproj
+      - name: Build
+        run: dotnet build --no-restore ./src/Mindbank.Linux/Mindbank.Linux.csproj
+      
+      # Linux x64
+      - name: Publish (Linux x64)
+        run: |
+          dotnet publish -c Release -r linux-x64 -o ./publish/linux-x64/ ./src/Mindbank.Linux/Mindbank.Linux.csproj
+          rm ./publish/linux-x64/*.dbg
+          tar czf ./publish/Mindbank-linux-x64.tar.gz ./publish/linux-x64/
+      - name: Upload Artifact (Linux x64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-Linux-x64
+          path: ./publish/Mindbank-linux-x64.tar.gz
+      
+      # Linux MUSL x64
+      - name: Publish (Linux MUSL x64)
+        run: |
+          dotnet publish -c Release -r linux-musl-x64 -o ./publish/linux-musl-x64/ ./src/Mindbank.Linux/Mindbank.Linux.csproj
+          rm ./publish/linux-musl-x64/*.dbg
+          tar czf ./publish/Mindbank-linux-musl-x64.tar.gz ./publish/linux-musl-x64/
+      - name: Upload Artifact (Linux MUSL x64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-Linux-MUSL-x64
+          path: ./publish/Mindbank-linux-musl-x64.tar.gz

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="BlueNotes/BlueNotes/App.axaml" value="BlueNotes/BlueNotes.Desktop/BlueNotes.Desktop.csproj" />
+        <entry key="BlueNotes/BlueNotes/Views/AboutScreen.axaml" value="BlueNotes/BlueNotes.Desktop/BlueNotes.Desktop.csproj" />
+        <entry key="BlueNotes/BlueNotes/Views/MainView.axaml" value="BlueNotes/BlueNotes.Desktop/BlueNotes.Desktop.csproj" />
+        <entry key="BlueNotes/BlueNotes/Views/MainWindow.axaml" value="BlueNotes/BlueNotes.Desktop/BlueNotes.Desktop.csproj" />
+        <entry key="BlueNotes/BlueNotes/Views/NoteScreen.axaml" value="BlueNotes/BlueNotes.Desktop/BlueNotes.Desktop.csproj" />
+        <entry key="BlueNotes/BlueNotes/Views/SettingsScreen.axaml" value="BlueNotes/BlueNotes.Desktop/BlueNotes.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

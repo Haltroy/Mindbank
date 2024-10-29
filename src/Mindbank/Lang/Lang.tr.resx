@@ -1,0 +1,143 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="About_About" xml:space="preserve">
+        <value>Hakkında</value>
+    </data>
+    <data name="About_AboutDesc" xml:space="preserve">
+        <value>Notlar alın, saklayın, düzenelyin ve seçin.</value>
+    </data>
+    <data name="About_License" xml:space="preserve">
+        <value>Lisans</value>
+    </data>
+    <data name="About_TechUsed" xml:space="preserve">
+        <value>Kullanılan Teknolojiler</value>
+    </data>
+    <data name="About_Visit" xml:space="preserve">
+        <value>Ziyaret et...</value>
+    </data>
+    <data name="AppName" xml:space="preserve">
+        <value>Mindbank</value>
+    </data>
+    <data name="ExitApp" xml:space="preserve">
+        <value>Mindbank'i kapat...</value>
+    </data>
+    <data name="ImportExportFileType" xml:space="preserve">
+        <value>Mindbank Bankası</value>
+    </data>
+    <data name="ImportNoteTitle" xml:space="preserve">
+        <value>Notları içe aktar...</value>
+    </data>
+    <data name="MainView_Cancel" xml:space="preserve">
+        <value>İptal</value>
+    </data>
+    <data name="MainView_CreateNewBank" xml:space="preserve">
+        <value>Yeni banka oluştur...</value>
+    </data>
+    <data name="MainView_DeleteBank" xml:space="preserve">
+        <value>Bu bankayı silmek istediğinize emin misiniz?</value>
+    </data>
+    <data name="MainView_Import" xml:space="preserve">
+        <value>İçe aktar...</value>
+    </data>
+    <data name="MainView_ImportFromFile" xml:space="preserve">
+        <value>Dosyadan içe aktar...</value>
+    </data>
+    <data name="MainView_NewBank" xml:space="preserve">
+        <value>Yeni Banka...</value>
+    </data>
+    <data name="MainView_NewBank_Create" xml:space="preserve">
+        <value>Oluştur...</value>
+    </data>
+    <data name="MainView_NewBank_Name" xml:space="preserve">
+        <value>İsim:</value>
+    </data>
+    <data name="MainView_No" xml:space="preserve">
+        <value>Hayır</value>
+    </data>
+    <data name="MainView_Welcome" xml:space="preserve">
+        <value>Mindbank'e hoşgeldiniz.
+Yeni bir not oluşturmak için yada içe aktarmak için "+" sembolünü,
+Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</value>
+    </data>
+    <data name="MainView_Yes" xml:space="preserve">
+        <value>Evet</value>
+    </data>
+    <data name="NoteScreen_Close" xml:space="preserve">
+        <value>Kapat</value>
+    </data>
+    <data name="NoteScreen_Loading" xml:space="preserve">
+        <value>Yükleniyor...</value>
+    </data>
+    <data name="NoteScreen_NewTag_Add" xml:space="preserve">
+        <value>Ekle...</value>
+    </data>
+    <data name="NoteScreen_NewTag_Color" xml:space="preserve">
+        <value>Renk:</value>
+    </data>
+    <data name="NoteScreen_Random_Max" xml:space="preserve">
+        <value>En Fazla:</value>
+    </data>
+    <data name="NoteScreen_Random_Min" xml:space="preserve">
+        <value>En Az:</value>
+    </data>
+    <data name="NoteScreen_SaveLogToFile" xml:space="preserve">
+        <value>Günlüğü dosyaya kaydet</value>
+    </data>
+    <data name="NoteScreen_SaveLogToFileTitle" xml:space="preserve">
+        <value>Günlüğü dosyaya kaydet...</value>
+    </data>
+    <data name="Settings_BlurLevel" xml:space="preserve">
+        <value>Bulanıklık seviyesi:</value>
+    </data>
+    <data name="Settings_HideToTray" xml:space="preserve">
+        <value>Sistem tepsisine gizlen</value>
+    </data>
+    <data name="Settings_KeepText" xml:space="preserve">
+        <value>Yazı ve seçili etiketleri yeni not oluşturduktan sonra sakla</value>
+    </data>
+    <data name="Settings_Main" xml:space="preserve">
+        <value>Ana</value>
+    </data>
+    <data name="Settings_Settings" xml:space="preserve">
+        <value>Ayarlar</value>
+    </data>
+    <data name="Settings_StartInTray" xml:space="preserve">
+        <value>Uygulamayı sistem tepsisinde başlat</value>
+    </data>
+    <data name="Settings_Theme" xml:space="preserve">
+        <value>Tema:</value>
+    </data>
+    <data name="Settings_ThemeDark" xml:space="preserve">
+        <value>Koyu</value>
+    </data>
+    <data name="Settings_ThemeDefault" xml:space="preserve">
+        <value>Sistem varsayılanı</value>
+    </data>
+    <data name="Settings_ThemeLight" xml:space="preserve">
+        <value>Açık</value>
+    </data>
+    <data name="Settings_Theming" xml:space="preserve">
+        <value>Temalama</value>
+    </data>
+    <data name="Settings_UseBlur" xml:space="preserve">
+        <value>Arakplanı bulanıklaştır</value>
+    </data>
+    <data name="ShowApp" xml:space="preserve">
+        <value>Mindbank'i göster...</value>
+    </data>
+</root>

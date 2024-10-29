@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:nuc="clr-namespace:Mindbank.Views"
+             xmlns:lang="clr-namespace:Mindbank.Lang"
+             Initialized="Init"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Mindbank.Views.SettingsScreen">
+    <UserControl.Resources>
+        <StreamGeometry x:Key="chevron_left_regular">M31.8839 8.36612C32.372 8.85427 32.372 9.64573 31.8839 10.1339L18.0178 24L31.8839 37.8661C32.372 38.3543 32.372 39.1457 31.8839 39.6339C31.3957 40.122 30.6043 40.122 30.1161 39.6339L15.3661 24.8839C14.878 24.3957 14.878 23.6043 15.3661 23.1161L30.1161 8.36612C30.6043 7.87796 31.3957 7.87796 31.8839 8.36612Z</StreamGeometry>
+    </UserControl.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
+                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent">
+                    <Path Data="{StaticResource chevron_left_regular}" Fill="{DynamicResource TextControlForeground}"
+                          Stretch="UniformToFill" />
+                </Button>
+                <TextBlock FontSize="20" FontWeight="Bold" Text="{x:Static lang:Lang.Settings_Settings}"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+            <Separator />
+        </StackPanel>
+        <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Vertical" Spacing="5">
+                <TextBlock Text="{x:Static lang:Lang.Settings_Main}" FontWeight="Bold" FontSize="20" />
+                <Separator />
+                <ToggleSwitch Name="HideToSysTray" OnContent="{x:Static lang:Lang.Settings_HideToTray}"
+                              OffContent="{CompiledBinding $self.OnContent}"
+                              IsChecked="{CompiledBinding $parent[nuc:NUC].Settings.HideToSysTray, Mode=TwoWay}"
+                              IsVisible="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}" />
+                <ToggleSwitch Name="KeepText" OnContent="{x:Static lang:Lang.Settings_KeepText}"
+                              OffContent="{CompiledBinding $self.OnContent}"
+                              IsChecked="{CompiledBinding $parent[nuc:NUC].Settings.HideToSysTray, Mode=TwoWay}" />
+                <ToggleSwitch Name="StartInSysTray" OnContent="{x:Static lang:Lang.Settings_StartInTray}"
+                              OffContent="{CompiledBinding $self.OnContent}"
+                              IsChecked="{CompiledBinding $parent[nuc:NUC].Settings.HideToSysTray, Mode=TwoWay}"
+                              IsVisible="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}" />
+                <Panel Height="20" />
+                <TextBlock Text="{x:Static lang:Lang.Settings_Theming}" FontWeight="Bold" FontSize="20" />
+                <Separator />
+                <TextBlock Text="{x:Static lang:Lang.Settings_Theme}" />
+                <StackPanel Orientation="Vertical" Spacing="5">
+                    <RadioButton Name="DefaultTheme" Content="{x:Static lang:Lang.Settings_ThemeDefault}"
+                                 IsCheckedChanged="SystemThemeChecked" />
+                    <RadioButton Name="LightTheme" Content="{x:Static lang:Lang.Settings_ThemeLight}"
+                                 IsCheckedChanged="LightThemeChecked" />
+                    <RadioButton Name="DarkTheme" Content="{x:Static lang:Lang.Settings_ThemeDark}"
+                                 IsCheckedChanged="DarkThemeChecked" />
+                </StackPanel>
+                <ToggleSwitch OnContent="{x:Static lang:Lang.Settings_UseBlur}"
+                              IsVisible="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}"
+                              IsEnabled="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}" Name="UseBlur"
+                              OffContent="{CompiledBinding $self.OnContent}"
+                              IsChecked="{CompiledBinding $parent[nuc:NUC].Settings.UseBlur, Mode=TwoWay}"
+                              IsCheckedChanged="UseBlurCheckedChanged" />
+                <DockPanel IsVisible="{CompiledBinding #UseBlur.IsChecked}"
+                           IsEnabled="{CompiledBinding #UseBlur.IsChecked}">
+                    <TextBlock Text="{x:Static lang:Lang.Settings_BlurLevel}" VerticalAlignment="Center"
+                               DockPanel.Dock="Left" />
+                    <TextBlock Text="%" DockPanel.Dock="Right" VerticalAlignment="Center" />
+                    <TextBlock Text="{CompiledBinding #BlurLevel.Value}" DockPanel.Dock="Right"
+                               VerticalAlignment="Center" />
+                    <Slider Value="{CompiledBinding $parent[nuc:NUC].Settings.BlurLevel}" TickFrequency="1"
+                            Margin="5 0"
+                            Name="BlurLevel" IsSnapToTickEnabled="True"
+                            ValueChanged="BlurLevelValueChanged" />
+                </DockPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

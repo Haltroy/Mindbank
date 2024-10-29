@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:Mindbank.Views"
+             mc:Ignorable="d"
+             x:Class="Mindbank.Views.TagControl">
+    <UserControl.Styles>
+        <Styles>
+            <Style Selector="views|TagControl">
+                <Style Selector="^ Border">
+                    <Setter Property="BorderBrush"
+                            Value="{CompiledBinding  $parent[views:TagControl].TextColorBrush}" />
+                    <Setter Property="Background" Value="{CompiledBinding $parent[views:TagControl].ColorBrush}" />
+                    <Style Selector="^:pointerover">
+                        <Setter Property="BorderBrush"
+                                Value="{CompiledBinding  $parent[views:TagControl].TextColorBrushIsPointerOver}" />
+                        <Setter Property="Background"
+                                Value="{CompiledBinding $parent[views:TagControl].ColorBrushIsPointerOver}" />
+                    </Style>
+                </Style>
+                <Style Selector="^[IsChecked=True]">
+                    <Style Selector="^ Border">
+                        <Setter Property="BorderBrush"
+                                Value="{CompiledBinding  $parent[views:TagControl].TextColorBrushIsChecked}" />
+                        <Setter Property="Background"
+                                Value="{CompiledBinding $parent[views:TagControl].ColorBrushIsChecked}" />
+                        <Style Selector="^:pointerover">
+                            <Setter Property="BorderBrush"
+                                    Value="{CompiledBinding  $parent[views:TagControl].TextColorBrushIsCheckedIsPointerOver}" />
+                            <Setter Property="Background"
+                                    Value="{CompiledBinding $parent[views:TagControl].ColorBrushIsPointerOverIsChecked}" />
+                        </Style>
+                    </Style>
+                </Style>
+            </Style>
+        </Styles>
+    </UserControl.Styles>
+    <Panel>
+        <Border BorderThickness="1" Name="MainBorder"
+                CornerRadius="{CompiledBinding $parent[views:TagControl].CornerRadius}">
+            <Border.Transitions>
+                <Transitions>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.1" />
+                    <BrushTransition Property="Background" Duration="0:0:0.1" />
+                </Transitions>
+            </Border.Transitions>
+            <TextBlock Margin="5" Text="{CompiledBinding $parent[views:TagControl].TagObject.Text}"
+                       Foreground="{CompiledBinding #MainBorder.BorderBrush}" />
+        </Border>
+    </Panel>
+</UserControl>
