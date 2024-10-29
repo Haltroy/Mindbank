@@ -20,11 +20,17 @@ public partial class NoteScreen : NUC
     public static readonly StyledProperty<Bank> BankProperty =
         AvaloniaProperty.Register<NoteScreen, Bank>(nameof(Bank), Bank.GenerateExampleBank());
 
-    private readonly List<Tag> NewNoteTags = [];
+    public static readonly StyledProperty<Color> NewTagColorProperty =
+        AvaloniaProperty.Register<NoteScreen, Color>(nameof(NewTagColor), Colors.CornflowerBlue);
 
-    private readonly List<Tag> SelectedTags = [];
+    public static readonly StyledProperty<string> NewTagTextProperty =
+        AvaloniaProperty.Register<NoteScreen, string>(nameof(NewTagColor), string.Empty);
 
-    private Note? RandomNote;
+    private readonly List<Tag> _newNoteTags = [];
+
+    private readonly List<Tag> _selectedTags = [];
+
+    private Note? _randomNote;
 
     public NoteScreen()
     {
@@ -36,6 +42,18 @@ public partial class NoteScreen : NUC
     {
         get => GetValue(BankProperty);
         init => SetValue(BankProperty, value);
+    }
+
+    public Color NewTagColor
+    {
+        get => GetValue(NewTagColorProperty);
+        set => SetValue(NewTagColorProperty, value);
+    }
+
+    public string NewTagText
+    {
+        get => GetValue(NewTagTextProperty);
+        set => SetValue(NewTagTextProperty, value);
     }
 
     private Predicate<Note> GetPredicate => SearchConditionIsMet;
@@ -112,8 +130,8 @@ public partial class NoteScreen : NUC
     private void AllTagsCheckedChanged(object? sender, RoutedEventArgs e)
     {
         if (sender is not ToggleButton { Tag: Tag tag, IsChecked: var b }) return;
-        if (b is true) SelectedTags.Add(tag);
-        else SelectedTags.Remove(tag);
+        if (b is true) _selectedTags.Add(tag);
+        else _selectedTags.Remove(tag);
         DoSearch(GetPredicate);
     }
 
@@ -138,7 +156,7 @@ public partial class NoteScreen : NUC
 
     private bool SearchConditionIsMet(Note note)
     {
-        if (RandomNote is not null) return note == RandomNote;
+        if (_randomNote is not null) return note == _randomNote;
 
         var condition1 = true;
         if (SearchBox is { Text: var searchText } && !string.IsNullOrEmpty(searchText))
@@ -151,8 +169,8 @@ public partial class NoteScreen : NUC
                     caseSensitive ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase);
         }
 
-        if (SelectedTags.Count <= 0) return condition1;
-        foreach (var tag in SelectedTags)
+        if (_selectedTags.Count <= 0) return condition1;
+        foreach (var tag in _selectedTags)
             if (note.Tags.Contains(tag))
                 return condition1;
 
@@ -167,11 +185,11 @@ public partial class NoteScreen : NUC
         {
             var rnd = new Random();
             var pick = rnd.Next((int)min, (int)max);
-            RandomNote = Bank.Notes.Where(n => n.Visible).ToArray()[pick];
+            _randomNote = Bank.Notes.Where(n => n.Visible).ToArray()[pick];
         }
         else
         {
-            RandomNote = null;
+            _randomNote = null;
         }
 
         DoSearch(GetPredicate);
@@ -213,32 +231,31 @@ public partial class NoteScreen : NUC
     private void NewNoteTagChecked(object? sender, RoutedEventArgs e)
     {
         if (sender is not ToggleButton { IsChecked: var c, Tag: Tag tag }) return;
-        if (c is true) NewNoteTags.Add(tag);
-        else NewNoteTags.Remove(tag);
+        if (c is true) _newNoteTags.Add(tag);
+        else _newNoteTags.Remove(tag);
         tag.NewNoteChecked = c is true;
     }
 
     private void RandomColorClick(object? sender, RoutedEventArgs e)
     {
         var rnd = new Random();
-        NewTagColor.Color = Color.FromRgb((byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256));
+        NewTagColor = Color.FromRgb((byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256));
     }
 
     private void NewTagClicked(object? sender, RoutedEventArgs e)
     {
-        if (NewTagText is not { Text: var text } || string.IsNullOrWhiteSpace(text) ||
-            NewTagColor is not { Color: var color }) return;
-        Bank.Add(new Tag(text, color, Bank));
+        if (string.IsNullOrWhiteSpace(NewTagText)) return;
+        Bank.Add(new Tag(NewTagText, NewTagColor, Bank));
     }
 
     private void AddNewNoteClicked(object? sender, RoutedEventArgs e)
     {
         if (NewText is not { Text: var text } || string.IsNullOrWhiteSpace(text)) return;
-        Bank.Add(new Note(text, NewNoteTags.ToArray(), DateTime.Now, Bank));
+        Bank.Add(new Note(text, _newNoteTags.ToArray(), DateTime.Now, Bank));
         if (!Settings.KeepText)
         {
             NewText.Text = string.Empty;
-            SelectedTags.Clear();
+            _selectedTags.Clear();
             foreach (var item in NewNoteTagsIC.Items)
             {
                 if (item is not Tag tag) continue;

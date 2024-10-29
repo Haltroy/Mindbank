@@ -225,7 +225,8 @@
                                             <StackPanel Orientation="Horizontal" Spacing="5">
                                                 <TextBlock Text="{x:Static lang:Lang.NoteScreen_NewTag_Color}"
                                                            VerticalAlignment="Center" />
-                                                <ColorPicker Name="NewTagColor" />
+                                                <ColorPicker
+                                                    Color="{CompiledBinding $parent[views:NoteScreen].NewTagColor, Mode=TwoWay}" />
                                                 <Button Click="RandomColorClick">
                                                     <Path Data="{StaticResource dice_regular}"
                                                           Fill="{DynamicResource TextControlForeground}"
@@ -233,11 +234,13 @@
                                                           Height="{CompiledBinding $self.Bounds.Width}" />
                                                 </Button>
                                             </StackPanel>
-                                            <TextBox Name="NewTagText" HorizontalAlignment="Stretch" />
+                                            <TextBox
+                                                Text="{CompiledBinding $parent[views:NoteScreen].NewTagText, Mode=TwoWay}"
+                                                HorizontalAlignment="Stretch" />
                                             <Button Content="{x:Static lang:Lang.NoteScreen_NewTag_Add}"
                                                     HorizontalAlignment="Stretch"
                                                     HorizontalContentAlignment="Center" Click="NewTagClicked"
-                                                    IsEnabled="{CompiledBinding !!#NewTagText.Text}" />
+                                                    IsEnabled="{CompiledBinding !!$parent[views:NoteScreen].NewTagText}" />
                                         </StackPanel>
                                     </Flyout>
                                 </Button.Flyout>
