@@ -26,6 +26,8 @@ jobs:
         uses: android-actions/setup-android@v3
       - name: Setup workloads
         run: dotnet workload restore ./Mindbank.sln
+      - name: Install Android workload
+        run: dotnet workload install android
       - name: Restore dependencies
         run: dotnet restore ./src/Mindbank.Android/Mindbank.Android.csproj
       - name: Build
