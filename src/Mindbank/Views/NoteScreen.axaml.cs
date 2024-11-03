@@ -113,7 +113,7 @@ public partial class NoteScreen : NUC
 
     private void NoteTagClick(object? sender, RoutedEventArgs e)
     {
-        if (sender is not ToggleButton { Tag: NoteTag { Note: var note, Tag: var tag } }) return;
+        if (sender is not TagControl { TagObject: { } tag, Tag: NoteTag { Note: { } note } }) return;
         if (note.Tags.Contains(tag))
         {
             note.Tags = note.Tags.Where(x => x != tag).ToArray();
@@ -125,6 +125,10 @@ public partial class NoteScreen : NUC
             tags[^1] = tag;
             note.Tags = tags;
         }
+
+        note.RequestPropertyChangeInvoke();
+
+        Bank.NeedsSaving = true;
     }
 
     private void AllTagsCheckedChanged(object? sender, RoutedEventArgs e)
@@ -143,6 +147,52 @@ public partial class NoteScreen : NUC
     private void SearchUseRegexCheckedChanged(object? sender, RoutedEventArgs e)
     {
         DoSearch(GetPredicate);
+    }
+
+    private async void ExportSelected(object? sender, RoutedEventArgs e)
+    {
+        await Task.Run(async () =>
+        {
+            if (Main?.Parent is not TopLevel { StorageProvider.CanSave: true } topLevel) return;
+
+            var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            {
+                Title = null,
+                SuggestedStartLocation = null,
+                SuggestedFileName = null,
+                DefaultExtension = null,
+                FileTypeChoices = null,
+                ShowOverwritePrompt = null
+            });
+            if (file is null) return;
+            var exported = Bank.Notes.Where(n => n.Visible).ToArray();
+            await using var fs = await file.OpenWriteAsync();
+            Bank.SaveToStream(fs, exported);
+        });
+    }
+
+    private async void ImportFromFile(object? sender, RoutedEventArgs e)
+    {
+        await Task.Run(async () =>
+        {
+            if (Main?.Parent is not TopLevel { StorageProvider.CanOpen: true } topLevel) return;
+
+            var file = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = null,
+                SuggestedStartLocation = null,
+                SuggestedFileName = null,
+                AllowMultiple = false,
+                FileTypeFilter = null
+            });
+            if (file.Count <= 0) return;
+            await using var fs = await file[0].OpenReadAsync();
+            var loaded = Bank.LoadFromStream(fs, Bank, out var v);
+            if (v > Settings.Version)
+                Main?.ShowVersionMismatchError(v);
+            else
+                Bank.AddRange(loaded);
+        });
     }
 
     private void DoSearch(Predicate<Note> predicate)
@@ -266,6 +316,7 @@ public partial class NoteScreen : NUC
 
     private void GoBack(object? sender, RoutedEventArgs e)
     {
+        Bank.Write();
         Bank.Unload();
         Main?.GoBack();
     }

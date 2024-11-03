@@ -24,6 +24,7 @@ public partial class SettingsScreen : NUC
         Settings.Theme = ThemeVariant.Default;
         if (BlurLevel is { Value: var v } && DesktopContainer is not null && UseBlur is { IsChecked: var useBlur })
             DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
     }
 
     private void LightThemeChecked(object? sender, RoutedEventArgs e)
@@ -34,6 +35,7 @@ public partial class SettingsScreen : NUC
         Settings.Theme = ThemeVariant.Light;
         if (BlurLevel is { Value: var v } && DesktopContainer is not null && UseBlur is { IsChecked: var useBlur })
             DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
     }
 
     private void DarkThemeChecked(object? sender, RoutedEventArgs e)
@@ -44,6 +46,7 @@ public partial class SettingsScreen : NUC
         Settings.Theme = ThemeVariant.Dark;
         if (BlurLevel is { Value: var v } && DesktopContainer is not null && UseBlur is { IsChecked: var useBlur })
             DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
     }
 
     private void BlurLevelValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
@@ -51,6 +54,7 @@ public partial class SettingsScreen : NUC
         if (initializing_settings || sender is not Slider { Value: var v } || DesktopContainer is null ||
             UseBlur is not { IsChecked: var useBlur }) return;
         DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
     }
 
     private void UseBlurCheckedChanged(object? sender, RoutedEventArgs e)
@@ -58,7 +62,7 @@ public partial class SettingsScreen : NUC
         if (initializing_settings || BlurLevel is not { Value: var v } || DesktopContainer is null ||
             UseBlur is not { IsChecked: var useBlur }) return;
         DesktopContainer.SetOpacity(useBlur is true ? v : 100);
-        Settings.Save();
+        if (!Design.IsDesignMode) Settings.Save();
     }
 
     private void GoBack(object? sender, RoutedEventArgs e)

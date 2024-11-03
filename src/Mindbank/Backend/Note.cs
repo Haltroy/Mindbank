@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using Avalonia.Media;
@@ -11,7 +10,7 @@ using Mindbank.Backend.Exceptions;
 
 namespace Mindbank.Backend;
 
-public class Bank : INotifyPropertyChanged
+public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 {
     private readonly List<Note> _notes = [];
     private readonly List<Tag> _tags = [];
@@ -24,12 +23,7 @@ public class Bank : INotifyPropertyChanged
 
     private bool _save;
 
-    public Bank(Settings? settings)
-    {
-        Settings = settings;
-    }
-
-    public Settings? Settings { get; }
+    public Settings? Settings { get; } = settings;
     public Bank Self => this;
 
     /// <summary>
@@ -294,6 +288,7 @@ public class Bank : INotifyPropertyChanged
 
     public async void Read()
     {
+        _init = true;
         if (IsExample)
         {
             Thread.Sleep(5000);
@@ -302,7 +297,12 @@ public class Bank : INotifyPropertyChanged
 
         await using var fileStream =
             new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite);
-        LoadFromStream(fileStream);
+        _notes.AddRange(LoadFromStream(fileStream, this, out var v));
+        Version = v;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
+        foreach (var n in Notes)
+            n.RequestPropertyChangeInvoke();
+        _init = false;
     }
 
     public async void Write()
@@ -312,40 +312,41 @@ public class Bank : INotifyPropertyChanged
         await using var fileStream = !File.Exists(FilePath)
             ? File.Create(FilePath)
             : File.Open(FilePath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
-        SaveToStream(fileStream);
+        SaveToStream(fileStream, Notes);
         NeedsSaving = false;
         IsSaving = false;
     }
 
-    private void LoadFromStream(Stream stream)
+    internal static Note[] LoadFromStream(Stream stream, Bank bank, out int version)
     {
-        _init = true;
-        var version = stream.ReadByte();
+        version = stream.ReadByte();
         if (version < 0) throw new MindbankEndOfFileException(0, nameof(stream));
-        var r_hasTags = Tools.isBitSet((byte)version, 7);
-        if (r_hasTags) version -= 128;
-        var r_hasItems = Tools.isBitSet((byte)version, 6);
-        if (r_hasItems) version -= 64;
-        Version = version;
-        if (r_hasTags)
+        var rHasTags = Tools.isBitSet((byte)version, 7);
+        if (rHasTags) version -= 128;
+        var rHasItems = Tools.isBitSet((byte)version, 6);
+        if (rHasItems) version -= 64;
+        Tag[] loadedTags = [];
+        if (rHasTags)
         {
-            var tags_count = Tools.DecodeVarInt(stream);
-            for (var ignored = 0; ignored < tags_count; ignored++)
+            var tagsCount = Tools.DecodeVarInt(stream);
+            loadedTags = new Tag[tagsCount];
+            for (var i = 0; i < tagsCount; i++)
             {
                 var color = Tools.DecodeVarUInt(stream);
                 var text = Encoding.Unicode.GetString(Tools.DecodeByteArrWithVarInt(stream));
-                _tags.Add(new Tag(text, Color.FromUInt32(color), this));
+                loadedTags[i] = new Tag(text, Color.FromUInt32(color), bank);
             }
         }
 
-        if (!r_hasItems) return;
+        if (!rHasItems) return [];
 
         var count = Tools.DecodeVarInt(stream);
-        for (var ignored = 0; ignored < count; ignored++)
+        var result = new Note[count];
+        for (var i = 0; i < count; i++)
         {
             Tag[] tags = [];
             var type = stream.ReadByte();
-            if (type < 0) throw new MindbankEndOfFileException(7, "" + ignored);
+            if (type < 0) throw new MindbankEndOfFileException(7, "" + i);
             var hasTags = Tools.isBitSet((byte)type, 7);
             if (hasTags)
             {
@@ -355,7 +356,7 @@ public class Bank : INotifyPropertyChanged
                 for (var ignored2 = 0; ignored2 < tagCount; ignored2++)
                 {
                     var index = Tools.DecodeVarInt(stream);
-                    tags[ignored2] = Tags[index];
+                    tags[ignored2] = loadedTags[index];
                 }
             }
 
@@ -364,36 +365,41 @@ public class Bank : INotifyPropertyChanged
                 case 0:
                     var text = Tools.DecodeByteArrWithVarInt(stream);
                     var date = Tools.DecodeVarLong(stream);
-                    _notes.Add(new Note(Encoding.Unicode.GetString(text), tags, DateTime.FromBinary(date),
-                        this));
+                    result[i] = new Note(Encoding.Unicode.GetString(text), tags, DateTime.FromBinary(date),
+                        bank);
                     break;
 
                 // no other type is implemented yet, so we don't have to deal with this here for now.
             }
         }
 
-        _init = false;
+        return result;
     }
 
-    private void SaveToStream(Stream stream)
+    internal static void SaveToStream(Stream stream, Note[] notes)
     {
         var version = Settings.Version;
-        if (Count > 0) version += 64;
-        if (TagCount > 0) version += 128;
+        List<Tag> tags = [];
+        foreach (var note in notes)
+        foreach (var tag in note.Tags)
+            if (!tags.Contains(tag))
+                tags.Add(tag);
+        if (notes.Length > 0) version += 64;
+        if (tags.Count > 0) version += 128;
         stream.WriteByte(version);
-        if (TagCount > 0)
+        if (tags.Count > 0)
         {
-            Tools.WriteVarInt(stream, TagCount);
-            foreach (var tag in Tags)
+            Tools.WriteVarInt(stream, tags.Count);
+            foreach (var tag in tags)
             {
                 Tools.WriteVarUInt(stream, tag.Color.ToUInt32());
                 Tools.WriteByteArrWithVarInt(stream, Encoding.Unicode.GetBytes(tag.Text));
             }
         }
 
-        if (Count <= 0) return;
-        Tools.WriteVarInt(stream, Count);
-        foreach (var note in Notes)
+        if (notes.Length <= 0) return;
+        Tools.WriteVarInt(stream, notes.Length);
+        foreach (var note in notes)
         {
             // no other type is implemented yet
             var type = 0 +
@@ -409,22 +415,9 @@ public class Bank : INotifyPropertyChanged
             Tools.WriteVarLong(stream, note.Date.ToBinary());
         }
     }
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
-    }
 }
 
-public class Tag : INotifyPropertyChanged
+public sealed class Tag : INotifyPropertyChanged
 {
     private readonly bool _init;
     private Color _color;
@@ -478,19 +471,6 @@ public class Tag : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
-    }
 }
 
 public record NoteTag(Note Note, Tag Tag)
@@ -499,12 +479,12 @@ public record NoteTag(Note Note, Tag Tag)
     public bool NoteHasTag => Note.Tags.Contains(Tag);
 }
 
-public class Note : INotifyPropertyChanged
+public sealed class Note : INotifyPropertyChanged
 {
+    private readonly DateTime _date = DateTime.MinValue;
     private readonly bool _init;
 
     private bool _checked;
-    private DateTime _date = DateTime.MinValue;
     private Tag[] _tags = [];
     private string _text = string.Empty;
 
@@ -547,7 +527,7 @@ public class Note : INotifyPropertyChanged
     public DateTime Date
     {
         get => _date;
-        set
+        init
         {
             _date = value;
             if (!_init && Bank != null) Bank.NeedsSaving = true;
@@ -594,19 +574,7 @@ public class Note : INotifyPropertyChanged
 
     public void RequestPropertyChangeInvoke()
     {
+        _ = NoteTagCombination;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NoteTagCombination)));
-    }
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
     }
 }

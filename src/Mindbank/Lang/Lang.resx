@@ -149,4 +149,10 @@ To continue working on notes, click on the note name.</value>
     <data name="Settings_BlurLevel" xml:space="preserve">
         <value>Blur level:</value>
     </data>
+    <data name="MainView_OK" xml:space="preserve">
+        <value>OK</value>
+    </data>
+    <data name="MainView_CanntoLoad_VersionMismatch" xml:space="preserve">
+        <value>Cannot load or import this bank(s)/note(s). Version %v% is not supported in this version of Mindbank. </value>
+    </data>
 </root>

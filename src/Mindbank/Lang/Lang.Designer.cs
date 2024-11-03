@@ -290,5 +290,17 @@ namespace Mindbank.Lang {
                 return ResourceManager.GetString("Settings_BlurLevel", resourceCulture);
             }
         }
+        
+        public static string MainView_OK {
+            get {
+                return ResourceManager.GetString("MainView_OK", resourceCulture);
+            }
+        }
+        
+        public static string MainView_CanntoLoad_VersionMismatch {
+            get {
+                return ResourceManager.GetString("MainView_CanntoLoad_VersionMismatch", resourceCulture);
+            }
+        }
     }
 }

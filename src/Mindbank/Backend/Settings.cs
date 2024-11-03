@@ -172,6 +172,8 @@ public class Settings : INotifyPropertyChanged
 
         _isLoading = false;
         _alreadyLoaded = true;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Settings"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
     }
 
     public void Save()
@@ -262,7 +264,7 @@ public class Settings : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
     }
 
-    public void NewNote(string name)
+    public Bank NewNote(string name)
     {
         if (!Directory.Exists(SourcesFolder)) Directory.CreateDirectory(SourcesFolder);
         Bank ns = new(this)
@@ -272,6 +274,7 @@ public class Settings : INotifyPropertyChanged
         };
         ns.Write();
         Add(ns);
+        return ns;
     }
 
     public void ImportNote(Stream file)

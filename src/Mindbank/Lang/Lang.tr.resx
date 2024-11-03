@@ -140,4 +140,10 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     <data name="ShowApp" xml:space="preserve">
         <value>Mindbank'i göster...</value>
     </data>
+    <data name="MainView_OK" xml:space="preserve">
+        <value>Tamam</value>
+    </data>
+    <data name="MainView_CanntoLoad_VersionMismatch" xml:space="preserve">
+        <value>Banka(lar)/not(lar) içeri aktarırken ya da yüklerken bir sorunla karşılaşıldı. %v% sürümü bu Mindbank sürümünde desteklenmiyor. </value>
+    </data>
 </root>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -26,6 +27,7 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
+        Settings.Load();
     }
 
     public Settings Settings
@@ -57,6 +59,35 @@ public partial class MainView : UserControl
         DialogHost.Close(null);
     }
 
+    internal void ShowVersionMismatchError(int v)
+    {
+        StackPanel stackPanel = new() { Orientation = Orientation.Vertical, Spacing = 5 };
+        DockPanel infoPanel = new() { Margin = new Thickness(10) };
+        stackPanel.Children.Add(infoPanel);
+        var errorPath = new Path
+        {
+            Stroke = new SolidColorBrush(Colors.Red),
+            StrokeThickness = 1,
+            Stretch = Stretch.Uniform,
+            Height = 25,
+            Margin = new Thickness(10),
+            Data = new PathGeometry
+            {
+                Figures = PathFigures.Parse(
+                    "M12,2 C17.523,2 22,6.478 22,12 C22,17.522 17.523,22 12,22 C6.477,22 2,17.522 2,12 C2,6.478 6.477,2 12,2 Z M12,3.667 C7.405,3.667 3.667,7.405 3.667,12 C3.667,16.595 7.405,20.333 12,20.333 C16.595,20.333 20.333,16.595 20.333,12 C20.333,7.405 16.595,3.667 12,3.667 Z M11.9986626,14.5022358 C12.5502088,14.5022358 12.9973253,14.9493523 12.9973253,15.5008984 C12.9973253,16.0524446 12.5502088,16.4995611 11.9986626,16.4995611 C11.4471165,16.4995611 11,16.0524446 11,15.5008984 C11,14.9493523 11.4471165,14.5022358 11.9986626,14.5022358 Z M11.9944624,7 C12.3741581,6.99969679 12.6881788,7.28159963 12.7381342,7.64763535 L12.745062,7.7494004 L12.7486629,12.2509944 C12.7489937,12.6652079 12.4134759,13.0012627 11.9992625,13.0015945 C11.6195668,13.0018977 11.3055461,12.7199949 11.2555909,12.3539592 L11.2486629,12.2521941 L11.245062,7.7506001 C11.2447312,7.33638667 11.580249,7.00033178 11.9944624,7 Z")
+            }
+        };
+        DockPanel.SetDock(errorPath, Dock.Left);
+        infoPanel.Children.Add(errorPath);
+        infoPanel.Children.Add(new TextBlock
+            { Text = Lang.Lang.MainView_CanntoLoad_VersionMismatch.Replace("%v%", $"{v}") });
+        Button okButton = new() { Content = Lang.Lang.MainView_OK, HorizontalAlignment = HorizontalAlignment.Right };
+        okButton.Click += DialogDismiss;
+        stackPanel.Children.Add(okButton);
+
+        DialogHost.Show(stackPanel);
+    }
+
     private void NoteGroupButtonClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is not Control { Tag: Control c } || !MainCarousel.Items.Contains(c)) return;
@@ -74,34 +105,23 @@ public partial class MainView : UserControl
         Settings.Load();
         if (Application.Current is { } app) app.RequestedThemeVariant = Settings.Theme;
 
-        if (IsOnDesktop is true && DesktopContainer != null)
-        {
-            DesktopContainer.SetOpacity(Settings.UseBlur ? Settings.BlurLevel : 100);
-            if (Settings.HideToSysTray) DesktopContainer.AllowClosing = false;
-            if (Settings.StartInTray) DesktopContainer.Hide();
-        }
+        if (IsOnDesktop is not true || DesktopContainer == null) return;
+        DesktopContainer.SetOpacity(Settings.UseBlur ? Settings.BlurLevel : 100);
+        if (Settings.HideToSysTray) DesktopContainer.AllowClosing = false;
+        if (Settings.StartInTray) DesktopContainer.Hide();
     }
 
     private void BankClicked(object? sender, RoutedEventArgs e)
     {
-        if (sender is not Button button) return;
-        switch (button.Tag)
-        {
-            case Bank bank:
-                var ns = new NoteScreen { Bank = bank };
-                MainCarousel.Items.Add(ns);
-                button.Tag = ns;
-                MainCarousel.SelectedItem = ns;
-                break;
-            case NoteScreen c when MainCarousel.Items.Contains(c):
-                MainCarousel.SelectedItem = c;
-                break;
-        }
+        if (sender is not Button { Tag: Bank bank }) return;
+        var ns = new NoteScreen { Bank = bank, Main = this };
+        MainCarousel.Items.Add(ns);
+        MainCarousel.SelectedItem = ns;
     }
 
     private void DeleteNoteSourceClicked(object? sender, RoutedEventArgs e)
     {
-        if (sender is not Button { Tag: Button button }) return;
+        if (sender is not Button { Tag: Bank bank }) return;
         DockPanel mainPanel = new() { Margin = new Thickness(10) };
         var warningIcon = new Path
         {
@@ -125,30 +145,30 @@ public partial class MainView : UserControl
         sidePanel.Children.Add(new TextBlock
         {
             Margin = new Thickness(10),
-            Text = button.Content is string s ? s : "Bank",
+            Text = bank.Name,
             TextAlignment = TextAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Center
         });
-        var buttonPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 5 };
-        var yesButton = new Button { Content = Lang.Lang.MainView_Yes };
-        yesButton.Click += (_, __) =>
+        var buttonPanel = new Grid { ColumnDefinitions = new ColumnDefinitions("*,5,*") };
+        var yesButton = new Button
         {
-            switch (button.Tag)
-            {
-                case Bank ns:
-                    Settings.Remove(ns);
-                    break;
-                case NoteScreen { Bank: var n_s }:
-                    Settings.Remove(n_s);
-                    break;
-            }
-
-            Notes.Items.Remove(button);
+            Content = Lang.Lang.MainView_Yes, HorizontalAlignment = HorizontalAlignment.Stretch,
+            HorizontalContentAlignment = HorizontalAlignment.Center
+        };
+        Grid.SetColumn(yesButton, 0);
+        yesButton.Click += (_, _) =>
+        {
+            Settings.Remove(bank);
             DialogHost.Close(null);
         };
-        var noButton = new Button { Content = Lang.Lang.MainView_No };
-        noButton.Click += (_, __) => DialogHost.Close(null);
+        var noButton = new Button
+        {
+            Content = Lang.Lang.MainView_No, HorizontalAlignment = HorizontalAlignment.Stretch,
+            HorizontalContentAlignment = HorizontalAlignment.Center
+        };
+        Grid.SetColumn(noButton, 2);
+        noButton.Click += (_, _) => DialogHost.Close(null);
         buttonPanel.Children.Add(yesButton);
         buttonPanel.Children.Add(noButton);
         sidePanel.Children.Add(buttonPanel);
@@ -160,19 +180,33 @@ public partial class MainView : UserControl
     {
         if (MainCarousel is null || MainPanel is null || !MainCarousel.Items.Contains(MainPanel)) return;
         MainCarousel.SelectedItem = MainPanel;
+        var l = new List<object?>();
+        foreach (var control in MainCarousel.Items)
+        {
+            if (Equals(control, MainPanel) || Equals(control, SettingsView) || Equals(control, AboutView)) continue;
+            l.Add(control);
+            if (control is NoteScreen ns) ns.Main = null;
+        }
+
+        foreach (var obj in l) MainCarousel.Items.Remove(obj);
     }
 
     private void CreateNewNoteClicked(object? sender, RoutedEventArgs e)
     {
         if (NewNoteGroupName is not { Text: var t } || string.IsNullOrWhiteSpace(t)) return;
-        Settings.NewNote(t);
+        var bank = Settings.NewNote(t);
+        var ns = new NoteScreen { Bank = bank, Main = this };
+        MainCarousel.Items.Add(ns);
+        MainCarousel.SelectedItem = ns;
+        NewNoteGroupName.Text = string.Empty;
+        DialogHost.Close(null);
     }
 
     private async void ImportFromFileClicked(object? sender, RoutedEventArgs e)
     {
         await Dispatcher.UIThread.InvokeAsync(async () =>
         {
-            if (Parent is not TopLevel { StorageProvider: { CanOpen: true } } top) return;
+            if (Parent is not TopLevel { StorageProvider.CanOpen: true } top) return;
             var files = await top.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
                 Title = Lang.Lang.ImportNoteTitle,

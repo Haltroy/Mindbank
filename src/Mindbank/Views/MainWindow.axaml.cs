@@ -9,7 +9,7 @@ namespace Mindbank.Views;
 
 public partial class MainWindow : Window
 {
-    private readonly double _opacity = 0.75;
+    private double _opacity = 0.75;
 
     public bool AllowClosing = false;
 
@@ -26,7 +26,7 @@ public partial class MainWindow : Window
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
                 if (Background is Brush brush && Math.Abs(brush.Opacity - _opacity) > 0.001)
-                    SetOpacity(_opacity);
+                    SetOpacity(_opacity * 100);
             });
             Thread.Sleep(5000);
             AvaloniaWontSetMyOpacity();
@@ -35,7 +35,15 @@ public partial class MainWindow : Window
 
     public void SetOpacity(double value)
     {
-        if (Background is Brush b) b.Opacity = value / 100;
+        _opacity = value / 100;
+        if (value < 100)
+            TransparencyLevelHint =
+            [
+                WindowTransparencyLevel.AcrylicBlur, WindowTransparencyLevel.Blur, WindowTransparencyLevel.Transparent,
+                WindowTransparencyLevel.None
+            ];
+        else TransparencyLevelHint = [WindowTransparencyLevel.None];
+        if (Background is Brush b) b.Opacity = _opacity;
     }
 
     private void Window_OnClosing(object? sender, WindowClosingEventArgs e)
