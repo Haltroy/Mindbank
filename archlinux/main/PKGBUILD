@@ -1,0 +1,33 @@
+# Maintainer: <haltroy> <thehaltroy@gmail.com>
+pkgname=mindbank
+pkgver=1.0.0.0
+pkgrel=1
+pkgdesc="Advanced GUI note taking application."
+url="https://haltroy.com/Mindbank"
+license=(GPL-3.0-or-later)
+provides=(mindbank)
+arch=(x86_64 aarch64)
+makedepends=(dotnet-sdk)
+options=("!strip")
+
+build() {
+  if [ "$arch" = "x86_64" ]
+  then
+        $MB_ARCH = "x64"
+  elif [ "$arch" = "aarch64" ]
+  then
+        $MB_ARCH = "arm64"
+  fi
+  dotnet publish \
+        -c Release \
+        -r linux-$MB_ARCH \
+        -o ../$pkgname \
+        Mindbank.Linux/Mindbank.Linux.csproj
+  rm ../$pkgname/Mindbank.dbg
+}
+
+package() {
+  mkdir -p "$pkgdir/usr/lib/mindbank/"
+  cp -r "../$pkgname" "$pkgdir/usr/lib/mindbank/"
+  install -d "$pkgdir/usr/lib/mindbank/"
+}
