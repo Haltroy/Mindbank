@@ -1,0 +1,16 @@
+# Maintainer: <haltroy> <thehaltroy@gmail.com>
+pkgname=mindbank-bin
+pkgver=1.0.0.0
+pkgrel=1
+pkgdesc="Advanced GUI note taking application (Binary file)."
+url="https://haltroy.com/Mindbank"
+license=(GPL-3.0-or-later)
+provides=(mindbank)
+arch=(x86_64 aarch64)
+options=("!strip")
+source_x86_64=(minbank-linux-x64.tar.gz"https://github.com/Haltroy/Mindbank/releases/download/${pkgver}/mindbank-linux-x64.tar.gz")
+source_aarch64=(minbank-linux-x64.tar.gz"https://github.com/Haltroy/Mindbank/releases/download/${pkgver}/mindbank-linux-arm64.tar.gz")
+
+package() {
+  install -d "$pkgdir/usr/lib/mindbank/"
+}
