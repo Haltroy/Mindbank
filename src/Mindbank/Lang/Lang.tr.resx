@@ -146,4 +146,25 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     <data name="MainView_CanntoLoad_VersionMismatch" xml:space="preserve">
         <value>Banka(lar)/not(lar) içeri aktarırken ya da yüklerken bir sorunla karşılaşıldı. %v% sürümü bu Mindbank sürümünde desteklenmiyor. </value>
     </data>
+    <data name="Update_1" xml:space="preserve">
+        <value>Mindbank'e bir güncelleme geldi.</value>
+    </data>
+    <data name="Update_3" xml:space="preserve">
+        <value>Bu uygulamanın her zaman en güncel sürümü kullanılması tavsiye edilmektedir.</value>
+    </data>
+    <data name="Update_4" xml:space="preserve">
+        <value>Güncellemek ister misiniz?</value>
+    </data>
+    <data name="Update_CheckForUpdates" xml:space="preserve">
+        <value>Güncellemeler denetleniyor..</value>
+    </data>
+    <data name="Update_UpdateAvailable" xml:space="preserve">
+        <value>Güncelleme var</value>
+    </data>
+    <data name="Update_UpToDate" xml:space="preserve">
+        <value>Güncel</value>
+    </data>
+    <data name="Update_2" xml:space="preserve">
+        <value>Bu güncelleme içeriği yeni özellikler getiriyor olabilir. Aynı zamanda  bu güncelleme, uygulamanın güvenliğini de attıran yenilikler de içerebilir.</value>
+    </data>
 </root>

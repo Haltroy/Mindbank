@@ -1,29 +1,22 @@
 name: Mindbank Windows
-
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
-
+    branches: ["main"]
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      - name: Setup workloads
-        run: dotnet workload restore ./Mindbank.sln
       - name: Restore dependencies
         run: dotnet restore ./src/Mindbank.Windows/Mindbank.Windows.csproj
       - name: Build
         run: dotnet build --no-restore ./src/Mindbank.Windows/Mindbank.Windows.csproj
-      
       # Windows x64
       - name: Publish (Windows x64)
         run: |
@@ -36,9 +29,20 @@ jobs:
           name: Mindbank-Windows-x64
           path: |
             ./publish/win-x64/
-
+      - name: Make Setup (Windows x64)
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: ./src/Mindbank.Windows/Mindbank-x64.iss
+      - name: Upload Artifact (Windows x64 Installer)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-Windows-x64-Installer
+          path: |
+            ./publish/Mindbank-x64.exe
       # Windows ARM64
       - name: Publish (Windows ARM64)
+        # Windows ARM64
+
         run: |
           dotnet publish -c Release -r win-arm64 -o ./publish/win-arm64/ ./src/Mindbank.Windows/Mindbank.Windows.csproj
           Remove-Item .\publish\win-arm64\*.pdb
@@ -49,3 +53,13 @@ jobs:
           name: Mindbank-Windows-ARM64
           path: |
             ./publish/win-arm64/
+      - name: Make Setup (Windows ARM64)
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: ./src/Mindbank.Windows/Mindbank-ARM64.iss
+      - name: Upload Artifact (Windows ARM64 Installer)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-Windows-ARM64-Installer
+          path: |
+            ./publish/Mindbank-ARM64.exe
