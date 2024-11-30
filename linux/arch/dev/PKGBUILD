@@ -3,7 +3,7 @@ pkgname=mindbank-git
 pkgver=1.2
 pkgrel=1
 pkgdesc="Advanced note taking application."
-url="https://haltroy.com/Fluxion"
+url="https://haltroy.com/en/mindbank"
 license=(GPL-3.0-or-later)
 provides=(mindbank)
 arch=(x86_64 aarch64)
@@ -25,7 +25,7 @@ build() {
             -c Release \
             -r linux-$FV_ARCH \
             -o "${srcdir}/${FV_ARCH}" \
-            "${srcdir}/${pkgname}-src/src/mindbank.Linux/mindbank.Linux.csproj"
+            "${srcdir}/${pkgname}-src/src/Mindbank.Linux/Mindbank.Linux.csproj"
       rm "${srcdir}/${FV_ARCH}/mindbank.dbg"
 }
 
