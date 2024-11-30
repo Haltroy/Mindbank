@@ -25,7 +25,7 @@ Priority: optional
 Architecture: ${deb_arch}
 Depends: libx11-6, libice6, libsm6, libfontconfig1, ca-certificates, tzdata, libc6, libgcc1 | libgcc-s1, libgssapi-krb5-2, libstdc++6, zlib1g, libssl1.0.0 | libssl1.0.2 | libssl1.1 | libssl3, libicu | libicu74 | libicu72 | libicu71 | libicu70 | libicu69 | libicu68 | libicu67 | libicu66 | libicu65 | libicu63 | libicu60 | libicu57 | libicu55 | libicu52
 Maintainer: haltroy <thehaltroy@gmail.com>
-Homepage: https://github.com/haltroy/FluxionViewer
+Homepage: https://github.com/haltroy/Mindbank
 Description: Advanced note taking application.
 Copyright: 2024 haltroy <thehaltroy@gmail.com>
 EOL
@@ -41,7 +41,7 @@ cp ${SCRIPT_DIR}/desktop.desktop ${SCRIPT_DIR}/${arch}/usr/share/applications/mi
 
 echo Copy icon
 mkdir -p ${SCRIPT_DIR}/${arch}/usr/share/icons/hicolor/2048x2048/apps
-cp ${SCRIPT_DIR}/../src/FluxionViewer/Assets/logo.png ${SCRIPT_DIR}/${arch}/usr/share/icons/hicolor/2048x2048/apps/mindbank.png
+cp ${SCRIPT_DIR}/../src/Mindbank/Assets/logo.png ${SCRIPT_DIR}/${arch}/usr/share/icons/hicolor/2048x2048/apps/mindbank.png
 
 echo Copy executable
 mkdir -p ${SCRIPT_DIR}/${arch}/usr/lib/mindbank
