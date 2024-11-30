@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Reflection;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -24,10 +28,38 @@ public partial class MainView : UserControl
     public static readonly StyledProperty<Settings> SettingsProperty =
         AvaloniaProperty.Register<MainView, Settings>(nameof(Settings), new Settings());
 
+    internal static readonly StyledProperty<bool> CheckingForUpdatesProperty =
+        AvaloniaProperty.Register<MainView, bool>(nameof(CheckingForUpdates), true);
+
+    internal static readonly StyledProperty<bool> UpToDateProperty =
+        AvaloniaProperty.Register<MainView, bool>(nameof(UpToDate));
+
+    internal static readonly StyledProperty<bool> UpdateAvailableProperty =
+        AvaloniaProperty.Register<MainView, bool>(nameof(UpdateAvailable));
+
     public MainView()
     {
         InitializeComponent();
         Settings.Load();
+        CheckForUpdates();
+    }
+
+    public bool CheckingForUpdates
+    {
+        get => GetValue(CheckingForUpdatesProperty);
+        set => SetValue(CheckingForUpdatesProperty, value);
+    }
+
+    public bool UpToDate
+    {
+        get => GetValue(UpToDateProperty);
+        set => SetValue(UpToDateProperty, value);
+    }
+
+    public bool UpdateAvailable
+    {
+        get => GetValue(UpdateAvailableProperty);
+        set => SetValue(UpdateAvailableProperty, value);
     }
 
     public Settings Settings
@@ -46,6 +78,60 @@ public partial class MainView : UserControl
     {
         get => GetValue(DesktopContainerProperty);
         set => SetValue(DesktopContainerProperty, value);
+    }
+
+    private static Version GetVersion()
+    {
+        return Assembly.GetExecutingAssembly() is { } ass
+               && ass.GetName() is { } name
+               && name.Version != null
+            ? name.Version
+            : new Version();
+    }
+
+    private async void CheckForUpdates()
+    {
+        try
+        {
+            await Dispatcher.UIThread.InvokeAsync(async () =>
+            {
+                if (Design.IsDesignMode)
+                {
+                    CheckingForUpdates = false;
+                    UpToDate = true;
+                    UpdateAvailable = false;
+                    return;
+                }
+
+                const string updateCheckLocation =
+                    "https://raw.githubusercontent.com/Haltroy/Mindbank/refs/heads/main/version";
+                using var httpClient = new HttpClient();
+                var response = await Task.Run(async () => await httpClient.GetAsync(updateCheckLocation));
+                response.EnsureSuccessStatusCode();
+                var versionText = await response.Content.ReadAsStringAsync();
+                var version = new Version(versionText);
+                if (version.CompareTo(GetVersion()) > 0)
+                {
+                    CheckingForUpdates = false;
+                    UpToDate = false;
+                    UpdateAvailable = true;
+                    return;
+                }
+
+                CheckingForUpdates = false;
+                UpToDate = true;
+                UpdateAvailable = false;
+            });
+        }
+        catch (Exception)
+        {
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                CheckingForUpdates = false;
+                UpToDate = true;
+                UpdateAvailable = false;
+            });
+        }
     }
 
     private void NewNotesClicked(object? sender, RoutedEventArgs e)
@@ -204,26 +290,58 @@ public partial class MainView : UserControl
 
     private async void ImportFromFileClicked(object? sender, RoutedEventArgs e)
     {
-        await Dispatcher.UIThread.InvokeAsync(async () =>
+        try
         {
-            if (Parent is not TopLevel { StorageProvider.CanOpen: true } top) return;
-            var files = await top.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            await Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                Title = Lang.Lang.ImportNoteTitle,
-                AllowMultiple = true,
-                FileTypeFilter =
-                [
-                    new FilePickerFileType(Lang.Lang.ImportExportFileType)
-                    {
-                        Patterns = "*.mbf".Split('|'),
-                        MimeTypes = "application/haltroy-mindbank".Split('|'),
-                        AppleUniformTypeIdentifiers = "haltroy.mindbank".Split('|')
-                    },
-                    FilePickerFileTypes.All
-                ]
+                if (Parent is not TopLevel { StorageProvider.CanOpen: true } top) return;
+                var files = await top.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = Lang.Lang.ImportNoteTitle,
+                    AllowMultiple = true,
+                    FileTypeFilter =
+                    [
+                        new FilePickerFileType(Lang.Lang.ImportExportFileType)
+                        {
+                            Patterns = "*.mbf".Split('|'),
+                            MimeTypes = "application/haltroy-mindbank".Split('|'),
+                            AppleUniformTypeIdentifiers = "haltroy.mindbank".Split('|')
+                        },
+                        FilePickerFileTypes.All
+                    ]
+                });
+                if (files.Count < 0) return;
+                foreach (var file in files) Settings.ImportNote(await file.OpenReadAsync());
             });
-            if (files.Count < 0) return;
-            foreach (var file in files) Settings.ImportNote(await file.OpenReadAsync());
-        });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+    }
+
+    private void UpdateApp(object? sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo("https://haltroy.com/en/fluxion#fluxion-viewer") { UseShellExecute = true });
+    }
+
+    private void UpdateButtonClicked(object? sender, RoutedEventArgs e)
+    {
+        if (UpdateAvailable)
+        {
+            if (sender is not Button { Tag: Control c }) return;
+            DialogHost.Show(c);
+            return;
+        }
+
+        if (!UpToDate) return;
+        CheckingForUpdates = true;
+        UpToDate = false;
+        UpdateAvailable = false;
+        CheckForUpdates();
+    } // ReSharper disable UnusedParameter.Local
+    private void CloseDialogHost(object? s, RoutedEventArgs e)
+    {
+        MainDialogHost.CurrentSession?.Close();
     }
 }

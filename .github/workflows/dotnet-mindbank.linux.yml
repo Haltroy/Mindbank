@@ -1,11 +1,9 @@
-name: Mindbank Linux x64
-
+name: Mindbank Linux
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
-
+    branches: ["main"]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,33 +13,98 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      - name: Setup workloads
-        run: dotnet workload restore ./Mindbank.sln
+      - name: Set-up some packages for packaging
+        run: |
+          sudo apt update
+          sudo apt install alien -y
       - name: Restore dependencies
         run: dotnet restore ./src/Mindbank.Linux/Mindbank.Linux.csproj
       - name: Build
         run: dotnet build --no-restore ./src/Mindbank.Linux/Mindbank.Linux.csproj
-      
       # Linux x64
       - name: Publish (Linux x64)
         run: |
           dotnet publish -c Release -r linux-x64 -o ./publish/linux-x64/ ./src/Mindbank.Linux/Mindbank.Linux.csproj
           rm ./publish/linux-x64/*.dbg
-          tar czf ./publish/Mindbank-linux-x64.tar.gz ./publish/linux-x64/
-      - name: Upload Artifact (Linux x64)
-        uses: actions/upload-artifact@v4
-        with:
-          name: Mindbank-Linux-x64
-          path: ./publish/Mindbank-linux-x64.tar.gz
-      
+          tar czf ./publish/mindbank-linux-x64.tar.gz ./publish/linux-x64/
       # Linux MUSL x64
       - name: Publish (Linux MUSL x64)
         run: |
           dotnet publish -c Release -r linux-musl-x64 -o ./publish/linux-musl-x64/ ./src/Mindbank.Linux/Mindbank.Linux.csproj
           rm ./publish/linux-musl-x64/*.dbg
-          tar czf ./publish/Mindbank-linux-musl-x64.tar.gz ./publish/linux-musl-x64/
+          tar czf ./publish/mindbank-linux-musl-x64.tar.gz ./publish/linux-musl-x64/
+      - name: Set-up cross-compiling AArch64
+        run: |
+          sudo dpkg --add-architecture arm64
+          sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
+          deb [arch=arm64] https://ports.ubuntu.com/ubuntu-ports/ jammy main restricted
+          deb [arch=arm64] https://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted
+          deb [arch=arm64] https://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
+          EOF'
+          sudo sed -i -e 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list
+          sudo sed -i -e 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list
+          sudo apt update
+          sudo apt install clang llvm zlib1g-dev:arm64 zlib1g-dev gcc-aarch64-linux-gnu g++-aarch64-linux-gnu binutils-aarch64-linux-gnu -y
+      # Linux ARM64
+      - name: Publish (Linux ARM64)
+        run: |
+          export OBJCOPY=aarch64-linux-gnu-objcopy
+          dotnet publish -c Release -r linux-arm64 -p:LinkerFlavor=lld -p:ObjCopyName=$OBJCOPY -o ./publish/linux-arm64/ ./src/Mindbank.Linux/Mindbank.Linux.csproj
+          rm ./publish/linux-arm64/*.dbg
+          tar czf ./publish/mindbank-linux-arm64.tar.gz ./publish/linux-arm64/
+      # Linux MUSL ARM64
+      - name: Publish (Linux MUSL ARM64)
+        run: |
+          export OBJCOPY=aarch64-linux-gnu-objcopy
+          dotnet publish -c Release -r linux-musl-arm64 -p:LinkerFlavor=lld -p:ObjCopyName=$OBJCOPY -o ./publish/linux-musl-arm64/ ./src/Mindbank.Linux/Mindbank.Linux.csproj
+          rm ./publish/linux-musl-arm64/*.dbg
+          tar czf ./publish/mindbank-linux-musl-arm64.tar.gz ./publish/linux-musl-arm64/
+      - name: Upload Artifact (Linux x64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-Linux-x64
+          path: ./publish/Mindbank-linux-x64.tar.gz
       - name: Upload Artifact (Linux MUSL x64)
         uses: actions/upload-artifact@v4
         with:
           name: Mindbank-Linux-MUSL-x64
-          path: ./publish/Mindbank-linux-musl-x64.tar.gz
+          path: ./publish/mindbank-linux-musl-x64.tar.gz
+      - name: Upload Artifact (Linux ARM64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-Linux-ARM64
+          path: ./publish/mindbank-linux-arm64.tar.gz
+      - name: Upload Artifact (Linux MUSL ARM64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-Linux-MUSL-ARM64
+          path: ./publish/mindbank-linux-musl-arm64.tar.gz
+      # Debian x64
+      - name: Debian Package x64
+        run: ./linux/debian.sh ./publish/linux-x64/ x64
+      - name: Upload Artifact (Debian x64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-amd64-Debian
+          path: ./linux/*.amd64.deb
+      # Debian ARM64
+      - name: Debian Package ARM64
+        run: ./linux/debian.sh ./publish/linux-arm64/ arm64
+      - name: Upload Artifact (Debian ARM64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-aarch64-Debian
+          path: ./linux/*.aarch64.deb
+      # DEB -> RPM (convert with Alien)
+      - name: DEB -> RPM conversion
+        run: sudo $(which alien) -rv ./linux/*.deb
+      - name: Upload Artifact (RPM x64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-amd64-RPM
+          path: ./*x86_64.rpm
+      - name: Upload Artifact (RPM ARM64)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank-aarch64-RPM
+          path: ./*aarch64.rpm

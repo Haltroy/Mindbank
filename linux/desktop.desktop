@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Mindbank
+Comment=Something in your mind?
+GenericName=Text Editor
+Exec=/usr/lib/mindbank/Mindbank %F
+Icon=/usr/share/icons/hicolor/2048x2048/apps/mindbank.png
+Type=Application
+StartupNotify=false
+StartupWMClass=mindbank
+Categories=TextEditor;
+MimeType=application/mindbank;
+Keywords=mindbank;note;notes;storage;tags;
