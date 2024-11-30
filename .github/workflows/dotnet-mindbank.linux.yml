@@ -63,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Mindbank-Linux-x64
-          path: ./publish/Mindbank-linux-x64.tar.gz
+          path: ./publish/mindbank-linux-x64.tar.gz
       - name: Upload Artifact (Linux MUSL x64)
         uses: actions/upload-artifact@v4
         with:
