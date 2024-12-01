@@ -229,8 +229,8 @@ public partial class NoteScreen : NUC
 
     private void PickRandomCheckedChanged(object? sender, RoutedEventArgs e)
     {
-        if (sender is not ToggleButton { IsChecked: var b } || RandomPickMax is not { Value: var max } ||
-            RandomPickMin is not { Value: var min }) return;
+        if (sender is not ToggleButton { IsChecked: var b } || RandomPickSlider is not
+                { UpperSelectedValue: var max, LowerSelectedValue: var min }) return;
         if (b is true)
         {
             var rnd = new Random();

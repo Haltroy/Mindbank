@@ -28,6 +28,8 @@
         <PackageReference Include="Markdown.Avalonia" Version="11.0.2"/>
         <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="$(AvaloniaVersion)"/>
         <PackageReference Include="Avalonia.Controls.ColorPicker" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="RangeSlider.Avalonia" Version="2.1.0"/>
+        <PackageReference Include="FluentAvalonia.ProgressRing" Version="1.69.2"/>
     </ItemGroup>
 
     <ItemGroup>

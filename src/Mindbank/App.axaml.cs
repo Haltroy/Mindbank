@@ -18,7 +18,7 @@ public class App : Application
         switch (ApplicationLifetime)
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
-                desktop.MainWindow = new MainWindow();
+                desktop.MainWindow = new Splash();
                 break;
             case ISingleViewApplicationLifetime singleViewPlatform:
                 singleViewPlatform.MainView = new MainView();

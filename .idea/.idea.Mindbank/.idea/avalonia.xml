@@ -9,10 +9,12 @@
         <entry key="Mindbank/Mindbank/Views/MainWindow.axaml" value="Mindbank/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="Mindbank/Mindbank/Views/NoteScreen.axaml" value="Mindbank/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="Mindbank/Mindbank/Views/SettingsScreen.axaml" value="Mindbank/Mindbank.Linux/Mindbank.Linux.csproj" />
+        <entry key="src/Mindbank/App.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/AboutScreen.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/MainView.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/NoteScreen.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/SettingsScreen.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
+        <entry key="src/Mindbank/Views/Splash.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/Tag.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/TagControl.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
       </map>

@@ -80,9 +80,6 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     <data name="NoteScreen_Close" xml:space="preserve">
         <value>Kapat</value>
     </data>
-    <data name="NoteScreen_Loading" xml:space="preserve">
-        <value>Yükleniyor...</value>
-    </data>
     <data name="NoteScreen_NewTag_Add" xml:space="preserve">
         <value>Ekle...</value>
     </data>

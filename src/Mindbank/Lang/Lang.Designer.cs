@@ -177,12 +177,6 @@ namespace Mindbank.Lang {
             }
         }
         
-        public static string NoteScreen_Loading {
-            get {
-                return ResourceManager.GetString("NoteScreen_Loading", resourceCulture);
-            }
-        }
-        
         public static string NoteScreen_Close {
             get {
                 return ResourceManager.GetString("NoteScreen_Close", resourceCulture);

@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using Avalonia.Media;
 using Mindbank.Backend.Exceptions;
 
@@ -288,33 +287,43 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     public async void Read()
     {
-        _init = true;
-        if (IsExample)
+        try
         {
-            Thread.Sleep(5000);
-            return;
-        }
+            _init = true;
+            if (IsExample) return;
 
-        await using var fileStream =
-            new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite);
-        _notes.AddRange(LoadFromStream(fileStream, this, out var v));
-        Version = v;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
-        foreach (var n in Notes)
-            n.RequestPropertyChangeInvoke();
-        _init = false;
+            await using var fileStream =
+                new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite);
+            _notes.AddRange(LoadFromStream(fileStream, this, out var v));
+            Version = v;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
+            foreach (var n in Notes)
+                n.RequestPropertyChangeInvoke();
+            _init = false;
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     public async void Write()
     {
-        IsSaving = true;
-        if (!CanWrite) return;
-        await using var fileStream = !File.Exists(FilePath)
-            ? File.Create(FilePath)
-            : File.Open(FilePath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
-        SaveToStream(fileStream, Notes);
-        NeedsSaving = false;
-        IsSaving = false;
+        try
+        {
+            IsSaving = true;
+            if (!CanWrite) return;
+            await using var fileStream = !File.Exists(FilePath)
+                ? File.Create(FilePath)
+                : File.Open(FilePath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
+            SaveToStream(fileStream, Notes);
+            NeedsSaving = false;
+            IsSaving = false;
+        }
+        catch (Exception)
+        {
+            //ignored
+        }
     }
 
     internal static Note[] LoadFromStream(Stream stream, Bank bank, out int version)

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -8,6 +9,9 @@ namespace Mindbank.Views;
 
 public partial class AboutScreen : NUC
 {
+    internal static AvaloniaProperty TechnologyListProperty =
+        AvaloniaProperty.Register<AboutScreen, TechnologyLink[]?>(nameof(TechnologyList), GenTechList());
+
     public AboutScreen()
     {
         InitializeComponent();
@@ -25,6 +29,24 @@ public partial class AboutScreen : NUC
         LicenseBox.Text = ReadResource("LICENSE");
     }
 
+    internal TechnologyLink[]? TechnologyList
+    {
+        get => GetValue(TechnologyListProperty) as TechnologyLink[];
+        set => SetValue(TechnologyListProperty, value);
+    }
+
+    internal static TechnologyLink[] GenTechList()
+    {
+        return
+        [
+            new TechnologyLink("AvaloniaUI", "https://avaloniaui.net/"),
+            new TechnologyLink("Avalonia Fluent Icons", "http://avaloniaui.github.io/icons.html"),
+            new TechnologyLink(".NET", "https://dotnet.microsoft.com/"),
+            new TechnologyLink("RangeSlider.Avalonia", "https://github.com/DmitryNizhebovsky/Avalonia.RangeSlider"),
+            new TechnologyLink("FluentAvalonia.ProgressRing", "https://github.com/ymg2006/FluentAvalonia.ProgressRing")
+        ];
+    }
+
     private static string ReadResource(string name)
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name);
@@ -33,6 +55,7 @@ public partial class AboutScreen : NUC
         return reader.ReadToEnd();
     }
 
+    // ReSharper disable once InconsistentNaming
     private void CarouselButton_Click(object? S, RoutedEventArgs e)
     {
         if (S is not Button { Tag: Control panel }) return;
@@ -54,3 +77,5 @@ public partial class AboutScreen : NUC
         Main?.GoBack();
     }
 }
+
+public record TechnologyLink(string Name, string Link);

@@ -3,9 +3,12 @@
              x:Class="Mindbank.App"
              xmlns:lang="clr-namespace:Mindbank.Lang"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             xmlns:rangeSlider="using:RangeSlider.Avalonia.Themes.Fluent"
              RequestedThemeVariant="Default">
     <Application.Styles>
+        <StyleInclude Source="avares://FluentAvalonia.ProgressRing/Styling/Controls/ProgressRing.axaml" />
         <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
+        <rangeSlider:RangeSliderTheme />
         <FluentTheme />
         <dialogHostAvalonia:DialogHostStyles />
     </Application.Styles>
