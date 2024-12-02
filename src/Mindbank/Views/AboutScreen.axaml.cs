@@ -9,7 +9,7 @@ namespace Mindbank.Views;
 
 public partial class AboutScreen : NUC
 {
-    internal static AvaloniaProperty TechnologyListProperty =
+    private static readonly AvaloniaProperty TechnologyListProperty =
         AvaloniaProperty.Register<AboutScreen, TechnologyLink[]?>(nameof(TechnologyList), GenTechList());
 
     public AboutScreen()
@@ -35,12 +35,12 @@ public partial class AboutScreen : NUC
         set => SetValue(TechnologyListProperty, value);
     }
 
-    internal static TechnologyLink[] GenTechList()
+    private static TechnologyLink[] GenTechList()
     {
         return
         [
             new TechnologyLink("AvaloniaUI", "https://avaloniaui.net/"),
-            new TechnologyLink("Avalonia Fluent Icons", "http://avaloniaui.github.io/icons.html"),
+            new TechnologyLink("Avalonia Fluent Icons", "https://avaloniaui.github.io/icons.html"),
             new TechnologyLink(".NET", "https://dotnet.microsoft.com/"),
             new TechnologyLink("RangeSlider.Avalonia", "https://github.com/DmitryNizhebovsky/Avalonia.RangeSlider"),
             new TechnologyLink("FluentAvalonia.ProgressRing", "https://github.com/ymg2006/FluentAvalonia.ProgressRing")

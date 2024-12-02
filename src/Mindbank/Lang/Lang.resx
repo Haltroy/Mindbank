@@ -144,7 +144,7 @@ To continue working on notes, click on the note name.</value>
         <value>Use background blur</value>
     </data>
     <data name="Settings_BlurLevel" xml:space="preserve">
-        <value>Blur level:</value>
+        <value>Opaque level:</value>
     </data>
     <data name="MainView_OK" xml:space="preserve">
         <value>OK</value>
@@ -172,5 +172,119 @@ To continue working on notes, click on the note name.</value>
     </data>
     <data name="Update_4" xml:space="preserve">
         <value>Would you like to update?</value>
+    </data>
+    <data name="GoBack" xml:space="preserve">
+        <value>Go back...</value>
+    </data>
+    <data name="ToolTip_UpdatesAvailable" xml:space="preserve">
+        <value>You have updates available for this app. Click/touch this button to update.</value>
+    </data>
+    <data name="ToolTip_CheckingForUpdates" xml:space="preserve">
+        <value>Please wait while we are checking for updates...</value>
+    </data>
+    <data name="ToolTip_UpToDate" xml:space="preserve">
+        <value>Your software is up to date. Press/touch this button to perform an update checking.</value>
+    </data>
+    <data name="ToolTip_Settings" xml:space="preserve">
+        <value>Click/touch here to go to Settings.</value>
+    </data>
+    <data name="ToolTip_About" xml:space="preserve">
+        <value>Click/touch here to see Abouts page.</value>
+    </data>
+    <data name="ToolTip_NewNoteGroup" xml:space="preserve">
+        <value>Banks are groups of notes. Click/touch here to create a new bank.</value>
+    </data>
+    <data name="ToolTip_Note_EditName" xml:space="preserve">
+        <value>Click/touch here to toggle the ability to change the name  of this bank.</value>
+    </data>
+    <data name="ToolTip_Note_SelectItems" xml:space="preserve">
+        <value>Click/touch to enable selection mode.</value>
+    </data>
+    <data name="ToolTip_Note_SelectItemsExit" xml:space="preserve">
+        <value>Click/touch to exit out of selection mode.</value>
+    </data>
+    <data name="ToolTip_Note_SelectAll" xml:space="preserve">
+        <value>Click/touch to select/unselect all notes.</value>
+    </data>
+    <data name="ToolTip_Note_RemoveSelected" xml:space="preserve">
+        <value>Click/touch this button to remove all selected notes.</value>
+    </data>
+    <data name="ToolTip_Note_ExportSelected" xml:space="preserve">
+        <value>Click/touch here to export the selected notes.</value>
+    </data>
+    <data name="ToolTip_Note_InvertSelection" xml:space="preserve">
+        <value>Click/touch here to select the unselected items and unselect the selected items.</value>
+    </data>
+    <data name="ToolTip_Note_Import" xml:space="preserve">
+        <value>Click/touch here to import notes.</value>
+    </data>
+    <data name="ToolTip_Note_RandomButton" xml:space="preserve">
+        <value>Click/touch to show/hide the random picker panel.</value>
+    </data>
+    <data name="ToolTip_Note_RandomPick" xml:space="preserve">
+        <value>Click/touch to decide only to show the random picked note or all.</value>
+    </data>
+    <data name="ToolTip_Note_SearchButton" xml:space="preserve">
+        <value>Click/touch to show/hide the search panel.</value>
+    </data>
+    <data name="ToolTip_Note_SearchUseRegex" xml:space="preserve">
+        <value>Click/touch to toggle regular expression mode.</value>
+    </data>
+    <data name="ToolTip_Note_SearchCaseSensitive" xml:space="preserve">
+        <value>Click/touch to toggle case sensitivity mode.</value>
+    </data>
+    <data name="ToolTip_Note_EditNoteOn" xml:space="preserve">
+        <value>Click/touch here to stop editing the note.</value>
+    </data>
+    <data name="ToolTip_Note_EditNoteOff" xml:space="preserve">
+        <value>Click/touch here to edit this note.</value>
+    </data>
+    <data name="ToolTip_Note_TagOn" xml:space="preserve">
+        <value>Click/touch here to remove this tag from this note.</value>
+    </data>
+    <data name="ToolTip_Note_TagOff" xml:space="preserve">
+        <value>Click/touch here to add this tag to this note.</value>
+    </data>
+    <data name="ToolTip_Note_Send" xml:space="preserve">
+        <value>Click/touch to add the new note.</value>
+    </data>
+    <data name="ToolTip_Note_PowerMode" xml:space="preserve">
+        <value>Power Mode: Text and tags stay after adding a new note. Click/touch this button to toggle it.</value>
+    </data>
+    <data name="ToolTip_Note_PreviewOn" xml:space="preserve">
+        <value>Click/touch this to disable the preview.</value>
+    </data>
+    <data name="ToolTip_Note_PreviewOff" xml:space="preserve">
+        <value>Click/touch this to enable the preview.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagButton" xml:space="preserve">
+        <value>Click/touch here to toggle show/hide the tags panel for the new note.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagOn" xml:space="preserve">
+        <value>Click/touch here to remove this tag from the new note.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagOff" xml:space="preserve">
+        <value>Click/touch here to add this tag to the new note.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemNewTag" xml:space="preserve">
+        <value>Click/touch here to make a new tag.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagColor" xml:space="preserve">
+        <value>This determines the color of the tag.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagColorRandom" xml:space="preserve">
+        <value>Click/touch here to assign a random color ofr this tag.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagAdd" xml:space="preserve">
+        <value>Click/touch here to add this tag.</value>
+    </data>
+    <data name="ToolTip_Note_TagMenuButton" xml:space="preserve">
+        <value>Click/touch to show/hide the tags panel.</value>
+    </data>
+    <data name="ToolTip_Note_TagMenuTagOn" xml:space="preserve">
+        <value>Click/touch to show all notes.</value>
+    </data>
+    <data name="ToolTip_Note_TagMenuTagOff" xml:space="preserve">
+        <value>Click/touch to only show notes with this tag.</value>
     </data>
 </root>

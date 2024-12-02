@@ -4,6 +4,7 @@ using Mindbank.Backend;
 
 namespace Mindbank.Views;
 
+// ReSharper disable once InconsistentNaming
 public class NUC : UserControl
 {
     public static readonly StyledProperty<MainView?> MainProperty =

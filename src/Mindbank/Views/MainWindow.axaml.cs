@@ -21,16 +21,23 @@ public partial class MainWindow : Window
 
     private async void AvaloniaWontSetMyOpacity()
     {
-        await Task.Run(async () =>
+        try
         {
-            await Dispatcher.UIThread.InvokeAsync(() =>
+            await Task.Run(async () =>
             {
-                if (Background is Brush brush && Math.Abs(brush.Opacity - _opacity) > 0.001)
-                    SetOpacity(_opacity * 100);
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    if (Background is Brush brush && Math.Abs(brush.Opacity - _opacity) > 0.001)
+                        SetOpacity(_opacity * 100);
+                });
+                Thread.Sleep(5000);
+                AvaloniaWontSetMyOpacity();
             });
-            Thread.Sleep(5000);
-            AvaloniaWontSetMyOpacity();
-        });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     public void SetOpacity(double value)

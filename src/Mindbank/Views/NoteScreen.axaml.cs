@@ -60,55 +60,69 @@ public partial class NoteScreen : NUC
 
     private async void LoadNote()
     {
-        await Dispatcher.UIThread.InvokeAsync(async () =>
+        try
         {
-            try
+            await Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                await Task.Run(Bank.Read);
-                MainCarousel.SelectedIndex = 1;
-            }
-            catch (Exception ex)
-            {
-                ErrorPanel.IsVisible = true;
-                LogText.Text = ex.ToString();
-            }
-        });
+                try
+                {
+                    await Task.Run(Bank.Read);
+                    MainCarousel.SelectedIndex = 1;
+                }
+                catch (Exception ex)
+                {
+                    ErrorPanel.IsVisible = true;
+                    LogText.Text = ex.ToString();
+                }
+            });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     private async void SaveLogToFileClick(object? sender, RoutedEventArgs e)
     {
-        await Dispatcher.UIThread.InvokeAsync(async () =>
+        try
         {
-            IStorageProvider? storageProvider = null;
-            switch (IsOnDesktop)
+            await Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                case true:
+                IStorageProvider? storageProvider = null;
+                switch (IsOnDesktop)
                 {
-                    if (DesktopContainer is { StorageProvider: { CanSave: true } sp })
-                        storageProvider = sp;
-                    break;
+                    case true:
+                    {
+                        if (DesktopContainer is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                    default:
+                    {
+                        if (Main is { Parent: TopLevel { StorageProvider: { CanSave: true } sp } })
+                            storageProvider = sp;
+                        break;
+                    }
                 }
-                default:
-                {
-                    if (Main is { Parent: TopLevel { StorageProvider: { CanSave: true } sp } })
-                        storageProvider = sp;
-                    break;
-                }
-            }
 
-            if (storageProvider is null) return;
-            var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
-            {
-                Title = Lang.Lang.NoteScreen_SaveLogToFileTitle,
-                FileTypeChoices = [FilePickerFileTypes.TextPlain, FilePickerFileTypes.All]
+                if (storageProvider is null) return;
+                var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+                {
+                    Title = Lang.Lang.NoteScreen_SaveLogToFileTitle,
+                    FileTypeChoices = [FilePickerFileTypes.TextPlain, FilePickerFileTypes.All]
+                });
+                if (file is not null)
+                {
+                    await using var fileStream = await file.OpenWriteAsync();
+                    await using var streamWriter = new StreamWriter(fileStream);
+                    await streamWriter.WriteLineAsync(LogText.Text ?? string.Empty);
+                }
             });
-            if (file is not null)
-            {
-                await using var fileStream = await file.OpenWriteAsync();
-                await using var streamWriter = new StreamWriter(fileStream);
-                await streamWriter.WriteLineAsync(LogText.Text ?? string.Empty);
-            }
-        });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     private void NoteTagClick(object? sender, RoutedEventArgs e)
@@ -151,53 +165,67 @@ public partial class NoteScreen : NUC
 
     private async void ExportSelected(object? sender, RoutedEventArgs e)
     {
-        await Task.Run(async () =>
+        try
         {
-            if (Main?.Parent is not TopLevel { StorageProvider.CanSave: true } topLevel) return;
-
-            var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            await Task.Run(async () =>
             {
-                Title = null,
-                SuggestedStartLocation = null,
-                SuggestedFileName = null,
-                DefaultExtension = null,
-                FileTypeChoices = null,
-                ShowOverwritePrompt = null
+                if (Main?.Parent is not TopLevel { StorageProvider.CanSave: true } topLevel) return;
+
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+                {
+                    Title = null,
+                    SuggestedStartLocation = null,
+                    SuggestedFileName = null,
+                    DefaultExtension = null,
+                    FileTypeChoices = null,
+                    ShowOverwritePrompt = null
+                });
+                if (file is null) return;
+                var exported = Bank.Notes.Where(n => n.Visible).ToArray();
+                await using var fs = await file.OpenWriteAsync();
+                Bank.SaveToStream(fs, exported);
             });
-            if (file is null) return;
-            var exported = Bank.Notes.Where(n => n.Visible).ToArray();
-            await using var fs = await file.OpenWriteAsync();
-            Bank.SaveToStream(fs, exported);
-        });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     private async void ImportFromFile(object? sender, RoutedEventArgs e)
     {
-        await Task.Run(async () =>
+        try
         {
-            if (Main?.Parent is not TopLevel { StorageProvider.CanOpen: true } topLevel) return;
-
-            var file = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            await Task.Run(async () =>
             {
-                Title = null,
-                SuggestedStartLocation = null,
-                SuggestedFileName = null,
-                AllowMultiple = false,
-                FileTypeFilter = null
+                if (Main?.Parent is not TopLevel { StorageProvider.CanOpen: true } topLevel) return;
+
+                var file = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = null,
+                    SuggestedStartLocation = null,
+                    SuggestedFileName = null,
+                    AllowMultiple = false,
+                    FileTypeFilter = null
+                });
+                if (file.Count <= 0) return;
+                await using var fs = await file[0].OpenReadAsync();
+                var loaded = Bank.LoadFromStream(fs, Bank, out var v);
+                if (v > Settings.Version)
+                    Main?.ShowVersionMismatchError(v);
+                else
+                    Bank.AddRange(loaded);
             });
-            if (file.Count <= 0) return;
-            await using var fs = await file[0].OpenReadAsync();
-            var loaded = Bank.LoadFromStream(fs, Bank, out var v);
-            if (v > Settings.Version)
-                Main?.ShowVersionMismatchError(v);
-            else
-                Bank.AddRange(loaded);
-        });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     private void DoSearch(Predicate<Note> predicate)
     {
-        foreach (var child in NotesIC.Items)
+        foreach (var child in NotesIc.Items)
         {
             if (child is not Note note) continue;
             note.Visible = predicate(note);
@@ -248,7 +276,7 @@ public partial class NoteScreen : NUC
     private void CheckAll_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
     {
         if (sender is not CheckBox { IsChecked: var c }) return;
-        foreach (var item in NotesIC.Items)
+        foreach (var item in NotesIc.Items)
         {
             if (item is not Note { Visible: true } note) return;
             note.Checked = c is true;
@@ -257,7 +285,7 @@ public partial class NoteScreen : NUC
 
     private void InvertSelection(object? sender, RoutedEventArgs e)
     {
-        foreach (var item in NotesIC.Items)
+        foreach (var item in NotesIc.Items)
         {
             if (item is not Note { Visible: true } note) return;
             note.Checked = !note.Checked;
@@ -306,7 +334,7 @@ public partial class NoteScreen : NUC
         {
             NewText.Text = string.Empty;
             _selectedTags.Clear();
-            foreach (var item in NewNoteTagsIC.Items)
+            foreach (var item in NewNoteTagsIc.Items)
             {
                 if (item is not Tag tag) continue;
                 tag.NewNoteChecked = false;
@@ -323,6 +351,13 @@ public partial class NoteScreen : NUC
 
     private async void SaveClicked(object? sender, RoutedEventArgs e)
     {
-        await Dispatcher.UIThread.InvokeAsync(() => Bank.Write());
+        try
+        {
+            await Dispatcher.UIThread.InvokeAsync(() => Bank.Write());
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 }

@@ -338,5 +338,233 @@ namespace Mindbank.Lang {
                 return ResourceManager.GetString("Update_4", resourceCulture);
             }
         }
+        
+        public static string GoBack {
+            get {
+                return ResourceManager.GetString("GoBack", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_UpdatesAvailable {
+            get {
+                return ResourceManager.GetString("ToolTip_UpdatesAvailable", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_CheckingForUpdates {
+            get {
+                return ResourceManager.GetString("ToolTip_CheckingForUpdates", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_UpToDate {
+            get {
+                return ResourceManager.GetString("ToolTip_UpToDate", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Settings {
+            get {
+                return ResourceManager.GetString("ToolTip_Settings", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_About {
+            get {
+                return ResourceManager.GetString("ToolTip_About", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_NewNoteGroup {
+            get {
+                return ResourceManager.GetString("ToolTip_NewNoteGroup", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_EditName {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_EditName", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_SelectItems {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_SelectItems", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_SelectItemsExit {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_SelectItemsExit", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_SelectAll {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_SelectAll", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_RemoveSelected {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_RemoveSelected", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_ExportSelected {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_ExportSelected", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_InvertSelection {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_InvertSelection", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_Import {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_Import", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_RandomButton {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_RandomButton", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_RandomPick {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_RandomPick", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_SearchButton {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_SearchButton", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_SearchUseRegex {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_SearchUseRegex", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_SearchCaseSensitive {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_SearchCaseSensitive", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_EditNoteOn {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_EditNoteOn", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_EditNoteOff {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_EditNoteOff", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_TagOn {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_TagOn", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_TagOff {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_TagOff", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_Send {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_Send", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_PowerMode {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_PowerMode", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_PreviewOn {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_PreviewOn", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_PreviewOff {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_PreviewOff", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_NewItemTagButton {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_NewItemTagButton", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_NewItemTagOn {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_NewItemTagOn", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_NewItemTagOff {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_NewItemTagOff", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_NewItemNewTag {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_NewItemNewTag", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_NewItemTagColor {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_NewItemTagColor", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_NewItemTagColorRandom {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_NewItemTagColorRandom", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_NewItemTagAdd {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_NewItemTagAdd", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_TagMenuButton {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_TagMenuButton", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_TagMenuTagOn {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_TagMenuTagOn", resourceCulture);
+            }
+        }
+        
+        public static string ToolTip_Note_TagMenuTagOff {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_TagMenuTagOff", resourceCulture);
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Mindbank.Views;
 
 public partial class SettingsScreen : NUC
 {
-    private bool initializing_settings = true;
+    private bool _initializingSettings = true;
 
     public SettingsScreen()
     {
@@ -18,7 +18,7 @@ public partial class SettingsScreen : NUC
 
     private void SystemThemeChecked(object? sender, RoutedEventArgs e)
     {
-        if (initializing_settings || sender is not RadioButton { IsChecked: true } ||
+        if (_initializingSettings || sender is not RadioButton { IsChecked: true } ||
             Application.Current is not { } app) return;
         app.RequestedThemeVariant = ThemeVariant.Default;
         Settings.Theme = ThemeVariant.Default;
@@ -29,7 +29,7 @@ public partial class SettingsScreen : NUC
 
     private void LightThemeChecked(object? sender, RoutedEventArgs e)
     {
-        if (initializing_settings || sender is not RadioButton { IsChecked: true } ||
+        if (_initializingSettings || sender is not RadioButton { IsChecked: true } ||
             Application.Current is not { } app) return;
         app.RequestedThemeVariant = ThemeVariant.Light;
         Settings.Theme = ThemeVariant.Light;
@@ -40,7 +40,7 @@ public partial class SettingsScreen : NUC
 
     private void DarkThemeChecked(object? sender, RoutedEventArgs e)
     {
-        if (initializing_settings || sender is not RadioButton { IsChecked: true } ||
+        if (_initializingSettings || sender is not RadioButton { IsChecked: true } ||
             Application.Current is not { } app) return;
         app.RequestedThemeVariant = ThemeVariant.Dark;
         Settings.Theme = ThemeVariant.Dark;
@@ -51,7 +51,7 @@ public partial class SettingsScreen : NUC
 
     private void BlurLevelValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
     {
-        if (initializing_settings || sender is not Slider { Value: var v } || DesktopContainer is null ||
+        if (_initializingSettings || sender is not Slider { Value: var v } || DesktopContainer is null ||
             UseBlur is not { IsChecked: var useBlur }) return;
         DesktopContainer.SetOpacity(useBlur is true ? v : 100);
         if (!Design.IsDesignMode) Settings.Save();
@@ -59,7 +59,7 @@ public partial class SettingsScreen : NUC
 
     private void UseBlurCheckedChanged(object? sender, RoutedEventArgs e)
     {
-        if (initializing_settings || BlurLevel is not { Value: var v } || DesktopContainer is null ||
+        if (_initializingSettings || BlurLevel is not { Value: var v } || DesktopContainer is null ||
             UseBlur is not { IsChecked: var useBlur }) return;
         DesktopContainer.SetOpacity(useBlur is true ? v : 100);
         if (!Design.IsDesignMode) Settings.Save();
@@ -72,12 +72,12 @@ public partial class SettingsScreen : NUC
 
     private void Init(object? sender, EventArgs e)
     {
-        initializing_settings = true;
+        _initializingSettings = true;
         if (Settings.Theme == ThemeVariant.Default && DefaultTheme != null) DefaultTheme.IsChecked = true;
         if (Settings.Theme == ThemeVariant.Dark && DarkTheme != null) DarkTheme.IsChecked = true;
         if (Settings.Theme == ThemeVariant.Light && LightTheme != null) LightTheme.IsChecked = true;
         if (UseBlur != null) UseBlur.IsChecked = Settings.UseBlur;
         if (BlurLevel != null) BlurLevel.Value = Settings.BlurLevel;
-        initializing_settings = false;
+        _initializingSettings = false;
     }
 }

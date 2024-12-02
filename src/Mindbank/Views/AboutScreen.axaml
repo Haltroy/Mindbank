@@ -12,7 +12,8 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
-                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent">
+                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent"
+                        ToolTip.Tip="{x:Static lang:Lang.GoBack}">
                     <Path Data="{StaticResource ChevronLeftRegular}" Fill="{DynamicResource TextControlForeground}"
                           Stretch="UniformToFill" />
                 </Button>
@@ -66,14 +67,16 @@
                             <ItemsControl ItemsSource="{CompiledBinding $parent[views:AboutScreen].TechnologyList}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate x:DataType="views:TechnologyLink">
                                         <StackPanel Orientation="Horizontal" Spacing="10">
                                             <TextBlock Text="●" VerticalAlignment="Center" FontSize="15" />
-                                            <TextBlock Text="{CompiledBinding Name}" VerticalAlignment="Center" FontSize="15" />
+                                            <TextBlock Text="{CompiledBinding Name}" VerticalAlignment="Center"
+                                                       FontSize="15" />
                                             <Button Content="{x:Static lang:Lang.About_Visit}" Click="Navigate"
                                                     Tag="{CompiledBinding Link}" />
                                         </StackPanel>

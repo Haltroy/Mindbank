@@ -12,6 +12,7 @@
         <entry key="src/Mindbank/App.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/AboutScreen.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/MainView.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
+        <entry key="src/Mindbank/Views/MainWindow.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/NoteScreen.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/SettingsScreen.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/Splash.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />

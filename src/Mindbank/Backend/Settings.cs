@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using Avalonia.Styling;
 
 namespace Mindbank.Backend;
 
-public class Settings : INotifyPropertyChanged
+public sealed class Settings : INotifyPropertyChanged
 {
     private readonly List<Bank> _banks = [];
     private bool _alreadyLoaded;
@@ -54,21 +53,10 @@ public class Settings : INotifyPropertyChanged
         }
     }
 
-    public int Count => _banks.Count;
+    private int Count => _banks.Count;
 
-    public Bank this[int index] => _banks[index];
+    private Bank this[int index] => _banks[index];
 
-    public Bank this[string name, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase]
-    {
-        get
-        {
-            foreach (var bank in _banks)
-                if (bank.Name.Equals(name, stringComparison))
-                    return bank;
-
-            throw new Exception($"Can't find bank with name '{name}'");
-        }
-    }
 
     public bool KeepText
     {
@@ -203,7 +191,7 @@ public class Settings : INotifyPropertyChanged
             ns.SetInfo(stream);
     }
 
-    public void Add(Bank bank)
+    private void Add(Bank bank)
     {
         _banks.Add(bank);
         Save();
@@ -213,52 +201,6 @@ public class Settings : INotifyPropertyChanged
     public void Remove(Bank bank)
     {
         _banks.Remove(bank);
-        if (!_isLoading)
-            Save();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
-    }
-
-    public void Remove(string name, StringComparison stringComparison = StringComparison.CurrentCulture)
-    {
-        RemoveAll(bank => bank.Name.Equals(name, stringComparison));
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
-    }
-
-    public void Insert(int index, Bank bank)
-    {
-        _banks.Insert(index, bank);
-        if (!_isLoading)
-            Save();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
-    }
-
-    public void AddRange(IEnumerable<Bank> banks)
-    {
-        _banks.AddRange(banks);
-        if (!_isLoading)
-            Save();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
-    }
-
-    public void RemoveAll()
-    {
-        _banks.Clear();
-        if (!_isLoading)
-            Save();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
-    }
-
-    public void RemoveAll(Predicate<Bank> match)
-    {
-        _banks.RemoveAll(match);
-        if (!_isLoading)
-            Save();
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
-    }
-
-    public void RemoveAt(int index)
-    {
-        _banks.RemoveAt(index);
         if (!_isLoading)
             Save();
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Banks)));
@@ -300,18 +242,5 @@ public class Settings : INotifyPropertyChanged
             var path = Path.Combine(SourcesFolder, generated);
             if (!File.Exists(path)) return path;
         }
-    }
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
     }
 }

@@ -10,15 +10,15 @@ using Mindbank.Backend;
 namespace Mindbank.Views;
 
 [PseudoClasses(":checked", ":unchecked")]
-public partial class TagControl : UserControl
+public sealed partial class TagControl : UserControl
 {
     public static readonly StyledProperty<Tag> TagObjectProperty =
         AvaloniaProperty.Register<TagControl, Tag>(nameof(TagObject), new Tag("Sample", Colors.Gold, null));
 
-    public static readonly RoutedEvent<RoutedEventArgs> IsCheckedChangedEvent =
+    private static readonly RoutedEvent<RoutedEventArgs> IsCheckedChangedEvent =
         RoutedEvent.Register<TagControl, RoutedEventArgs>(nameof(IsCheckedChanged), RoutingStrategies.Direct);
 
-    public static readonly RoutedEvent<RoutedEventArgs> ClickEvent =
+    private static readonly RoutedEvent<RoutedEventArgs> ClickEvent =
         RoutedEvent.Register<TagControl, RoutedEventArgs>(nameof(Click), RoutingStrategies.Direct);
 
     public static readonly StyledProperty<bool> IsCheckedProperty =
@@ -85,7 +85,7 @@ public partial class TagControl : UserControl
         remove => RemoveHandler(IsCheckedChangedEvent, value);
     }
 
-    protected virtual void OnIsCheckedChanged()
+    private void OnIsCheckedChanged()
     {
         UpdatePseudoClasses(IsChecked);
         var args = new RoutedEventArgs(IsCheckedChangedEvent);
@@ -99,7 +99,7 @@ public partial class TagControl : UserControl
         remove => RemoveHandler(ClickEvent, value);
     }
 
-    protected virtual void OnClick()
+    private void OnClick()
     {
         IsChecked = !IsChecked;
         var args = new RoutedEventArgs(ClickEvent);

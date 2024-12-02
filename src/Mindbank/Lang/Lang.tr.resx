@@ -99,7 +99,7 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
         <value>Günlüğü dosyaya kaydet...</value>
     </data>
     <data name="Settings_BlurLevel" xml:space="preserve">
-        <value>Bulanıklık seviyesi:</value>
+        <value>Opaklık seviyesi:</value>
     </data>
     <data name="Settings_HideToTray" xml:space="preserve">
         <value>Sistem tepsisine gizlen</value>
@@ -164,4 +164,118 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     <data name="Update_2" xml:space="preserve">
         <value>Bu güncelleme içeriği yeni özellikler getiriyor olabilir. Aynı zamanda  bu güncelleme, uygulamanın güvenliğini de attıran yenilikler de içerebilir.</value>
     </data>
+    <data name="GoBack" xml:space="preserve">
+        <value>Geri dön...</value>
+    </data>
+    <data name="ToolTip_UpdatesAvailable" xml:space="preserve">
+        <value>Bu uygulamalar için güncellemeler var. GÜncellemek için dokunun/tıklayın.</value>
+    </data>
+    <data name="ToolTip_CheckingForUpdates" xml:space="preserve">
+        <value>Biz güncellemeleri denetlerken lütfen bekleyin...</value>
+    </data>
+    <data name="ToolTip_UpToDate" xml:space="preserve">
+        <value>Yazılımınız güncel. Güncellemeleri denetlemek içini bu butona dokunun/tıklayın.</value>
+    </data>
+    <data name="ToolTip_Settings" xml:space="preserve">
+        <value>Ayarlar menüsüne gitmek için tıklayınız/dokununuz.</value>
+    </data>
+    <data name="ToolTip_About" xml:space="preserve">
+        <value>Hakkında bölümüne gitmek için dokununuz/tıklayınız.</value>
+    </data>
+    <data name="ToolTip_NewNoteGroup" xml:space="preserve">
+        <value>Bankalar, notları gruplar. Oluşturmak için tıklayınız/dokununuz.</value>
+    </data>
+    <data name="ToolTip_Note_EditName" xml:space="preserve">
+<value>Bu bankanın adını değiştirme özelliğini açmak/kapatmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_SelectItems" xml:space="preserve">
+<value>Seçim modunu etkinleştirmek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_SelectItemsExit" xml:space="preserve">
+<value>Seçim modundan çıkmak için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_SelectAll" xml:space="preserve">
+<value>Tüm notları seçmek/seçimini kaldırmak için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_RemoveSelected" xml:space="preserve">
+<value>Tüm seçili notları kaldırmak için bu düğmeye tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_ExportSelected" xml:space="preserve">
+<value>Seçili notları dışa aktarmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_InvertSelection" xml:space="preserve">
+<value>Seçili olmayan öğeleri seçmek ve seçili öğelerin seçimini kaldırmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_Import" xml:space="preserve">
+<value>Notları içe aktarmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_RandomButton" xml:space="preserve">
+<value>Rastgele seçiciyi göstermek/gizlemek için tıklayın/dokunun panel.</value>
+</data>
+    <data name="ToolTip_Note_RandomPick" xml:space="preserve">
+<value>Yalnızca rastgele seçilen notu veya tümünü göstermeye karar vermek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_SearchButton" xml:space="preserve">
+<value>Arama panelini göstermek/gizlemek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_SearchUseRegex" xml:space="preserve">
+<value>Düzenli ifade modunu değiştirmek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_SearchCaseSensitive" xml:space="preserve">
+<value>Büyük/küçük harf duyarlılığı modunu değiştirmek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_EditNoteOn" xml:space="preserve">
+<value>Notu düzenlemeyi durdurmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_EditNoteOff" xml:space="preserve">
+<value>Bu notu düzenlemek için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_TagOn" xml:space="preserve">
+<value>Bu etiketi bu nottan kaldırmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_TagOff" xml:space="preserve">
+<value>Bu etiketi bu nota eklemek için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_Send" xml:space="preserve">
+<value>Yeni etiketi eklemek için tıklayın/dokunun. not.</value>
+</data>
+    <data name="ToolTip_Note_PowerMode" xml:space="preserve">
+<value>Güç Modu: Yeni bir not eklendikten sonra metin ve etiketler kalır. Bu özelliği açıp kapatmak için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_PreviewOn" xml:space="preserve">
+<value>Önizlemeyi devre dışı bırakmak için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_PreviewOff" xml:space="preserve">
+<value>Önizlemeyi etkinleştirmek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_NewItemTagButton" xml:space="preserve">
+<value>Yeni not için etiketler panelini gösterme/gizleme geçişini yapmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_NewItemTagOn" xml:space="preserve">
+<value>Bu etiketi yeni nottan kaldırmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_NewItemTagOff" xml:space="preserve">
+<value>Bu etiketi yeni nota eklemek için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_NewItemNewTag" xml:space="preserve">
+<value>Yeni bir etiket oluşturmak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_NewItemTagColor" xml:space="preserve">
+<value>Bu, etiketin rengini belirler.</value>
+</data>
+    <data name="ToolTip_Note_NewItemTagColorRandom" xml:space="preserve">
+<value>Bu etikete rastgele bir renk atamak için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_NewItemTagAdd" xml:space="preserve">
+<value>Bu etiketi eklemek için buraya tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_TagMenuButton" xml:space="preserve">
+<value>Etiketler panelini göstermek/gizlemek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_TagMenuTagOn" xml:space="preserve">
+<value>Tüm notları göstermek için tıklayın/dokunun.</value>
+</data>
+    <data name="ToolTip_Note_TagMenuTagOff" xml:space="preserve">
+<value>Yalnızca bu etikete sahip notları göstermek için tıklayın/dokunun.</value>
+</data>
 </root>
