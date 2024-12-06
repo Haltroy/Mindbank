@@ -434,7 +434,7 @@
                                             </Style>
                                         </Border.Styles>
                                         <DockPanel>
-                                            <Grid DockPanel.Dock="Left" RowDefinitions="*,Auto,*">
+                                            <Grid IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked}" IsVisible="{CompiledBinding $self.IsEnabled}" DockPanel.Dock="Left" RowDefinitions="*,Auto,*">
                                                 <Button Grid.Row="0" Tag="{CompiledBinding Self}" Click="MoveItemUp"
                                                         IsEnabled="{CompiledBinding !IsOnTop}"
                                                         Background="Transparent">
