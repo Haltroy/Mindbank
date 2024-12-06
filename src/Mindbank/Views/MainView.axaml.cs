@@ -44,6 +44,18 @@ public partial class MainView : UserControl
         CheckForUpdates();
     }
 
+    public static bool IsDebugMode
+    {
+        get
+        {
+#if DEBUG
+            return true;
+#else
+            return false;
+#endif
+        }
+    }
+
     public bool CheckingForUpdates
     {
         get => GetValue(CheckingForUpdatesProperty);

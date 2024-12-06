@@ -103,18 +103,14 @@ public static class Tools
         return value;
     }
 
-    public static bool isBitSet(byte value, int bitPosition)
+    public static bool IsBitSet(int value, int bitPosition)
     {
-        if (bitPosition is < 0 or > 7)
+        if (bitPosition < 0 || bitPosition > (sizeof(int) - 1) * 8)
             throw new ArgumentOutOfRangeException(
                 nameof(bitPosition),
-                "Must be between 0 and 7"
+                string.Format(Lang.Lang.Tools_IsBitSet_Error, (sizeof(int) - 1) * 8)
             );
-
-        // Create a bitmask with the target bit set to 1
         var bitmask = 1 << bitPosition;
-
-        // Check if the bit is set using bitwise AND
         return (value & bitmask) != 0;
     }
 
@@ -122,20 +118,20 @@ public static class Tools
     {
         length = length switch
         {
-            0 => throw new ArgumentOutOfRangeException(nameof(length), "\"length\" must be greater than 0."),
+            0 => throw new ArgumentOutOfRangeException(nameof(length), Lang.Lang.Tools_GenerateRandomTextError),
             < 0 => length * -1,
             _ => length
         };
         if (length >= int.MaxValue)
             throw new ArgumentOutOfRangeException(nameof(length),
-                "\"length\" must be smaller than the 32-bit integer limit.");
+                Lang.Lang.Tools_GenerateRandomTextError2);
         var builder = new StringBuilder();
         Enumerable
             .Range(65, 26)
             .Select(e => ((char)e).ToString())
             .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
             .Concat(Enumerable.Range(0, length - 1).Select(e => e.ToString()))
-            .OrderBy(e => Guid.NewGuid())
+            .OrderBy(_ => Guid.NewGuid())
             .Take(length)
             .ToList().ForEach(e => builder.Append(e));
         return builder.ToString();
