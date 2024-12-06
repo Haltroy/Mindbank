@@ -52,6 +52,11 @@
                             Click="CarouselButton_Click" />
                 </StackPanel>
                 <Carousel Name="CarouselMenu" Margin="20 10 20 0">
+                    <Carousel.PageTransition>
+                        <CompositePageTransition>
+                            <CrossFade Duration="0:00:00.25" FadeInEasing="SineEaseIn" FadeOutEasing="SineEaseOut" />
+                        </CompositePageTransition>
+                    </Carousel.PageTransition>
                     <Panel Name="About">
                         <SelectableTextBlock
                             VerticalAlignment="Center"
