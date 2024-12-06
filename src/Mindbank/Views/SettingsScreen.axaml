@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:nuc="clr-namespace:Mindbank.Views"
              xmlns:lang="clr-namespace:Mindbank.Lang"
+             xmlns:backend="clr-namespace:Mindbank.Backend"
+             xmlns:dict="clr-namespace:System.Collections.Generic;assembly=System.Runtime"
              Initialized="Init"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Mindbank.Views.SettingsScreen">

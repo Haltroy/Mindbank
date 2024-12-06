@@ -566,5 +566,29 @@ namespace Mindbank.Lang {
                 return ResourceManager.GetString("ToolTip_Note_TagMenuTagOff", resourceCulture);
             }
         }
+        
+        public static string ToolTip_Note_Save {
+            get {
+                return ResourceManager.GetString("ToolTip_Note_Save", resourceCulture);
+            }
+        }
+        
+        public static string Tools_IsBitSet_Error {
+            get {
+                return ResourceManager.GetString("Tools_IsBitSet_Error", resourceCulture);
+            }
+        }
+        
+        public static string Tools_GenerateRandomTextError {
+            get {
+                return ResourceManager.GetString("Tools_GenerateRandomTextError", resourceCulture);
+            }
+        }
+        
+        public static string Tools_GenerateRandomTextError2 {
+            get {
+                return ResourceManager.GetString("Tools_GenerateRandomTextError2", resourceCulture);
+            }
+        }
     }
 }

@@ -287,4 +287,16 @@ To continue working on notes, click on the note name.</value>
     <data name="ToolTip_Note_TagMenuTagOff" xml:space="preserve">
         <value>Click/touch to only show notes with this tag.</value>
     </data>
+    <data name="ToolTip_Note_Save" xml:space="preserve">
+        <value>Click/touch this icon to save your changes.</value>
+    </data>
+    <data name="Tools_IsBitSet_Error" xml:space="preserve">
+        <value>Must be between 0 and {0}.</value>
+    </data>
+    <data name="Tools_GenerateRandomTextError" xml:space="preserve">
+        <value>"length" must be greater than 0.</value>
+    </data>
+    <data name="Tools_GenerateRandomTextError2" xml:space="preserve">
+        <value>"length" must be smaller than the 32-bit integer limit.</value>
+    </data>
 </root>

@@ -23,7 +23,7 @@
                            VerticalContentAlignment="Stretch" VerticalAlignment="Stretch">
         <Carousel Name="MainCarousel">
             <DockPanel Name="MainPanel">
-                <DockPanel DockPanel.Dock="Top">
+                <DockPanel DockPanel.Dock="Bottom">
                     <Button Click="UpdateButtonClicked" Margin="5 0" DockPanel.Dock="Right">
                         <Button.Styles>
                             <Style
@@ -177,19 +177,25 @@
                         </StackPanel>
                     </Button>
                     <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_About}"
+                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_About}" Background="Transparent"
                             Tag="{CompiledBinding #AboutView}" Click="NoteGroupButtonClicked"
                             DockPanel.Dock="Right">
                         <Path Data="{StaticResource InfoRegular}" Fill="{DynamicResource TextControlForeground}" />
                     </Button>
                     <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_Settings}"
+                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_Settings}" Background="Transparent"
                             Tag="{CompiledBinding #SettingsView}" Click="NoteGroupButtonClicked"
                             DockPanel.Dock="Right">
                         <Path Data="{StaticResource SettingsRegular}" Fill="{DynamicResource TextControlForeground}" />
                     </Button>
                     <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_NewNoteGroup}"
+                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_Settings}" Background="Transparent"
+                            Tag="{CompiledBinding #TestNote}" Click="NoteGroupButtonClicked"
+                            DockPanel.Dock="Right" Content="Test Note"
+                            IsVisible="{CompiledBinding $parent[views:MainView].IsDebugMode}"
+                            IsEnabled="{CompiledBinding $self.IsVisible}" />
+                    <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_NewNoteGroup}" Background="Transparent"
                             Click="NewNotesClicked">
                         <StackPanel Orientation="Horizontal" Spacing="5">
                             <Path Data="{StaticResource AddSquareRegular}"
@@ -255,6 +261,10 @@
                                   DesktopContainer="{CompiledBinding $parent[views:MainView].DesktopContainer}"
                                   Settings="{CompiledBinding $parent[views:MainView].Settings}"
                                   Main="{CompiledBinding $parent[views:MainView]}" />
+            <views:NoteScreen Name="TestNote" IsOnDesktop="{CompiledBinding $parent[views:MainView].IsOnDesktop}"
+                              DesktopContainer="{CompiledBinding $parent[views:MainView].DesktopContainer}"
+                              Settings="{CompiledBinding $parent[views:MainView].Settings}"
+                              Main="{CompiledBinding $parent[views:MainView]}" />
         </Carousel>
     </dialogHost:DialogHost>
 </UserControl>

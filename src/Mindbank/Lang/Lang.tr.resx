@@ -132,7 +132,7 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
         <value>Temalama</value>
     </data>
     <data name="Settings_UseBlur" xml:space="preserve">
-        <value>Arakplanı bulanıklaştır</value>
+        <value>Arkaplanı bulanıklaştır</value>
     </data>
     <data name="ShowApp" xml:space="preserve">
         <value>Mindbank'i göster...</value>
@@ -278,4 +278,16 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     <data name="ToolTip_Note_TagMenuTagOff" xml:space="preserve">
 <value>Yalnızca bu etikete sahip notları göstermek için tıklayın/dokunun.</value>
 </data>
+    <data name="ToolTip_Note_Save" xml:space="preserve">
+        <value>Değişiklikleri kaydetmek için bu sembole dokunun/tıklayın.</value>
+    </data>
+    <data name="Tools_IsBitSet_Error" xml:space="preserve">
+        <value>Değer 0 ile {0} arası olmalıdır.</value>
+    </data>
+    <data name="Tools_GenerateRandomTextError" xml:space="preserve">
+        <value>"lenght" 0'dan büyük olmalıdır.</value>
+    </data>
+    <data name="Tools_GenerateRandomTextError2" xml:space="preserve">
+        <value>"length" bir 32-bit sayının maksimum değerini aşmamalıdır.</value>
+    </data>
 </root>

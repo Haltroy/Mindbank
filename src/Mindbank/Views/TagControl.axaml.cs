@@ -13,7 +13,7 @@ namespace Mindbank.Views;
 public sealed partial class TagControl : UserControl
 {
     public static readonly StyledProperty<Tag> TagObjectProperty =
-        AvaloniaProperty.Register<TagControl, Tag>(nameof(TagObject), new Tag("Sample", Colors.Gold, null));
+        AvaloniaProperty.Register<TagControl, Tag>(nameof(TagObject), new Tag("Sample", Colors.DodgerBlue, null));
 
     private static readonly RoutedEvent<RoutedEventArgs> IsCheckedChangedEvent =
         RoutedEvent.Register<TagControl, RoutedEventArgs>(nameof(IsCheckedChanged), RoutingStrategies.Direct);
@@ -25,7 +25,7 @@ public sealed partial class TagControl : UserControl
         AvaloniaProperty.Register<TagControl, bool>(nameof(IsChecked));
 
     public static readonly StyledProperty<Color> ColorProperty =
-        AvaloniaProperty.Register<TagControl, Color>(nameof(Color), Colors.DeepSkyBlue);
+        AvaloniaProperty.Register<TagControl, Color>(nameof(Color), Colors.DodgerBlue);
 
     private bool _mouseCaptured;
 
@@ -43,8 +43,6 @@ public sealed partial class TagControl : UserControl
     }
 
     public IBrush ColorBrush => new SolidColorBrush(Color.FromArgb(45, Color.R, Color.G, Color.B));
-
-    public IBrush ColorBrushIsChecked => new SolidColorBrush(Color);
 
     public IBrush ColorBrushIsPointerOver => new SolidColorBrush(Color.FromArgb(60, Color.R, Color.G, Color.B));
 

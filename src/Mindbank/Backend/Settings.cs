@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using Avalonia.Input;
 using Avalonia.Styling;
 
 namespace Mindbank.Backend;
@@ -17,6 +19,7 @@ public sealed class Settings : INotifyPropertyChanged
     private bool _startInTray;
     private ThemeVariant _theme = ThemeVariant.Default;
     private bool _useBlur = true;
+
 
     public double BlurLevel
     {
@@ -56,7 +59,6 @@ public sealed class Settings : INotifyPropertyChanged
     private int Count => _banks.Count;
 
     private Bank this[int index] => _banks[index];
-
 
     public bool KeepText
     {
@@ -126,13 +128,13 @@ public sealed class Settings : INotifyPropertyChanged
         var version = stream.ReadByte();
         if (version < 0 || version > Version) return;
         var theme = stream.ReadByte();
-        UseBlur = Tools.isBitSet((byte)theme, 2);
+        UseBlur = Tools.IsBitSet(theme, 2);
         theme -= UseBlur ? 4 : 0;
-        HideToSysTray = Tools.isBitSet((byte)theme, 3);
+        HideToSysTray = Tools.IsBitSet(theme, 3);
         theme -= HideToSysTray ? 8 : 0;
-        KeepText = Tools.isBitSet((byte)theme, 4);
+        KeepText = Tools.IsBitSet(theme, 4);
         theme -= KeepText ? 16 : 0;
-        StartInTray = Tools.isBitSet((byte)theme, 4);
+        StartInTray = Tools.IsBitSet(theme, 4);
         theme -= StartInTray ? 32 : 0;
         switch (theme)
         {

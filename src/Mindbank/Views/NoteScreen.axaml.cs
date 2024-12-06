@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
@@ -181,7 +183,7 @@ public partial class NoteScreen : NUC
                     ShowOverwritePrompt = null
                 });
                 if (file is null) return;
-                var exported = Bank.Notes.Where(n => n.Visible).ToArray();
+                var exported = Bank.Notes.Where(it => it is Note { Visible: true }).ToArray();
                 await using var fs = await file.OpenWriteAsync();
                 Bank.SaveToStream(fs, exported);
             });
@@ -263,7 +265,7 @@ public partial class NoteScreen : NUC
         {
             var rnd = new Random();
             var pick = rnd.Next((int)min, (int)max);
-            _randomNote = Bank.Notes.Where(n => n.Visible).ToArray()[pick];
+            _randomNote = Bank.Notes.Where(it => it is Note { Visible: true }).ToArray()[pick];
         }
         else
         {
@@ -294,8 +296,9 @@ public partial class NoteScreen : NUC
 
     private void RemoveSelected(object? sender, RoutedEventArgs e)
     {
-        foreach (var note in Bank.Notes)
+        foreach (var n in Bank.Notes)
         {
+            if (n is not Note note) continue;
             if (!note.Visible || !note.Checked) continue;
             Bank.Remove(note);
         }
@@ -359,5 +362,23 @@ public partial class NoteScreen : NUC
         {
             // ignored
         }
+    }
+
+    private void MoveItemUp(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Control { Tag: Note note }) return;
+        if (note.IsOnTop) return;
+        var index = Bank.IndexOf(note) - 1;
+        Bank.Remove(note);
+        Bank.Insert(index, note);
+    }
+
+    private void MoveItemDown(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Control { Tag: Note note }) return;
+        if (note.IsOnBottom) return;
+        var index = Bank.IndexOf(note) + 1;
+        Bank.Remove(note);
+        Bank.Insert(index, note);
     }
 }
