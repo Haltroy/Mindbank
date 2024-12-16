@@ -45,7 +45,8 @@
                     <BrushTransition Property="Background" Duration="0:0:0.1" />
                 </Transitions>
             </Border.Transitions>
-            <TextBlock FontWeight="Heavy" Margin="5" Text="{CompiledBinding $parent[views:TagControl].TagObject.Text}"
+            <TextBlock FontWeight="Heavy" Margin="5"
+                       Text="{CompiledBinding $parent[views:TagControl].TagObject.Text, FallbackValue=''}"
                        Foreground="{CompiledBinding #MainBorder.BorderBrush}" />
         </Border>
     </Panel>

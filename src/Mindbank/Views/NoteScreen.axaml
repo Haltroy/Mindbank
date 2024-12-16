@@ -10,6 +10,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Mindbank.Views.NoteScreen">
     <UserControl.Resources>
+        <StreamGeometry x:Key="ArrowMaximizeVerticalRegular">M13.7197 5.78033C14.0126 6.07322 14.4874 6.07322 14.7803 5.78033C15.0732 5.48744 15.0732 5.01256 14.7803 4.71967L12.2803 2.21967C11.9874 1.92678 11.5126 1.92678 11.2197 2.21967L8.71967 4.71967C8.42678 5.01256 8.42678 5.48744 8.71967 5.78033C9.01256 6.07322 9.48744 6.07322 9.78033 5.78033L11 4.56066L11 8.75C11 9.16421 11.3358 9.5 11.75 9.5C12.1642 9.5 12.5 9.16421 12.5 8.75V4.56066L13.7197 5.78033Z M4 11.75C4 11.3358 4.33579 11 4.75 11H19.25C19.6642 11 20 11.3358 20 11.75C20 12.1642 19.6642 12.5 19.25 12.5H4.75C4.33579 12.5 4 12.1642 4 11.75Z M12.5 14.75C12.5 14.3358 12.1642 14 11.75 14C11.3358 14 11 14.3358 11 14.75V19.4393L9.78033 18.2197C9.48744 17.9268 9.01256 17.9268 8.71967 18.2197C8.42678 18.5126 8.42678 18.9874 8.71967 19.2803L11.2197 21.7803C11.5126 22.0732 11.9874 22.0732 12.2803 21.7803L14.7803 19.2803C15.0732 18.9874 15.0732 18.5126 14.7803 18.2197C14.4874 17.9268 14.0126 17.9268 13.7197 18.2197L12.5 19.4393V14.75Z</StreamGeometry>
+        <StreamGeometry x:Key="SettingsRegular">M14 9.50006C11.5147 9.50006 9.5 11.5148 9.5 14.0001C9.5 16.4853 11.5147 18.5001 14 18.5001C15.3488 18.5001 16.559 17.9066 17.3838 16.9666C18.0787 16.1746 18.5 15.1365 18.5 14.0001C18.5 13.5401 18.431 13.0963 18.3028 12.6784C17.7382 10.8381 16.0253 9.50006 14 9.50006ZM11 14.0001C11 12.3432 12.3431 11.0001 14 11.0001C15.6569 11.0001 17 12.3432 17 14.0001C17 15.6569 15.6569 17.0001 14 17.0001C12.3431 17.0001 11 15.6569 11 14.0001Z M21.7093 22.3948L19.9818 21.6364C19.4876 21.4197 18.9071 21.4515 18.44 21.7219C17.9729 21.9924 17.675 22.4693 17.6157 23.0066L17.408 24.8855C17.3651 25.273 17.084 25.5917 16.7055 25.682C14.9263 26.1061 13.0725 26.1061 11.2933 25.682C10.9148 25.5917 10.6336 25.273 10.5908 24.8855L10.3834 23.0093C10.3225 22.4731 10.0112 21.9976 9.54452 21.7281C9.07783 21.4586 8.51117 21.4269 8.01859 21.6424L6.29071 22.4009C5.93281 22.558 5.51493 22.4718 5.24806 22.1859C4.00474 20.8536 3.07924 19.2561 2.54122 17.5137C2.42533 17.1384 2.55922 16.7307 2.8749 16.4977L4.40219 15.3703C4.83721 15.0501 5.09414 14.5415 5.09414 14.0007C5.09414 13.4598 4.83721 12.9512 4.40162 12.6306L2.87529 11.5051C2.55914 11.272 2.42513 10.8638 2.54142 10.4882C3.08038 8.74734 4.00637 7.15163 5.24971 5.82114C5.51684 5.53528 5.93492 5.44941 6.29276 5.60691L8.01296 6.36404C8.50793 6.58168 9.07696 6.54881 9.54617 6.27415C10.0133 6.00264 10.3244 5.52527 10.3844 4.98794L10.5933 3.11017C10.637 2.71803 10.9245 2.39704 11.3089 2.31138C12.19 2.11504 13.0891 2.01071 14.0131 2.00006C14.9147 2.01047 15.8128 2.11485 16.6928 2.31149C17.077 2.39734 17.3643 2.71823 17.4079 3.11017L17.617 4.98937C17.7116 5.85221 18.4387 6.50572 19.3055 6.50663C19.5385 6.507 19.769 6.45838 19.9843 6.36294L21.7048 5.60568C22.0626 5.44818 22.4807 5.53405 22.7478 5.81991C23.9912 7.1504 24.9172 8.74611 25.4561 10.487C25.5723 10.8623 25.4386 11.2703 25.1228 11.5035L23.5978 12.6297C23.1628 12.95 22.9 13.4586 22.9 13.9994C22.9 14.5403 23.1628 15.0489 23.5988 15.3698L25.1251 16.4965C25.441 16.7296 25.5748 17.1376 25.4586 17.5131C24.9198 19.2536 23.9944 20.8492 22.7517 22.1799C22.4849 22.4657 22.0671 22.5518 21.7093 22.3948ZM16.263 22.1966C16.4982 21.4685 16.9889 20.8288 17.6884 20.4238C18.5702 19.9132 19.6536 19.8547 20.5841 20.2627L21.9281 20.8526C22.791 19.8538 23.4593 18.7013 23.8981 17.4552L22.7095 16.5778L22.7086 16.5771C21.898 15.98 21.4 15.0277 21.4 13.9994C21.4 12.9719 21.8974 12.0195 22.7073 11.4227L22.7085 11.4218L23.8957 10.545C23.4567 9.2988 22.7881 8.14636 21.9248 7.1477L20.5922 7.73425L20.5899 7.73527C20.1844 7.91463 19.7472 8.00722 19.3039 8.00663C17.6715 8.00453 16.3046 6.77431 16.1261 5.15465L16.1259 5.15291L15.9635 3.69304C15.3202 3.57328 14.6677 3.50872 14.013 3.50017C13.3389 3.50891 12.6821 3.57367 12.0377 3.69328L11.8751 5.15452C11.7625 6.16272 11.1793 7.05909 10.3019 7.56986C9.41937 8.0856 8.34453 8.14844 7.40869 7.73694L6.07273 7.14893C5.20949 8.14751 4.54092 9.29983 4.10196 10.5459L5.29181 11.4233C6.11115 12.0269 6.59414 12.9837 6.59414 14.0007C6.59414 15.0173 6.11142 15.9742 5.29237 16.5776L4.10161 17.4566C4.54002 18.7044 5.2085 19.8585 6.07205 20.8587L7.41742 20.2682C8.34745 19.8613 9.41573 19.9215 10.2947 20.4292C11.174 20.937 11.7593 21.832 11.8738 22.84L11.8744 22.8445L12.0362 24.3088C13.3326 24.5638 14.6662 24.5638 15.9626 24.3088L16.1247 22.8418C16.1491 22.6217 16.1955 22.4055 16.263 22.1966Z</StreamGeometry>
         <StreamGeometry x:Key="CaretUpRegular">M5.16108 14.9083C4.45387 15.7165 5.02785 16.9814 6.1018 16.9814H17.898C18.972 16.9814 19.5459 15.7165 18.8388 14.9083L13.3169 8.59762C12.6197 7.80079 11.3801 7.80079 10.6829 8.59762L5.16108 14.9083ZM6.65274 15.4814L11.8118 9.58537C11.9114 9.47154 12.0885 9.47154 12.1881 9.58537L17.3471 15.4814H6.65274Z</StreamGeometry>
         <StreamGeometry x:Key="CaretDownRegular">M5.16108 10.0731C4.45387 9.2649 5.02785 8 6.1018 8H17.898C18.972 8 19.5459 9.2649 18.8388 10.0731L13.3169 16.3838C12.6197 17.1806 11.3801 17.1806 10.6829 16.3838L5.16108 10.0731ZM6.65274 9.5L11.8118 15.396C11.9114 15.5099 12.0885 15.5099 12.1881 15.396L17.3471 9.5H6.65274Z</StreamGeometry>
         <StreamGeometry x:Key="TopSpeedRegular">M10.0492532,15.4208574 L16.3060077,6.94493547 C16.5131405,6.66433611 16.8962754,6.58091825 17.2013158,6.75000494 C17.4758699,6.90219275 17.61052,7.21639422 17.5413028,7.51420559 L17.510592,7.61262428 L13.6405266,17.4116224 C13.2205308,18.475051 12.0179777,18.9966563 10.9545491,18.5766605 C10.8710782,18.543694 10.7898393,18.5053348 10.7113465,18.4618255 C9.71108052,17.9073691 9.34968053,16.6470175 9.904137,15.6467516 L9.97303013,15.5314501 L9.97303013,15.5314501 L10.0492532,15.4208574 L16.3060077,6.94493547 L10.0492532,15.4208574 Z M13.850015,12.7977214 L11.2560655,16.3117019 L11.2160666,16.373966 L11.2160666,16.373966 C11.0632395,16.6496733 11.1628536,16.9970689 11.4385609,17.149896 L11.5055502,17.1815268 L11.5055502,17.1815268 C11.769176,17.2856445 12.0638421,17.1796801 12.2044743,16.9439092 L12.2453929,16.8606213 L13.850015,12.7977214 Z M18.6095174,7.41397033 C19.364068,8.02528183 20.0469718,8.75083284 20.6317275,9.58595046 C21.1562296,10.3350171 21.6612578,11.2420254 21.9517027,11.9842912 C22.1026388,12.3700259 21.9122969,12.8050834 21.5265623,12.9560194 C21.1408277,13.1069554 20.7057702,12.9166136 20.5548341,12.530879 C20.4575421,12.2822379 20.3277108,12.0046594 20.1775548,11.7190679 L18.1280514,12.9023464 C17.769332,13.1094531 17.3106392,12.9865468 17.1035324,12.6278273 C16.9136845,12.2990011 17.0011393,11.8861696 17.2933389,11.6601229 L17.3780514,11.6033083 L19.3963044,10.4364308 L19.1658779,10.1227204 C18.8419948,9.70016342 18.4876665,9.31329453 18.1081562,8.96304177 L18.4883177,7.99876394 C18.5262055,7.90283222 18.5550318,7.80534515 18.5751558,7.70730436 L18.5988599,7.55995309 L18.6095174,7.41397033 Z M15.9809484,5.85271523 C15.8318986,5.9392755 15.694531,6.04936208 15.5743759,6.18134222 L15.4601633,6.32055973 L14.919203,7.05349635 C14.2174399,6.80955942 13.4886764,6.6517272 12.7502416,6.58305531 L12.75,9.25589923 C12.75,9.6701128 12.4142136,10.0058992 12,10.0058992 C11.6203042,10.0058992 11.306509,9.72374535 11.2568466,9.35766979 L11.25,9.25589923 L11.2496135,6.56662077 C9.65294084,6.68015443 8.06551588,7.21425939 6.65889532,8.19918572 C5.84294582,8.77051971 5.13152818,9.52142873 4.54015984,10.4038879 L6.62237477,11.6059717 C6.98109424,11.8130785 7.1040006,12.2717713 6.89689382,12.6304908 C6.70704594,12.959317 6.30579591,13.0899946 5.96393397,12.9499658 L5.87237477,12.9050099 L3.79818254,11.7080227 C3.6704134,11.9742424 3.55177265,12.248307 3.44255853,12.5292935 C3.29249811,12.9153696 2.8578736,13.1066981 2.47179751,12.9566377 C2.08572142,12.8065773 1.89439292,12.3719528 2.04445335,11.9858767 C2.85090303,9.91103954 4.12374054,8.14315832 5.79853067,6.97045765 C8.8904309,4.8054858 12.7328827,4.5119546 15.9809484,5.85271523 Z</StreamGeometry>
@@ -19,7 +21,6 @@
         <StreamGeometry x:Key="SaveRegular">M3 5.75C3 4.23122 4.23122 3 5.75 3H15.7145C16.5764 3 17.4031 3.34241 18.0126 3.9519L20.0481 5.98744C20.6576 6.59693 21 7.42358 21 8.28553V18.25C21 19.7688 19.7688 21 18.25 21H5.75C4.23122 21 3 19.7688 3 18.25V5.75ZM5.75 4.5C5.05964 4.5 4.5 5.05964 4.5 5.75V18.25C4.5 18.9404 5.05964 19.5 5.75 19.5H6V14.25C6 13.0074 7.00736 12 8.25 12H15.75C16.9926 12 18 13.0074 18 14.25V19.5H18.25C18.9404 19.5 19.5 18.9404 19.5 18.25V8.28553C19.5 7.8214 19.3156 7.37629 18.9874 7.0481L16.9519 5.01256C16.6918 4.75246 16.3582 4.58269 16 4.52344V7.25C16 8.49264 14.9926 9.5 13.75 9.5H9.25C8.00736 9.5 7 8.49264 7 7.25V4.5H5.75ZM16.5 19.5V14.25C16.5 13.8358 16.1642 13.5 15.75 13.5H8.25C7.83579 13.5 7.5 13.8358 7.5 14.25V19.5H16.5ZM8.5 4.5V7.25C8.5 7.66421 8.83579 8 9.25 8H13.75C14.1642 8 14.5 7.66421 14.5 7.25V4.5H8.5Z</StreamGeometry>
         <StreamGeometry x:Key="EditOffRegular">M8.93944 10.0001L2.21979 3.28027C1.9269 2.98737 1.9269 2.5125 2.2198 2.21961C2.51269 1.92672 2.98757 1.92672 3.28046 2.21962L21.7802 20.7198C22.0731 21.0127 22.0731 21.4875 21.7802 21.7804C21.4873 22.0733 21.0125 22.0733 20.7196 21.7804L14 15.0608L9.0621 19.9987C8.78522 20.2756 8.44089 20.4754 8.06312 20.5784L2.94743 21.9736C2.38756 22.1263 1.87383 21.6126 2.02652 21.0527L3.42171 15.937C3.52474 15.5593 3.72456 15.2149 4.00144 14.9381L8.93944 10.0001ZM12.9392 13.9999L10.0001 11.0607L5.0621 15.9987C4.96981 16.091 4.9032 16.2058 4.86886 16.3317L3.81901 20.1811L7.66845 19.1313C7.79437 19.097 7.90915 19.0303 8.00144 18.9381L12.9392 13.9999Z M17.9393 8.99963L15.0598 11.8793L16.1207 12.9401L21.0304 8.03039C22.4279 6.63293 22.4279 4.36719 21.0304 2.96973C19.633 1.57227 17.3672 1.57227 15.9698 2.96973L11.0601 7.87943L12.1207 8.94013L15.0003 6.06063L17.9393 8.99963ZM17.0304 4.03039C17.8421 3.21871 19.1581 3.21871 19.9698 4.03039C20.7814 4.84206 20.7814 6.15805 19.9698 6.96973L18.9993 7.93963L16.0603 4.99963L17.0304 4.03039Z</StreamGeometry>
         <StreamGeometry x:Key="EditRegular">M27.3138 4.68622C28.8759 6.24832 28.8759 8.78098 27.3138 10.3431L12.5409 25.116C11.9001 25.7568 11.0972 26.2114 10.218 26.4312L5.63602 27.5767C4.90364 27.7598 4.24025 27.0964 4.42335 26.364L5.56885 21.782C5.78864 20.9028 6.24323 20.0999 6.88402 19.4591L21.6569 4.68622C23.219 3.12412 25.7517 3.12412 27.3138 4.68622ZM20.2426 8.92865L8.29824 20.8734C7.91376 21.2578 7.641 21.7396 7.50913 22.2671L6.76786 25.2322L9.73295 24.4909C10.2604 24.359 10.7422 24.0863 11.1267 23.7018L23.0706 11.7566L20.2426 8.92865ZM23.0712 6.10043L21.6566 7.51465L24.4846 10.3426L25.8996 8.92886C26.6806 8.14781 26.6806 6.88148 25.8996 6.10043C25.1185 5.31939 23.8522 5.31939 23.0712 6.10043Z</StreamGeometry>
-        <StreamGeometry x:Key="AddSquareRegular">M12 7C12.4142 7 12.75 7.33579 12.75 7.75V11.25H16.25C16.6642 11.25 17 11.5858 17 12C17 12.4142 16.6642 12.75 16.25 12.75H12.75V16.25C12.75 16.6642 12.4142 17 12 17C11.5858 17 11.25 16.6642 11.25 16.25V12.75H7.75C7.33579 12.75 7 12.4142 7 12C7 11.5858 7.33579 11.25 7.75 11.25H11.25V7.75C11.25 7.33579 11.5858 7 12 7Z M3 6.25C3 4.45507 4.45507 3 6.25 3H17.75C19.5449 3 21 4.45507 21 6.25V17.75C21 19.5449 19.5449 21 17.75 21H6.25C4.45507 21 3 19.5449 3 17.75V6.25ZM6.25 4.5C5.2835 4.5 4.5 5.2835 4.5 6.25V17.75C4.5 18.7165 5.2835 19.5 6.25 19.5H17.75C18.7165 19.5 19.5 18.7165 19.5 17.75V6.25C19.5 5.2835 18.7165 4.5 17.75 4.5H6.25Z</StreamGeometry>
         <StreamGeometry x:Key="PredictionsRegular">M12,2 C13.1533411,2 14.239122,2.28925943 15.1887536,2.79918917 C15.112506,3.24499916 14.9646822,3.56044404 14.7625631,3.76256313 C14.651965,3.87316122 14.5073983,3.96747369 14.3258552,4.04282999 C13.6240917,3.69484129 12.8347996,3.5 12,3.5 C9.10050506,3.5 6.75,5.85050506 6.75,8.75 C6.75,10.8881837 8.02822265,12.7278225 9.8622211,13.5464695 C10.5502799,13.8149728 11.1856692,13.9625453 11.7682833,13.9937269 L12,14 C12.6447239,14 13.3574543,13.8508379 14.1372164,13.5477329 C15.0530197,13.1384379 15.8301861,12.4750311 16.3789152,11.6472257 C17.0183307,11.8672416 17.7876826,11.7336231 18.2728071,11.2466813 C17.8577163,12.2895137 17.1901986,13.2039271 16.345851,13.9150872 L17.967289,18.7801589 C18.2335628,19.5789337 17.8932573,20.4540914 17.1573198,20.8631617 C15.7855762,21.6256443 14.0642518,22 12,22 C9.93575073,22 8.214428,21.6256452 6.84268887,20.8631665 C6.10675341,20.4541035 5.76644595,19.5789539 6.03270398,18.7801798 L7.654149,13.9150872 C6.18404803,12.6768801 5.25,10.8225194 5.25,8.75 C5.25,5.02207794 8.27207794,2 12,2 Z M15.0565518,14.7913638 L14.6969316,14.9394573 L14.6788415,14.9475423 C13.9522531,15.2620316 13.1594698,15.452487 12.3271908,15.4922091 C12.3209854,15.4911059 12.3153059,15.4914155 12.3096286,15.4917168 C12.2858058,15.4941022 12.2614052,15.4950751 12.2369716,15.4959181 L12,15.5 L11.804,15.496 L11.6733328,15.4907882 C10.8405302,15.452487 10.0477469,15.2620316 9.32115848,14.9475423 L9.30306837,14.9394573 C9.18403381,14.8929562 9.06416108,14.8435884 8.94344816,14.7913638 L7.45572893,19.2545215 C7.41769197,19.3686323 7.4663069,19.4936526 7.57144272,19.5520914 C8.7000759,20.1794401 10.1740439,20.5 12,20.5 C13.8259583,20.5 15.2999275,20.1794394 16.4285612,19.5520892 C16.533696,19.4936502 16.5823098,19.368631 16.5442682,19.2545129 L15.0565518,14.7913638 Z M11.6898272,15.4930001 L11.804,15.496 L11.8373106,15.4976957 L12,15.5 C11.8960435,15.5 11.7926358,15.49765 11.6898272,15.4930001 Z M17.9924045,1.88020833 L18,2 C18,3.14960906 18.2698654,3.95920521 18.7803301,4.46966991 C19.2515283,4.9408681 19.9776077,5.20705858 20.9907227,5.24522281 L21.25,5.25 C22.2083333,5.25 22.2482639,6.62760417 21.3697917,6.74240451 L21.25,6.75 C20.1003909,6.75 19.2907948,7.01986538 18.7803301,7.53033009 C18.3091319,8.00152827 18.0429414,8.72760769 18.0047772,9.74072273 L18,10 C18,11 16.5,11 16.5,10 C16.5,8.85039094 16.2301346,8.04079479 15.7196699,7.53033009 C15.2484717,7.0591319 14.5223923,6.79294142 13.5092773,6.75477719 L13.25,6.75 C12.2916667,6.75 12.2517361,5.37239583 13.1302083,5.25759549 L13.25,5.25 C14.3996091,5.25 15.2092052,4.98013462 15.7196699,4.46966991 C16.2301346,3.95920521 16.5,3.14960906 16.5,2 C16.5,1.04166667 17.8776042,1.00173611 17.9924045,1.88020833 Z M17.25,4.95250583 L17.1063227,5.15616731 C17.0062588,5.28827689 16.8976229,5.41303729 16.7803301,5.53033009 C16.6043909,5.70626928 16.4116496,5.86273057 16.2025058,6 C16.4116496,6.13726943 16.6043909,6.29373072 16.7803301,6.46966991 C16.9562693,6.64560911 17.1127306,6.8383504 17.25,7.04749417 C17.3872694,6.8383504 17.5437307,6.64560911 17.7196699,6.46966991 C17.8956091,6.29373072 18.0883504,6.13726943 18.2974942,6 C18.0883504,5.86273057 17.8956091,5.70626928 17.7196699,5.53033009 C17.6023771,5.41303729 17.4937412,5.28827689 17.3936773,5.15616731 L17.25,4.95250583 Z</StreamGeometry>
         <StreamGeometry x:Key="DiceRegular">M454.609,111.204L280.557,6.804C272.992,2.268,264.503,0,255.999,0c-8.507,0-16.995,2.268-24.557,6.796 L57.391,111.204c-5.346,3.202-9.917,7.369-13.556,12.192l207.904,124.708c2.622,1.575,5.9,1.575,8.519,0L468.16,123.396 C464.524,118.573,459.951,114.406,454.609,111.204z M157.711,130.313c-10.96,7.611-28.456,7.422-39.081-0.452 c-10.618-7.859-10.342-20.413,0.618-28.031c10.964-7.626,28.46-7.422,39.081,0.438C168.95,110.134,168.674,122.68,157.711,130.313z M274.159,131.021c-10.594,7.362-27.496,7.166-37.762-0.429c-10.263-7.596-9.992-19.727,0.599-27.089 c10.591-7.362,27.492-7.174,37.759,0.43C285.018,111.528,284.75,123.659,274.159,131.021z M391.908,132.702 c-10.964,7.618-28.461,7.414-39.085-0.444c-10.617-7.86-10.343-20.42,0.621-28.046c10.957-7.61,28.456-7.422,39.078,0.452 C403.147,112.523,402.868,125.076,391.908,132.702z M246.136,258.366L38.007,133.523c-2.46,5.802-3.798,12.117-3.798,18.62v208.084 c0,16.773,8.797,32.311,23.182,40.946l174.051,104.392c5.829,3.497,12.204,5.629,18.714,6.435V265.464 C250.156,262.556,248.63,259.858,246.136,258.366z M75.845,369.736c-12.056-6.57-21.829-21.671-21.829-33.727 c0-12.056,9.773-16.502,21.829-9.932c12.056,6.571,21.826,21.671,21.826,33.728C97.671,371.861,87.901,376.307,75.845,369.736z M75.845,247.87c-12.056-6.579-21.829-21.679-21.829-33.728c0-12.056,9.773-16.502,21.829-9.931 c12.056,6.57,21.826,21.671,21.826,33.728C97.671,249.987,87.901,254.44,75.845,247.87z M197.715,436.158 c-12.052-6.57-21.826-21.671-21.826-33.728c0-12.048,9.773-16.494,21.826-9.924c12.056,6.571,21.826,21.671,21.826,33.72 s9.773-16.502,21.826-9.931c12.056,6.57,21.826,21.671,21.826,33.727C219.541,316.417,209.771,320.862,197.715,314.292z M473.993,133.523l-208.13,124.843c-2.494,1.492-4.02,4.19-4.02,7.099V512 C477.791,145.64,476.453,139.325,473.993,133.523z M370.478,355.11c-19.287,10.512-34.922,3.398-34.922-15.892 c0-19.282,15.635-43.447,34.922-53.951c19.293-10.519,34.925-3.406,34.925,15.884C405.403,320.434,389.771,344.598,370.478,355.11z</StreamGeometry>
         <StreamGeometry x:Key="TagRegular">M19.75,2 C20.9926407,2 22,3.00735931 22,4.25 L22,9.71195771 C22,10.5737738 21.6576992,11.4003037 21.0483777,12.0097741 L12.5473442,20.5128837 C11.2778881,21.7797729 9.22213817,21.7806673 7.95097797,20.5142825 L3.48927551,16.0592499 C2.21880658,14.7912535 2.21717852,12.7333756 3.48549701,11.4631582 L11.9851607,2.95333557 C12.5947699,2.34296602 13.422034,2 14.2846894,2 L19.75,2 Z M19.75,3.5 L14.2846894,3.5 C13.8201826,3.5 13.3747328,3.68467401 13.0464816,4.01333454 L4.53430434,12.5358177 L4.53430434,12.5358177 C3.86407752,13.2207041 3.86916592,14.3191439 4.54902203,14.9976769 L9.0102422,19.4522286 C9.6951129,20.134526 10.8034812,20.1340438 11.4871562,19.4517518 L19.987588,10.9492434 C20.3156842,10.6210671 20.5,10.1760125 20.5,9.71195771 L20.5,4.25 C20.5,3.83578644 20.1642136,3.5 19.75,3.5 Z M16.9999743,5.50218109 C17.8283872,5.50218109 18.4999486,6.17374246 18.4999486,7.00215539 C18.4999486,7.83056832 17.8283872,8.50212969 16.9999743,8.50212969 C16.1715614,8.50212969 15.5,7.83056832 15.5,7.00215539 C15.5,6.17374246 16.1715614,5.50218109 16.9999743,5.50218109 Z</StreamGeometry>
@@ -168,6 +169,14 @@
                                           Stretch="Uniform" />
                                 </Grid>
                             </ToggleButton>
+                            <ToggleButton IsVisible="{CompiledBinding $self.IsEnabled}"
+                                          IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked, Mode=OneWay}"
+                                          Name="ReorderEnabled" Background="Transparent">
+                                <Path Fill="{DynamicResource ButtonForeground}"
+                                      Data="{StaticResource ArrowMaximizeVerticalRegular}" Width="24"
+                                      Height="{CompiledBinding $self.Bounds.Width}"
+                                      Stretch="Uniform" />
+                            </ToggleButton>
                         </StackPanel>
                     </ScrollViewer>
                     <ScrollViewer Grid.Column="1">
@@ -189,12 +198,6 @@
                                           Background="Transparent">
                                 <Path Fill="{DynamicResource ButtonForeground}"
                                       Data="{StaticResource SearchRegular}" Stretch="Uniform" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}" />
-                            </ToggleButton>
-                            <ToggleButton Name="Tags" ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_TagMenuButton}"
-                                          Background="Transparent">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource TagRegular}" Stretch="Uniform" Width="24"
                                       Height="{CompiledBinding $self.Bounds.Width}" />
                             </ToggleButton>
                         </StackPanel>
@@ -236,9 +239,15 @@
                     <TextBox TextChanged="SearchBoxTextChanged" Name="SearchBox" Margin="5 0" />
                 </DockPanel>
 
-                <DockPanel DockPanel.Dock="Top" Name="TagsPanel" IsVisible="{CompiledBinding #Tags.IsChecked}"
+                <DockPanel DockPanel.Dock="Bottom" Name="TagsPanel" IsVisible="{CompiledBinding #Tags.IsChecked}"
                            IsEnabled="{CompiledBinding $self.IsVisible}">
-                    <ItemsControl ItemsSource="{CompiledBinding $parent[views:NoteScreen].Bank.Tags}">
+                    <Button Background="Transparent" DockPanel.Dock="Left" Margin="5 0" Click="ManageTagsClicked">
+                        <Path Data="{StaticResource SettingsRegular}"
+                              Fill="{DynamicResource TextControlForeground}"
+                              Stretch="Uniform"
+                              Height="24" />
+                    </Button>
+                    <ItemsControl ItemsSource="{CompiledBinding $parent[views:NoteEditUserControl].Bank.Tags}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" />
@@ -248,15 +257,16 @@
                             <DataTemplate x:DataType="backend:Tag">
                                 <views:TagControl IsCheckedChanged="AllTagsCheckedChanged" Tag="{CompiledBinding Self}"
                                                   TagObject="{CompiledBinding Self}" CornerRadius="50"
-                                                  Color="{CompiledBinding Color}">
+                                                  IsChecked="{CompiledBinding Checked, Mode=TwoWay}"
+                                                  Color="{CompiledBinding Color}" AllowChecking="True">
                                     <ToolTip.Tip>
                                         <Panel>
                                             <TextBlock
-                                                IsVisible="{CompiledBinding !$parent[views:TagControl].IsChecked}"
+                                                IsVisible="{CompiledBinding !$parent[views:TagControl].TagObject.Checked, FallbackValue=True}"
                                                 Text="{x:Static lang:Lang.ToolTip_Note_TagMenuTagOff}"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
-                                                IsVisible="{CompiledBinding $parent[views:TagControl].IsChecked}"
+                                                IsVisible="{CompiledBinding $parent[views:TagControl].TagObject.Checked, FallbackValue=False}"
                                                 Text="{x:Static lang:Lang.ToolTip_Note_TagMenuTagOn}"
                                                 TextWrapping="Wrap" />
                                         </Panel>
@@ -268,90 +278,24 @@
                 </DockPanel>
 
                 <DockPanel DockPanel.Dock="Bottom"
-                           IsEnabled="{CompiledBinding $parent[views:NoteScreen].Bank.CanWrite}">
-                    <ScrollViewer
-                        DockPanel.Dock="Bottom"
-                        IsVisible="{CompiledBinding #NewNoteTagsPanelVisibility.IsChecked}"
-                        IsEnabled="{CompiledBinding $self.IsVisible}">
-                        <DockPanel Name="NewNoteTagsPanel">
-                            <Button DockPanel.Dock="Left" Background="Transparent">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Height="{CompiledBinding $self.Bounds.Width}"
-                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_NewItemNewTag}"
-                                      Data="{StaticResource AddSquareRegular}" Stretch="Uniform" Width="24" />
-                                <Button.Flyout>
-                                    <Flyout>
-                                        <StackPanel Spacing="5">
-                                            <StackPanel Orientation="Horizontal" Spacing="5">
-                                                <TextBlock Text="{x:Static lang:Lang.NoteScreen_NewTag_Color}"
-                                                           VerticalAlignment="Center" />
-                                                <ColorPicker
-                                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_NewItemTagColor}"
-                                                    Color="{CompiledBinding $parent[views:NoteScreen].NewTagColor, Mode=TwoWay}" />
-                                                <Button Click="RandomColorClick" Background="Transparent"
-                                                        ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_NewItemTagColorRandom}">
-                                                    <Path Data="{StaticResource DiceRegular}"
-                                                          Fill="{DynamicResource TextControlForeground}"
-                                                          Stretch="Uniform" Width="24"
-                                                          Height="{CompiledBinding $self.Bounds.Width}" />
-                                                </Button>
-                                            </StackPanel>
-                                            <TextBox
-                                                Text="{CompiledBinding $parent[views:NoteScreen].NewTagText, Mode=TwoWay}"
-                                                HorizontalAlignment="Stretch" />
-                                            <Button Content="{x:Static lang:Lang.NoteScreen_NewTag_Add}"
-                                                    Background="Transparent"
-                                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_NewItemTagAdd}"
-                                                    HorizontalAlignment="Stretch"
-                                                    HorizontalContentAlignment="Center" Click="NewTagClicked"
-                                                    IsEnabled="{CompiledBinding !!$parent[views:NoteScreen].NewTagText}" />
-                                        </StackPanel>
-                                    </Flyout>
-                                </Button.Flyout>
-                            </Button>
-                            <ItemsControl VerticalAlignment="Center" Name="NewNoteTagsIc"
-                                          ItemsSource="{CompiledBinding $parent[views:NoteScreen].Bank.Tags}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate x:DataType="backend:Tag">
-                                        <views:TagControl IsChecked="{CompiledBinding NewNoteChecked}"
-                                                          TagObject="{CompiledBinding Self}"
-                                                          Tag="{CompiledBinding Self}"
-                                                          Color="{CompiledBinding Color}"
-                                                          CornerRadius="50"
-                                                          IsCheckedChanged="NewNoteTagChecked">
-                                            <ToolTip.Tip>
-                                                <Panel>
-                                                    <TextBlock
-                                                        IsVisible="{CompiledBinding $parent[views:TagControl].IsChecked}"
-                                                        Text="{x:Static lang:Lang.ToolTip_Note_NewItemTagOn}"
-                                                        TextWrapping="Wrap" />
-                                                    <TextBlock
-                                                        IsVisible="{CompiledBinding !$parent[views:TagControl].IsChecked}"
-                                                        Text="{x:Static lang:Lang.ToolTip_Note_NewItemTagOff}"
-                                                        TextWrapping="Wrap" />
-                                                </Panel>
-                                            </ToolTip.Tip>
-                                        </views:TagControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                        </DockPanel>
-                    </ScrollViewer>
+                           IsEnabled="{CompiledBinding $parent[views:NoteEditUserControl].Bank.CanWrite}">
                     <Button DockPanel.Dock="Right" VerticalAlignment="Bottom" Click="AddNewNoteClicked"
-                            Background="Transparent"
+                            Background="Transparent" IsVisible="{CompiledBinding !$parent[views:NoteScreen].EditMode}"
+                            IsEnabled="{CompiledBinding $self.IsVisible}"
                             ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_Send}">
                         <Path Fill="{DynamicResource ButtonForeground}" Data="{StaticResource SendRegular}"
                               Stretch="Uniform" Width="24" Height="{CompiledBinding $self.Width}" />
                     </Button>
-                    <ToggleButton Name="NewNoteTagsPanelVisibility" Background="Transparent"
-                                  ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_NewItemTagButton}">
-                        <Path Fill="{DynamicResource ButtonForeground}" DockPanel.Dock="Left"
+                    <Button DockPanel.Dock="Right" IsVisible="{CompiledBinding $parent[views:NoteScreen].EditMode}"
+                            Click="NoteItemEditOffOnClick"
+                            IsEnabled="{CompiledBinding $self.IsVisible}" Background="Transparent">
+                        <Path Data="{StaticResource EditOffRegular}" Width="24"
+                              Height="{CompiledBinding $self.Bounds.Width}" Fill="{DynamicResource ButtonForeground}"
+                              Stretch="Uniform" />
+                    </Button>
+                    <ToggleButton Name="Tags" ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_TagMenuButton}"
+                                  Background="Transparent">
+                        <Path Fill="{DynamicResource ButtonForeground}"
                               Data="{StaticResource TagRegular}" Stretch="Uniform" Width="24"
                               Height="{CompiledBinding $self.Bounds.Width}" />
                     </ToggleButton>
@@ -383,7 +327,8 @@
                     </ToggleButton>
                     <ScrollViewer>
                         <Panel Margin="5 0">
-                            <TextBox Name="NewText" IsReadOnly="{CompiledBinding #PreviewToggle.IsChecked}"
+                            <TextBox TextChanged="NewText_OnTextChanged" Name="NewText"
+                                     IsReadOnly="{CompiledBinding #PreviewToggle.IsChecked}"
                                      AcceptsReturn="True" AcceptsTab="True">
                                 <TextBox.Styles>
                                     <Style Selector="TextBox[IsReadOnly=True]">
@@ -434,8 +379,11 @@
                                             </Style>
                                         </Border.Styles>
                                         <DockPanel>
-                                            <Grid IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked}" IsVisible="{CompiledBinding $self.IsEnabled}" DockPanel.Dock="Left" RowDefinitions="*,Auto,*">
-                                                <Button Grid.Row="0" Tag="{CompiledBinding Self}" Click="MoveItemUp"
+                                            <Grid IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked}"
+                                                  IsVisible="{CompiledBinding $self.IsEnabled}" DockPanel.Dock="Left"
+                                                  RowDefinitions="*,Auto,*">
+                                                <Button IsVisible="{CompiledBinding #ReorderEnabled.IsChecked}"
+                                                        Grid.Row="0" Tag="{CompiledBinding Self}" Click="MoveItemUp"
                                                         IsEnabled="{CompiledBinding !IsOnTop}"
                                                         Background="Transparent">
                                                     <Grid RowDefinitions="*,Auto" Width="24"
@@ -445,7 +393,8 @@
                                                               Data="{StaticResource CaretUpRegular}" />
                                                     </Grid>
                                                 </Button>
-                                                <Button Grid.Row="2" Background="Transparent" Click="MoveItemDown"
+                                                <Button IsVisible="{CompiledBinding #ReorderEnabled.IsChecked}"
+                                                        Grid.Row="2" Background="Transparent" Click="MoveItemDown"
                                                         IsEnabled="{CompiledBinding !IsOnBottom}"
                                                         Tag="{CompiledBinding Self}">
                                                     <Grid RowDefinitions="Auto,*" Width="24"
@@ -463,88 +412,24 @@
                                             <TextBlock Text="{CompiledBinding DateAsString}" x:DataType="backend:Note"
                                                        DockPanel.Dock="Top"
                                                        HorizontalAlignment="Left" />
-                                            <ToggleButton Name="NoteItemEditMode" DockPanel.Dock="Right"
-                                                          Background="Transparent"
-                                                          VerticalAlignment="Top">
-                                                <ToolTip.Tip>
-                                                    <Panel>
-                                                        <TextBlock TextWrapping="Wrap"
-                                                                   Text="{x:Static lang:Lang.ToolTip_Note_EditNoteOn}"
-                                                                   IsVisible="{CompiledBinding $parent[ToggleButton].IsChecked}" />
-                                                        <TextBlock TextWrapping="Wrap"
-                                                                   Text="{x:Static lang:Lang.ToolTip_Note_EditNoteOff}"
-                                                                   IsVisible="{CompiledBinding !$parent[ToggleButton].IsChecked}" />
-                                                    </Panel>
-                                                </ToolTip.Tip>
-                                                <Panel>
-                                                    <Path Fill="{DynamicResource ButtonForeground}"
-                                                          IsVisible="{CompiledBinding !#NoteItemEditMode.IsChecked}"
-                                                          Stretch="Uniform" Width="24"
-                                                          Height="{CompiledBinding $self.Bounds.Width}"
-                                                          Data="{StaticResource EditRegular}" />
-                                                    <Path Fill="{DynamicResource ButtonForeground}"
-                                                          IsVisible="{CompiledBinding #NoteItemEditMode.IsChecked}"
-                                                          Stretch="Uniform" Width="24"
-                                                          Height="{CompiledBinding $self.Bounds.Width}"
-                                                          Data="{StaticResource EditOffRegular}" />
-                                                </Panel>
-                                            </ToggleButton>
-                                            <ScrollViewer DockPanel.Dock="Bottom">
-                                                <StackPanel Margin="5" Orientation="Horizontal" Spacing="5">
-                                                    <ItemsControl ItemsSource="{CompiledBinding NoteTagCombination}"
-                                                                  x:DataType="backend:Note"
-                                                                  IsVisible="{CompiledBinding !!NoteTagCombination.Length}">
-                                                        <ItemsControl.ItemsPanel>
-                                                            <ItemsPanelTemplate>
-                                                                <StackPanel Orientation="Horizontal" />
-                                                            </ItemsPanelTemplate>
-                                                        </ItemsControl.ItemsPanel>
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate x:DataType="backend:NoteTag">
-                                                                <views:TagControl
-                                                                    IsChecked="{CompiledBinding NoteHasTag}"
-                                                                    Tag="{CompiledBinding Self}"
-                                                                    Color="{CompiledBinding Tag.Color}"
-                                                                    TagObject="{CompiledBinding Tag}"
-                                                                    CornerRadius="50"
-                                                                    Click="NoteTagClick">
-                                                                    <ToolTip.Tip>
-                                                                        <Panel>
-                                                                            <TextBlock
-                                                                                Text="{x:Static lang:Lang.ToolTip_Note_TagOn}"
-                                                                                TextWrapping="Wrap"
-                                                                                IsVisible="{CompiledBinding $parent[views:TagControl].IsChecked}" />
-                                                                            <TextBlock
-                                                                                Text="{x:Static lang:Lang.ToolTip_Note_TagOff}"
-                                                                                TextWrapping="Wrap"
-                                                                                IsVisible="{CompiledBinding !$parent[views:TagControl].IsChecked}" />
-                                                                        </Panel>
-                                                                    </ToolTip.Tip>
-                                                                </views:TagControl>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                    </ItemsControl>
-                                                </StackPanel>
-                                            </ScrollViewer>
-                                            <TextBox IsReadOnly="{CompiledBinding !#NoteItemEditMode.IsChecked}"
-                                                     Background="Transparent"
-                                                     AcceptsReturn="True" AcceptsTab="True" Margin="5 0"
-                                                     Text="{CompiledBinding Text, Mode=TwoWay}" Name="NoteText"
-                                                     x:DataType="backend:Note">
-                                                <TextBox.Styles>
-                                                    <Style Selector="TextBox[IsReadOnly=True]">
-                                                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                                                        <Setter Property="BorderThickness" Value="0" />
-                                                    </Style>
-                                                    <Style Selector="TextBox[IsReadOnly=True]:focus">
-                                                        <Style Selector="^ /template/ Border#PART_BorderElement">
-                                                            <Setter Property="IsVisible" Value="False" />
-                                                        </Style>
-                                                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                                                        <Setter Property="BorderThickness" Value="0" />
-                                                    </Style>
-                                                </TextBox.Styles>
-                                            </TextBox>
+                                            <Button Name="NoteItemEditMode" DockPanel.Dock="Right"
+                                                    Click="NoteItemEditMode_OnClick"
+                                                    Background="Transparent"
+                                                    IsVisible="{CompiledBinding !$parent[views:NoteScreen].EditMode}"
+                                                    IsEnabled="{CompiledBinding $self.IsEnabled}"
+                                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_EditNoteOff}"
+                                                    Tag="{CompiledBinding Self}"
+                                                    VerticalAlignment="Top">
+                                                <Path Fill="{DynamicResource ButtonForeground}"
+                                                      Stretch="Uniform" Width="24"
+                                                      Height="{CompiledBinding $self.Bounds.Width}"
+                                                      Data="{StaticResource EditRegular}" />
+                                            </Button>
+
+                                            <TextBlock
+                                                TextWrapping="Wrap" Margin="5 5"
+                                                Text="{CompiledBinding Text, Mode=TwoWay}" Name="NoteText"
+                                                x:DataType="backend:Note" />
                                         </DockPanel>
                                     </Border>
                                 </DataTemplate>

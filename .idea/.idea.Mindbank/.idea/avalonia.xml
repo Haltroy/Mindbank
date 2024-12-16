@@ -18,6 +18,7 @@
         <entry key="src/Mindbank/Views/Splash.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/Tag.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
         <entry key="src/Mindbank/Views/TagControl.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
+        <entry key="src/Mindbank/Views/TagEditor.axaml" value="src/Mindbank.Linux/Mindbank.Linux.csproj" />
       </map>
     </option>
   </component>

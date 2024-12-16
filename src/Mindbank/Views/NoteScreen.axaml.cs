@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -8,29 +7,24 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Mindbank.Backend;
 
 namespace Mindbank.Views;
 
-public partial class NoteScreen : NUC
+public partial class NoteScreen : NoteEditUserControl
 {
-    public static readonly StyledProperty<Bank> BankProperty =
-        AvaloniaProperty.Register<NoteScreen, Bank>(nameof(Bank), Bank.GenerateExampleBank());
+    public static readonly StyledProperty<bool> EditModeProperty =
+        AvaloniaProperty.Register<NoteScreen, bool>(nameof(EditMode));
 
-    public static readonly StyledProperty<Color> NewTagColorProperty =
-        AvaloniaProperty.Register<NoteScreen, Color>(nameof(NewTagColor), Colors.CornflowerBlue);
-
-    public static readonly StyledProperty<string> NewTagTextProperty =
-        AvaloniaProperty.Register<NoteScreen, string>(nameof(NewTagColor), string.Empty);
+    public static readonly StyledProperty<Note?> EditNoteProperty =
+        AvaloniaProperty.Register<NoteScreen, Note?>(nameof(EditNote));
 
     private readonly List<Tag> _newNoteTags = [];
 
-    private readonly List<Tag> _selectedTags = [];
+    private string _newText = string.Empty;
 
     private Note? _randomNote;
 
@@ -40,22 +34,16 @@ public partial class NoteScreen : NUC
         Task.Run(LoadNote);
     }
 
-    public Bank Bank
+    public Note? EditNote
     {
-        get => GetValue(BankProperty);
-        init => SetValue(BankProperty, value);
+        get => GetValue(EditNoteProperty);
+        set => SetValue(EditNoteProperty, value);
     }
 
-    public Color NewTagColor
+    public bool EditMode
     {
-        get => GetValue(NewTagColorProperty);
-        set => SetValue(NewTagColorProperty, value);
-    }
-
-    public string NewTagText
-    {
-        get => GetValue(NewTagTextProperty);
-        set => SetValue(NewTagTextProperty, value);
+        get => GetValue(EditModeProperty);
+        set => SetValue(EditModeProperty, value);
     }
 
     private Predicate<Note> GetPredicate => SearchConditionIsMet;
@@ -127,9 +115,15 @@ public partial class NoteScreen : NUC
         }
     }
 
-    private void NoteTagClick(object? sender, RoutedEventArgs e)
+    internal void AllTagsCheckedChanged(object? sender, RoutedEventArgs e)
     {
-        if (sender is not TagControl { TagObject: { } tag, Tag: NoteTag { Note: { } note } }) return;
+        if (sender is not TagControl { TagObject: { } tag }) return;
+        if (tag.Checked) _newNoteTags.Add(tag);
+        else _newNoteTags.Remove(tag);
+        DoSearch(GetPredicate);
+
+        if (!EditMode || EditNote is not { } note) return;
+
         if (note.Tags.Contains(tag))
         {
             note.Tags = note.Tags.Where(x => x != tag).ToArray();
@@ -145,14 +139,6 @@ public partial class NoteScreen : NUC
         note.RequestPropertyChangeInvoke();
 
         Bank.NeedsSaving = true;
-    }
-
-    private void AllTagsCheckedChanged(object? sender, RoutedEventArgs e)
-    {
-        if (sender is not ToggleButton { Tag: Tag tag, IsChecked: var b }) return;
-        if (b is true) _selectedTags.Add(tag);
-        else _selectedTags.Remove(tag);
-        DoSearch(GetPredicate);
     }
 
     private void SearchCaseSensitivityCheckedChanged(object? sender, RoutedEventArgs e)
@@ -183,7 +169,7 @@ public partial class NoteScreen : NUC
                     ShowOverwritePrompt = null
                 });
                 if (file is null) return;
-                var exported = Bank.Notes.Where(it => it is Note { Visible: true }).ToArray();
+                var exported = Bank.Notes.Where(it => it is { Visible: true }).ToArray();
                 await using var fs = await file.OpenWriteAsync();
                 Bank.SaveToStream(fs, exported);
             });
@@ -236,6 +222,7 @@ public partial class NoteScreen : NUC
 
     private bool SearchConditionIsMet(Note note)
     {
+        if (note == EditNote) return false;
         if (_randomNote is not null) return note == _randomNote;
 
         var condition1 = true;
@@ -249,8 +236,8 @@ public partial class NoteScreen : NUC
                     caseSensitive ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase);
         }
 
-        if (_selectedTags.Count <= 0) return condition1;
-        foreach (var tag in _selectedTags)
+        if (_newNoteTags.Count <= 0) return condition1;
+        foreach (var tag in _newNoteTags)
             if (note.Tags.Contains(tag))
                 return condition1;
 
@@ -265,7 +252,7 @@ public partial class NoteScreen : NUC
         {
             var rnd = new Random();
             var pick = rnd.Next((int)min, (int)max);
-            _randomNote = Bank.Notes.Where(it => it is Note { Visible: true }).ToArray()[pick];
+            _randomNote = Bank.Notes.Where(it => it is { Visible: true }).ToArray()[pick];
         }
         else
         {
@@ -298,9 +285,8 @@ public partial class NoteScreen : NUC
     {
         foreach (var n in Bank.Notes)
         {
-            if (n is not Note note) continue;
-            if (!note.Visible || !note.Checked) continue;
-            Bank.Remove(note);
+            if (!n.Visible || !n.Checked) continue;
+            Bank.Remove(n);
         }
     }
 
@@ -309,40 +295,13 @@ public partial class NoteScreen : NUC
         DoSearch(GetPredicate);
     }
 
-    private void NewNoteTagChecked(object? sender, RoutedEventArgs e)
-    {
-        if (sender is not ToggleButton { IsChecked: var c, Tag: Tag tag }) return;
-        if (c is true) _newNoteTags.Add(tag);
-        else _newNoteTags.Remove(tag);
-        tag.NewNoteChecked = c is true;
-    }
-
-    private void RandomColorClick(object? sender, RoutedEventArgs e)
-    {
-        var rnd = new Random();
-        NewTagColor = Color.FromRgb((byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256));
-    }
-
-    private void NewTagClicked(object? sender, RoutedEventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(NewTagText)) return;
-        Bank.Add(new Tag(NewTagText, NewTagColor, Bank));
-    }
-
     private void AddNewNoteClicked(object? sender, RoutedEventArgs e)
     {
         if (NewText is not { Text: var text } || string.IsNullOrWhiteSpace(text)) return;
         Bank.Add(new Note(text, _newNoteTags.ToArray(), DateTime.Now, Bank));
-        if (!Settings.KeepText)
-        {
-            NewText.Text = string.Empty;
-            _selectedTags.Clear();
-            foreach (var item in NewNoteTagsIc.Items)
-            {
-                if (item is not Tag tag) continue;
-                tag.NewNoteChecked = false;
-            }
-        }
+        if (Settings.KeepText) return;
+        NewText.Text = string.Empty;
+        _newNoteTags.Clear();
     }
 
     private void GoBack(object? sender, RoutedEventArgs e)
@@ -380,5 +339,62 @@ public partial class NoteScreen : NUC
         var index = Bank.IndexOf(note) + 1;
         Bank.Remove(note);
         Bank.Insert(index, note);
+    }
+
+    private void ManageTagsClicked(object? sender, RoutedEventArgs e)
+    {
+        if (MainCarousel is null) return;
+        var tagEditor = new TagEditor
+        {
+            [!BankProperty] = this[!BankProperty]
+        };
+        tagEditor.OkClick += TagEditorMenu_OnOKClick;
+        MainCarousel.Items.Add(tagEditor);
+        MainCarousel.SelectedItem = tagEditor;
+    }
+
+    private void TagEditorMenu_OnOKClick(object? sender, RoutedEventArgs e)
+    {
+        if (MainCarousel is null) return;
+        MainCarousel.SelectedIndex = 1;
+    }
+
+    private void NoteItemEditMode_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Control { Tag: Note note }) return;
+        note.Visible = false;
+        note.Checked = false;
+        EditMode = true;
+        EditNote = note;
+        if (NewText is not null)
+        {
+            _newText = NewText.Text ?? string.Empty;
+            NewText.Text = note.Text;
+        }
+
+        foreach (var tag in note.Tags) tag.Checked = true;
+
+        _newNoteTags.Clear();
+        _newNoteTags.AddRange(note.Tags);
+        DoSearch(GetPredicate);
+    }
+
+    private void NewText_OnTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        if (NewText is null) return;
+        if (EditMode && EditNote is { } note) note.Text = NewText.Text ?? string.Empty;
+    }
+
+    private void NoteItemEditOffOnClick(object? sender, RoutedEventArgs e)
+    {
+        EditMode = false;
+        if (EditNote is not null) EditNote.Visible = true;
+        EditNote = null;
+        if (NewText is not null) NewText.Text = _newText;
+        if (EditNote is not null)
+            foreach (var tag in EditNote.Tags)
+                tag.Checked = false;
+        _newNoteTags.Clear();
+        DoSearch(GetPredicate);
     }
 }

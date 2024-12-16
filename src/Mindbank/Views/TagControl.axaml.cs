@@ -12,15 +12,21 @@ namespace Mindbank.Views;
 [PseudoClasses(":checked", ":unchecked")]
 public sealed partial class TagControl : UserControl
 {
-    public static readonly StyledProperty<Tag> TagObjectProperty =
-        AvaloniaProperty.Register<TagControl, Tag>(nameof(TagObject), new Tag("Sample", Colors.DodgerBlue, null));
+    public static readonly StyledProperty<Tag?> TagObjectProperty =
+        AvaloniaProperty.Register<TagControl, Tag?>(nameof(TagObject));
 
-    private static readonly RoutedEvent<RoutedEventArgs> IsCheckedChangedEvent =
-        RoutedEvent.Register<TagControl, RoutedEventArgs>(nameof(IsCheckedChanged), RoutingStrategies.Direct);
-
-    private static readonly RoutedEvent<RoutedEventArgs> ClickEvent =
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static readonly RoutedEvent<RoutedEventArgs> ClickEvent =
         RoutedEvent.Register<TagControl, RoutedEventArgs>(nameof(Click), RoutingStrategies.Direct);
 
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static readonly RoutedEvent<RoutedEventArgs> IsCheckedChangedEvent =
+        RoutedEvent.Register<TagControl, RoutedEventArgs>(nameof(IsCheckedChanged), RoutingStrategies.Direct);
+
+    public static readonly StyledProperty<bool> AllowCheckingProperty =
+        AvaloniaProperty.Register<TagControl, bool>(nameof(AllowChecking), true);
+
+    // ReSharper disable once MemberCanBePrivate.Global
     public static readonly StyledProperty<bool> IsCheckedProperty =
         AvaloniaProperty.Register<TagControl, bool>(nameof(IsChecked));
 
@@ -32,6 +38,7 @@ public sealed partial class TagControl : UserControl
     static TagControl()
     {
         AffectsRender<TagControl>(IsCheckedProperty);
+        AffectsRender<TagControl>(AllowCheckingProperty);
         AffectsRender<TagControl>(ColorProperty);
         AffectsRender<TagControl>(TagObjectProperty);
         AffectsRender<TagControl>(IsPointerOverProperty);
@@ -55,7 +62,7 @@ public sealed partial class TagControl : UserControl
     public IBrush TextColorBrushIsChecked => new SolidColorBrush(Tools.ShiftBrightness(Color, 64));
     public IBrush TextColorBrushIsCheckedIsPointerOver => new SolidColorBrush(Tools.ShiftBrightness(Color, 96));
 
-    public Tag TagObject
+    public Tag? TagObject
     {
         get => GetValue(TagObjectProperty);
         set => SetValue(TagObjectProperty, value);
@@ -72,9 +79,25 @@ public sealed partial class TagControl : UserControl
         get => GetValue(IsCheckedProperty);
         set
         {
-            OnIsCheckedChanged();
             SetValue(IsCheckedProperty, value);
+            OnIsCheckedChanged();
         }
+    }
+
+    public bool AllowChecking
+    {
+        get => GetValue(AllowCheckingProperty);
+        set
+        {
+            UpdatePseudoClasses();
+            SetValue(AllowCheckingProperty, value);
+        }
+    }
+
+    public event EventHandler<RoutedEventArgs> Click
+    {
+        add => AddHandler(ClickEvent, value);
+        remove => RemoveHandler(ClickEvent, value);
     }
 
     public event EventHandler<RoutedEventArgs> IsCheckedChanged
@@ -83,23 +106,10 @@ public sealed partial class TagControl : UserControl
         remove => RemoveHandler(IsCheckedChangedEvent, value);
     }
 
-    private void OnIsCheckedChanged()
-    {
-        UpdatePseudoClasses(IsChecked);
-        var args = new RoutedEventArgs(IsCheckedChangedEvent);
-        RaiseEvent(args);
-    }
-
-
-    public event EventHandler<RoutedEventArgs> Click
-    {
-        add => AddHandler(ClickEvent, value);
-        remove => RemoveHandler(ClickEvent, value);
-    }
-
     private void OnClick()
     {
-        IsChecked = !IsChecked;
+        if (AllowChecking) IsChecked = !IsChecked;
+        UpdatePseudoClasses();
         var args = new RoutedEventArgs(ClickEvent);
         RaiseEvent(args);
     }
@@ -119,14 +129,18 @@ public sealed partial class TagControl : UserControl
         _mouseCaptured = false;
 
         OnClick();
-
-        var clickEventArgs = new RoutedEventArgs(ClickEvent);
-        RaiseEvent(clickEventArgs);
     }
 
-    private void UpdatePseudoClasses(bool isChecked)
+    private void OnIsCheckedChanged()
     {
-        PseudoClasses.Set(":checked", isChecked);
-        PseudoClasses.Set(":unchecked", isChecked == false);
+        UpdatePseudoClasses();
+        var args = new RoutedEventArgs(IsCheckedChangedEvent);
+        RaiseEvent(args);
+    }
+
+    private void UpdatePseudoClasses()
+    {
+        PseudoClasses.Set(":checked", IsChecked);
+        PseudoClasses.Set(":unchecked", !IsChecked);
     }
 }

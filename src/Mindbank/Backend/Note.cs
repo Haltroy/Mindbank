@@ -86,7 +86,6 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         get { return _notes.Count(it => it is { Visible: true }); }
     }
 
-    public int TagCount => _tags.Count;
 
     public Tag[] Tags => _tags.ToArray();
 
@@ -432,8 +431,8 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 public sealed class Tag : INotifyPropertyChanged
 {
     private readonly bool _init;
+    private bool _checked;
     private Color _color;
-    private bool _newNoteChecked;
     private string _text = string.Empty;
 
     public Tag(string text, Color color, Bank? bank)
@@ -472,13 +471,13 @@ public sealed class Tag : INotifyPropertyChanged
     public Bank? Bank { get; internal set; }
     public int Index => Bank?.IndexOf(this) ?? -1;
 
-    public bool NewNoteChecked
+    public bool Checked
     {
-        get => _newNoteChecked;
+        get => _checked;
         set
         {
-            _newNoteChecked = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NewNoteChecked)));
+            _checked = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Checked)));
         }
     }
 
