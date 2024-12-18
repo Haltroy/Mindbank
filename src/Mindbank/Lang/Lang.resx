@@ -48,12 +48,6 @@
     <data name="ImportExportFileType" xml:space="preserve">
         <value>Mindbank Bank</value>
     </data>
-    <data name="ShowApp" xml:space="preserve">
-        <value>Show Mindbank...</value>
-    </data>
-    <data name="ExitApp" xml:space="preserve">
-        <value>Exit Mindbank...</value>
-    </data>
     <data name="MainView_NewBank" xml:space="preserve">
         <value>New Bank...</value>
     </data>
@@ -92,9 +86,6 @@ To continue working on notes, click on the note name.</value>
     <data name="NoteScreen_SaveLogToFileTitle" xml:space="preserve">
         <value>Save log to a file...</value>
     </data>
-    <data name="NoteScreen_Close" xml:space="preserve">
-        <value>Close</value>
-    </data>
     <data name="NoteScreen_SaveLogToFile" xml:space="preserve">
         <value>Save log to a file</value>
     </data>
@@ -104,26 +95,8 @@ To continue working on notes, click on the note name.</value>
     <data name="NoteScreen_NewTag_Add" xml:space="preserve">
         <value>Add...</value>
     </data>
-    <data name="NoteScreen_Random_Max" xml:space="preserve">
-        <value>Maximum:</value>
-    </data>
-    <data name="NoteScreen_Random_Min" xml:space="preserve">
-        <value>Minimum:</value>
-    </data>
     <data name="Settings_Settings" xml:space="preserve">
         <value>Settings</value>
-    </data>
-    <data name="Settings_Main" xml:space="preserve">
-        <value>Main</value>
-    </data>
-    <data name="Settings_HideToTray" xml:space="preserve">
-        <value>Hide to system tray</value>
-    </data>
-    <data name="Settings_StartInTray" xml:space="preserve">
-        <value>Start app in system tray</value>
-    </data>
-    <data name="Settings_KeepText" xml:space="preserve">
-        <value>Keep text and selected tags after creating a ote</value>
     </data>
     <data name="Settings_Theme" xml:space="preserve">
         <value>Theme:</value>
@@ -233,17 +206,8 @@ To continue working on notes, click on the note name.</value>
     <data name="ToolTip_Note_SearchCaseSensitive" xml:space="preserve">
         <value>Click/touch to toggle case sensitivity mode.</value>
     </data>
-    <data name="ToolTip_Note_EditNoteOn" xml:space="preserve">
-        <value>Click/touch here to stop editing the note.</value>
-    </data>
     <data name="ToolTip_Note_EditNoteOff" xml:space="preserve">
         <value>Click/touch here to edit this note.</value>
-    </data>
-    <data name="ToolTip_Note_TagOn" xml:space="preserve">
-        <value>Click/touch here to remove this tag from this note.</value>
-    </data>
-    <data name="ToolTip_Note_TagOff" xml:space="preserve">
-        <value>Click/touch here to add this tag to this note.</value>
     </data>
     <data name="ToolTip_Note_Send" xml:space="preserve">
         <value>Click/touch to add the new note.</value>
@@ -257,26 +221,11 @@ To continue working on notes, click on the note name.</value>
     <data name="ToolTip_Note_PreviewOff" xml:space="preserve">
         <value>Click/touch this to enable the preview.</value>
     </data>
-    <data name="ToolTip_Note_NewItemTagButton" xml:space="preserve">
-        <value>Click/touch here to toggle show/hide the tags panel for the new note.</value>
-    </data>
-    <data name="ToolTip_Note_NewItemTagOn" xml:space="preserve">
-        <value>Click/touch here to remove this tag from the new note.</value>
-    </data>
-    <data name="ToolTip_Note_NewItemTagOff" xml:space="preserve">
-        <value>Click/touch here to add this tag to the new note.</value>
-    </data>
-    <data name="ToolTip_Note_NewItemNewTag" xml:space="preserve">
-        <value>Click/touch here to make a new tag.</value>
-    </data>
     <data name="ToolTip_Note_NewItemTagColor" xml:space="preserve">
         <value>This determines the color of the tag.</value>
     </data>
     <data name="ToolTip_Note_NewItemTagColorRandom" xml:space="preserve">
         <value>Click/touch here to assign a random color ofr this tag.</value>
-    </data>
-    <data name="ToolTip_Note_NewItemTagAdd" xml:space="preserve">
-        <value>Click/touch here to add this tag.</value>
     </data>
     <data name="ToolTip_Note_TagMenuButton" xml:space="preserve">
         <value>Click/touch to show/hide the tags panel.</value>
@@ -286,9 +235,6 @@ To continue working on notes, click on the note name.</value>
     </data>
     <data name="ToolTip_Note_TagMenuTagOff" xml:space="preserve">
         <value>Click/touch to only show notes with this tag.</value>
-    </data>
-    <data name="ToolTip_Note_Save" xml:space="preserve">
-        <value>Click/touch this icon to save your changes.</value>
     </data>
     <data name="Tools_IsBitSet_Error" xml:space="preserve">
         <value>Must be between 0 and {0}.</value>

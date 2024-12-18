@@ -93,18 +93,6 @@ namespace Mindbank.Lang {
             }
         }
         
-        public static string ShowApp {
-            get {
-                return ResourceManager.GetString("ShowApp", resourceCulture);
-            }
-        }
-        
-        public static string ExitApp {
-            get {
-                return ResourceManager.GetString("ExitApp", resourceCulture);
-            }
-        }
-        
         public static string MainView_NewBank {
             get {
                 return ResourceManager.GetString("MainView_NewBank", resourceCulture);
@@ -177,12 +165,6 @@ namespace Mindbank.Lang {
             }
         }
         
-        public static string NoteScreen_Close {
-            get {
-                return ResourceManager.GetString("NoteScreen_Close", resourceCulture);
-            }
-        }
-        
         public static string NoteScreen_SaveLogToFile {
             get {
                 return ResourceManager.GetString("NoteScreen_SaveLogToFile", resourceCulture);
@@ -201,45 +183,9 @@ namespace Mindbank.Lang {
             }
         }
         
-        public static string NoteScreen_Random_Max {
-            get {
-                return ResourceManager.GetString("NoteScreen_Random_Max", resourceCulture);
-            }
-        }
-        
-        public static string NoteScreen_Random_Min {
-            get {
-                return ResourceManager.GetString("NoteScreen_Random_Min", resourceCulture);
-            }
-        }
-        
         public static string Settings_Settings {
             get {
                 return ResourceManager.GetString("Settings_Settings", resourceCulture);
-            }
-        }
-        
-        public static string Settings_Main {
-            get {
-                return ResourceManager.GetString("Settings_Main", resourceCulture);
-            }
-        }
-        
-        public static string Settings_HideToTray {
-            get {
-                return ResourceManager.GetString("Settings_HideToTray", resourceCulture);
-            }
-        }
-        
-        public static string Settings_StartInTray {
-            get {
-                return ResourceManager.GetString("Settings_StartInTray", resourceCulture);
-            }
-        }
-        
-        public static string Settings_KeepText {
-            get {
-                return ResourceManager.GetString("Settings_KeepText", resourceCulture);
             }
         }
         
@@ -459,27 +405,9 @@ namespace Mindbank.Lang {
             }
         }
         
-        public static string ToolTip_Note_EditNoteOn {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_EditNoteOn", resourceCulture);
-            }
-        }
-        
         public static string ToolTip_Note_EditNoteOff {
             get {
                 return ResourceManager.GetString("ToolTip_Note_EditNoteOff", resourceCulture);
-            }
-        }
-        
-        public static string ToolTip_Note_TagOn {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_TagOn", resourceCulture);
-            }
-        }
-        
-        public static string ToolTip_Note_TagOff {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_TagOff", resourceCulture);
             }
         }
         
@@ -507,30 +435,6 @@ namespace Mindbank.Lang {
             }
         }
         
-        public static string ToolTip_Note_NewItemTagButton {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_NewItemTagButton", resourceCulture);
-            }
-        }
-        
-        public static string ToolTip_Note_NewItemTagOn {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_NewItemTagOn", resourceCulture);
-            }
-        }
-        
-        public static string ToolTip_Note_NewItemTagOff {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_NewItemTagOff", resourceCulture);
-            }
-        }
-        
-        public static string ToolTip_Note_NewItemNewTag {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_NewItemNewTag", resourceCulture);
-            }
-        }
-        
         public static string ToolTip_Note_NewItemTagColor {
             get {
                 return ResourceManager.GetString("ToolTip_Note_NewItemTagColor", resourceCulture);
@@ -540,12 +444,6 @@ namespace Mindbank.Lang {
         public static string ToolTip_Note_NewItemTagColorRandom {
             get {
                 return ResourceManager.GetString("ToolTip_Note_NewItemTagColorRandom", resourceCulture);
-            }
-        }
-        
-        public static string ToolTip_Note_NewItemTagAdd {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_NewItemTagAdd", resourceCulture);
             }
         }
         
@@ -564,12 +462,6 @@ namespace Mindbank.Lang {
         public static string ToolTip_Note_TagMenuTagOff {
             get {
                 return ResourceManager.GetString("ToolTip_Note_TagMenuTagOff", resourceCulture);
-            }
-        }
-        
-        public static string ToolTip_Note_Save {
-            get {
-                return ResourceManager.GetString("ToolTip_Note_Save", resourceCulture);
             }
         }
         
