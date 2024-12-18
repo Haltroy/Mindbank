@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Mindbank.Backend;
 
 namespace Mindbank.Views;
 
@@ -11,26 +12,33 @@ public partial class MainWindow : Window
 {
     private double _opacity = 0.75;
 
-    public bool AllowClosing = false;
-
     public MainWindow()
     {
         InitializeComponent();
         AvaloniaWontSetMyOpacity();
     }
 
+    internal bool ThisIsTheSingleton { get; set; }
+
     private async void AvaloniaWontSetMyOpacity()
     {
-        await Task.Run(async () =>
+        try
         {
-            await Dispatcher.UIThread.InvokeAsync(() =>
+            await Task.Run(async () =>
             {
-                if (Background is Brush brush && Math.Abs(brush.Opacity - _opacity) > 0.001)
-                    SetOpacity(_opacity * 100);
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    if (Background is Brush brush && Math.Abs(brush.Opacity - _opacity) > 0.001)
+                        SetOpacity(_opacity * 100);
+                });
+                Thread.Sleep(5000);
+                AvaloniaWontSetMyOpacity();
             });
-            Thread.Sleep(5000);
-            AvaloniaWontSetMyOpacity();
-        });
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     public void SetOpacity(double value)
@@ -48,8 +56,6 @@ public partial class MainWindow : Window
 
     private void Window_OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        if (AllowClosing) return;
-        e.Cancel = true;
-        Hide();
+        if (ThisIsTheSingleton) Settings.RemoveSingleton();
     }
 }
