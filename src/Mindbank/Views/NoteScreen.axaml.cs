@@ -89,7 +89,7 @@ public partial class NoteScreen : NoteEditUserControl
                     }
                     default:
                     {
-                        if (Main is { Parent: TopLevel { StorageProvider: { CanSave: true } sp } })
+                        if (TopLevel.GetTopLevel(this) is { StorageProvider: { CanSave: true } sp })
                             storageProvider = sp;
                         break;
                     }
@@ -138,7 +138,7 @@ public partial class NoteScreen : NoteEditUserControl
 
         note.RequestPropertyChangeInvoke();
 
-        Bank.NeedsSaving = true;
+        Dispatcher.UIThread.InvokeAsync(() => Bank.Write());
     }
 
     private void SearchCaseSensitivityCheckedChanged(object? sender, RoutedEventArgs e)
@@ -157,9 +157,25 @@ public partial class NoteScreen : NoteEditUserControl
         {
             await Task.Run(async () =>
             {
-                if (Main?.Parent is not TopLevel { StorageProvider.CanSave: true } topLevel) return;
+                IStorageProvider? storageProvider = null;
+                switch (IsOnDesktop)
+                {
+                    case true:
+                    {
+                        if (DesktopContainer is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                    default:
+                    {
+                        if (TopLevel.GetTopLevel(this) is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                }
 
-                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+                if (storageProvider is null) return;
+                var file = await storageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
                 {
                     Title = null,
                     SuggestedStartLocation = null,
@@ -186,9 +202,25 @@ public partial class NoteScreen : NoteEditUserControl
         {
             await Task.Run(async () =>
             {
-                if (Main?.Parent is not TopLevel { StorageProvider.CanOpen: true } topLevel) return;
+                IStorageProvider? storageProvider = null;
+                switch (IsOnDesktop)
+                {
+                    case true:
+                    {
+                        if (DesktopContainer is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                    default:
+                    {
+                        if (TopLevel.GetTopLevel(this) is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                }
 
-                var file = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                if (storageProvider is null) return;
+                var file = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
                 {
                     Title = null,
                     SuggestedStartLocation = null,
@@ -309,18 +341,6 @@ public partial class NoteScreen : NoteEditUserControl
         Bank.Write();
         Bank.Unload();
         Main?.GoBack();
-    }
-
-    private async void SaveClicked(object? sender, RoutedEventArgs e)
-    {
-        try
-        {
-            await Dispatcher.UIThread.InvokeAsync(() => Bank.Write());
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
     }
 
     private void MoveItemUp(object? sender, RoutedEventArgs e)

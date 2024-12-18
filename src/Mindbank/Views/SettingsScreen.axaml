@@ -4,8 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:nuc="clr-namespace:Mindbank.Views"
              xmlns:lang="clr-namespace:Mindbank.Lang"
-             xmlns:backend="clr-namespace:Mindbank.Backend"
-             xmlns:dict="clr-namespace:System.Collections.Generic;assembly=System.Runtime"
              Initialized="Init"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Mindbank.Views.SettingsScreen">
@@ -15,7 +13,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
-                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent"
+                <Button HotKey="Escape" VerticalAlignment="Center" Click="GoBack" Background="Transparent"
                         ToolTip.Tip="{x:Static lang:Lang.GoBack}">
                     <Path Data="{StaticResource ChevronLeftRegular}" Fill="{DynamicResource TextControlForeground}"
                           Stretch="UniformToFill" />
@@ -27,17 +25,6 @@
         </StackPanel>
         <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Orientation="Vertical" Spacing="5">
-                <TextBlock Text="{x:Static lang:Lang.Settings_Main}" FontWeight="Bold" FontSize="20" />
-                <Separator />
-                <ToggleSwitch Name="HideToSysTray" OnContent="{x:Static lang:Lang.Settings_HideToTray}"
-                              OffContent="{CompiledBinding $self.OnContent}"
-                              IsChecked="{CompiledBinding $parent[nuc:NUC].Settings.HideToSysTray, Mode=TwoWay}"
-                              IsVisible="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}" />
-                <ToggleSwitch Name="StartInSysTray" OnContent="{x:Static lang:Lang.Settings_StartInTray}"
-                              OffContent="{CompiledBinding $self.OnContent}"
-                              IsChecked="{CompiledBinding $parent[nuc:NUC].Settings.HideToSysTray, Mode=TwoWay}"
-                              IsVisible="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}" />
-                <Panel Height="20" />
                 <TextBlock Text="{x:Static lang:Lang.Settings_Theming}" FontWeight="Bold" FontSize="20" />
                 <Separator />
                 <TextBlock Text="{x:Static lang:Lang.Settings_Theme}" />
@@ -51,7 +38,7 @@
                 </StackPanel>
                 <ToggleSwitch OnContent="{x:Static lang:Lang.Settings_UseBlur}"
                               IsVisible="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}"
-                              IsEnabled="{CompiledBinding $parent[nuc:NUC].IsOnDesktop}" Name="UseBlur"
+                              IsEnabled="{CompiledBinding $self.IsVisible}" Name="UseBlur"
                               OffContent="{CompiledBinding $self.OnContent}"
                               IsChecked="{CompiledBinding $parent[nuc:NUC].Settings.UseBlur, Mode=TwoWay}"
                               IsCheckedChanged="UseBlurCheckedChanged" />

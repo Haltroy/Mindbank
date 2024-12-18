@@ -189,7 +189,10 @@ public partial class MainView : UserControl
     private void NoteGroupButtonClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is not Control { Tag: Control c } || !MainCarousel.Items.Contains(c)) return;
+        c.IsEnabled = true;
         MainCarousel.SelectedItem = c;
+        c.Focus();
+        DisableOthers();
     }
 
     private void Init(object? sender, EventArgs e)
@@ -205,8 +208,6 @@ public partial class MainView : UserControl
 
         if (IsOnDesktop is not true || DesktopContainer == null) return;
         DesktopContainer.SetOpacity(Settings.UseBlur ? Settings.BlurLevel : 100);
-        if (Settings.HideToSysTray) DesktopContainer.AllowClosing = false;
-        if (Settings.StartInTray) DesktopContainer.Hide();
     }
 
     private void BankClicked(object? sender, RoutedEventArgs e)
@@ -215,6 +216,8 @@ public partial class MainView : UserControl
         var ns = new NoteScreen { Bank = bank, Main = this };
         MainCarousel.Items.Add(ns);
         MainCarousel.SelectedItem = ns;
+        DisableOthers();
+        ns.Focus();
     }
 
     private void DeleteNoteSourceClicked(object? sender, RoutedEventArgs e)
@@ -278,6 +281,8 @@ public partial class MainView : UserControl
     {
         if (MainCarousel is null || MainPanel is null || !MainCarousel.Items.Contains(MainPanel)) return;
         MainCarousel.SelectedItem = MainPanel;
+        MainPanel.Focus();
+        DisableOthers();
         var l = new List<object?>();
         foreach (var control in MainCarousel.Items)
         {
@@ -289,6 +294,15 @@ public partial class MainView : UserControl
         foreach (var obj in l) MainCarousel.Items.Remove(obj);
     }
 
+    private void DisableOthers()
+    {
+        foreach (var c in MainCarousel.Items)
+        {
+            if (c is not Control control) continue;
+            control.IsEnabled = Equals(MainCarousel.SelectedItem, control);
+        }
+    }
+
     private void CreateNewNoteClicked(object? sender, RoutedEventArgs e)
     {
         if (NewNoteGroupName is not { Text: var t } || string.IsNullOrWhiteSpace(t)) return;
@@ -296,6 +310,8 @@ public partial class MainView : UserControl
         var ns = new NoteScreen { Bank = bank, Main = this };
         MainCarousel.Items.Add(ns);
         MainCarousel.SelectedItem = ns;
+        ns.Focus();
+        DisableOthers();
         NewNoteGroupName.Text = string.Empty;
         DialogHost.Close(null);
     }
@@ -306,8 +322,25 @@ public partial class MainView : UserControl
         {
             await Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                if (Parent is not TopLevel { StorageProvider.CanOpen: true } top) return;
-                var files = await top.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                IStorageProvider? storageProvider = null;
+                switch (IsOnDesktop)
+                {
+                    case true:
+                    {
+                        if (DesktopContainer is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                    default:
+                    {
+                        if (TopLevel.GetTopLevel(this) is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                }
+
+                if (storageProvider is null) return;
+                var files = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
                 {
                     Title = Lang.Lang.ImportNoteTitle,
                     AllowMultiple = true,
@@ -334,7 +367,7 @@ public partial class MainView : UserControl
 
     private void UpdateApp(object? sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo("https://haltroy.com/en/fluxion#fluxion-viewer") { UseShellExecute = true });
+        Process.Start(new ProcessStartInfo("https://haltroy.com/en/mindbank") { UseShellExecute = true });
     }
 
     private void UpdateButtonClicked(object? sender, RoutedEventArgs e)

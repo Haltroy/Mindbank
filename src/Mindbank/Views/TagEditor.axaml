@@ -18,34 +18,34 @@
     <DockPanel>
         <StackPanel Orientation="Vertical" Spacing="5" DockPanel.Dock="Top">
             <DockPanel>
-                <Button DockPanel.Dock="Left" Click="OkClicked" Background="Transparent">
+                <Button HotKey="Escape" DockPanel.Dock="Left" Click="OkClicked" Background="Transparent">
                     <Path Data="{StaticResource ChevronLeftRegular}"
                           Fill="{DynamicResource TextControlForeground}"
                           Stretch="Uniform"
                           Height="24" />
                 </Button>
 
-                <ToggleButton DockPanel.Dock="Right" Background="Transparent" Name="SelectTags"
+                <ToggleButton HotKey="Ctrl+S" DockPanel.Dock="Right" Background="Transparent" Name="SelectTags"
                               HorizontalAlignment="Right">
                     <Path Fill="{DynamicResource ButtonForeground}"
                           Data="{StaticResource SelectObjectRegular}" Stretch="Uniform" Width="24"
                           Height="{CompiledBinding $self.Bounds.Width}" />
                 </ToggleButton>
-                <Button Click="InvertSelection" DockPanel.Dock="Right" Background="Transparent"
+                <Button HotKey="Ctrl+I" Click="InvertSelection" DockPanel.Dock="Right" Background="Transparent"
                         IsVisible="{CompiledBinding #SelectTags.IsChecked}"
                         IsEnabled="{CompiledBinding $self.IsVisible}" HorizontalAlignment="Right">
                     <Path Fill="{DynamicResource ButtonForeground}"
                           Data="{StaticResource ArrowSyncCircleRegular}" Stretch="Uniform" Width="24"
                           Height="{CompiledBinding $self.Bounds.Width}" />
                 </Button>
-                <Button Click="DeleteSelected" DockPanel.Dock="Right" Background="Transparent"
+                <Button HotKey="Ctrl+R" Click="DeleteSelected" DockPanel.Dock="Right" Background="Transparent"
                         IsVisible="{CompiledBinding #SelectTags.IsChecked}"
                         IsEnabled="{CompiledBinding $self.IsVisible}" HorizontalAlignment="Right">
                     <Path Fill="{DynamicResource ButtonForeground}"
                           Data="{StaticResource DeleteRegular}" Stretch="Uniform" Width="24"
                           Height="{CompiledBinding $self.Bounds.Width}" />
                 </Button>
-                <Button DockPanel.Dock="Right" Background="Transparent"
+                <Button HotKey="Ctrl+N" DockPanel.Dock="Right" Background="Transparent"
                         IsVisible="{CompiledBinding !#SelectTags.IsChecked}"
                         IsEnabled="{CompiledBinding $self.IsVisible}" HorizontalAlignment="Right">
                     <Path Data="{StaticResource AddSquareRegular}"

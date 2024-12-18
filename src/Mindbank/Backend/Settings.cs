@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using Avalonia.Input;
 using Avalonia.Styling;
 
 namespace Mindbank.Backend;
@@ -13,10 +11,8 @@ public sealed class Settings : INotifyPropertyChanged
     private readonly List<Bank> _banks = [];
     private bool _alreadyLoaded;
     private byte _blurLevel = 75;
-    private bool _hideToSysTray = true;
     private bool _isLoading;
     private bool _keepText;
-    private bool _startInTray;
     private ThemeVariant _theme = ThemeVariant.Default;
     private bool _useBlur = true;
 
@@ -31,18 +27,6 @@ public sealed class Settings : INotifyPropertyChanged
             if (!_isLoading)
                 Save();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BlurLevel)));
-        }
-    }
-
-    public bool HideToSysTray
-    {
-        get => _hideToSysTray;
-        set
-        {
-            _hideToSysTray = value;
-            if (!_isLoading)
-                Save();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HideToSysTray)));
         }
     }
 
@@ -69,18 +53,6 @@ public sealed class Settings : INotifyPropertyChanged
             if (!_isLoading)
                 Save();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KeepText)));
-        }
-    }
-
-    public bool StartInTray
-    {
-        get => _startInTray;
-        set
-        {
-            _startInTray = value;
-            if (!_isLoading)
-                Save();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StartInTray)));
         }
     }
 
@@ -114,10 +86,23 @@ public sealed class Settings : INotifyPropertyChanged
 
     private static string SettingsFile => Path.Combine(AppFolder, "settings");
     private static string SourcesFolder => Path.Combine(AppFolder, "sources");
+    private static string LockFile => Path.Combine(AppFolder, "lock");
+
+    public static bool IsInstanceRunning => File.Exists(LockFile);
 
     public static byte Version => 0;
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    public static void SetupSingleton()
+    {
+        File.Create(LockFile);
+    }
+
+    public static void RemoveSingleton()
+    {
+        File.Delete(LockFile);
+    }
 
     public void Load(bool force = false)
     {
@@ -130,12 +115,8 @@ public sealed class Settings : INotifyPropertyChanged
         var theme = stream.ReadByte();
         UseBlur = Tools.IsBitSet(theme, 2);
         theme -= UseBlur ? 4 : 0;
-        HideToSysTray = Tools.IsBitSet(theme, 3);
-        theme -= HideToSysTray ? 8 : 0;
         KeepText = Tools.IsBitSet(theme, 4);
         theme -= KeepText ? 16 : 0;
-        StartInTray = Tools.IsBitSet(theme, 4);
-        theme -= StartInTray ? 32 : 0;
         switch (theme)
         {
             case 0:
@@ -182,9 +163,7 @@ public sealed class Settings : INotifyPropertyChanged
         else if (Theme == ThemeVariant.Light)
             booleans = 2;
         booleans += (byte)(UseBlur ? 4 : 0);
-        booleans += (byte)(HideToSysTray ? 8 : 0);
         booleans += (byte)(KeepText ? 16 : 0);
-        booleans += (byte)(StartInTray ? 32 : 0);
         stream.WriteByte(booleans);
         stream.WriteByte(_blurLevel);
 

@@ -12,7 +12,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
-                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent"
+                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent" HotKey="Escape"
                         ToolTip.Tip="{x:Static lang:Lang.GoBack}">
                     <Path Data="{StaticResource ChevronLeftRegular}" Fill="{DynamicResource TextControlForeground}"
                           Stretch="UniformToFill" />
@@ -44,11 +44,13 @@
             <DockPanel LastChildFill="True">
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0 10 0 0"
                             HorizontalAlignment="Center">
-                    <Button Content="{x:Static lang:Lang.About_About}" Tag="{CompiledBinding #About}"
+                    <Button Content="{x:Static lang:Lang.About_About}" Tag="{CompiledBinding #About}" HotKey="Ctrl+I"
                             Click="CarouselButton_Click" />
                     <Button Content="{x:Static lang:Lang.About_License}" Tag="{CompiledBinding #LicenseBox}"
+                            HotKey="Ctrl+L"
                             Click="CarouselButton_Click" />
                     <Button Content="{x:Static lang:Lang.About_TechUsed}" Tag="{CompiledBinding #Credits}"
+                            HotKey="Ctrl+T"
                             Click="CarouselButton_Click" />
                 </StackPanel>
                 <Carousel Name="CarouselMenu" Margin="20 10 20 0">

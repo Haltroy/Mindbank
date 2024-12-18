@@ -58,3 +58,13 @@ build -r linux-x64 -c Release). The application should be inside the bin folder 
     - `osx-x64`: macOS Intel 64-bit
     - `osx-arm64`: macOS ARM 64-bit
 4. Build files should be in the `bin` folder of that specific platform.
+
+
+## Development
+
+You can help the development of Mindbank by:
+ - Reporting any issues (bugs, vulnerabilities, feature requests etc.)
+ - Submitting PRs
+    - NOTE: The Linux and Windows workloads DO take some time since Windows workload has to publish it (with NativeAOT and everything) for 2 different platforms while Linux has to publish it for 4 platforms. This isn't a bug. Patience is a virtue.
+    
+Your contributions will be rewarded in the credits screen in the About section of this program (only if you want to).

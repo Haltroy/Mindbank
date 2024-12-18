@@ -18,7 +18,6 @@
         <StreamGeometry x:Key="ArrowUploadRegular">M18.2498 3.50871C18.664 3.50883 19 3.17314 19 2.75892C19 2.34471 18.6644 2.00883 18.2502 2.00871L5.25022 2.00494C4.836 2.00482 4.5 2.34051 4.5 2.75473C4.5 3.16894 4.83557 3.50482 5.24978 3.50494L18.2498 3.50871ZM11.6482 21.9969L11.75 22.0038C12.1297 22.0038 12.4435 21.7216 12.4932 21.3555L12.5 21.2538L12.499 7.56876L16.2208 11.2891C16.4871 11.5553 16.9038 11.5795 17.1974 11.3616L17.2815 11.289C17.5477 11.0227 17.5719 10.606 17.354 10.3124L17.2814 10.2283L12.2837 5.23171C12.0176 4.96562 11.6012 4.94131 11.3076 5.15888L11.2235 5.2314L6.22003 10.228C5.92694 10.5207 5.92661 10.9956 6.21931 11.2887C6.48539 11.5551 6.90204 11.5796 7.1958 11.362L7.27997 11.2894L10.999 7.57576L11 21.2538C11 21.6335 11.2822 21.9473 11.6482 21.9969Z</StreamGeometry>
         <StreamGeometry x:Key="ArrowDownloadRegular">M12.25,39.5 L35.75,39.5 C36.4403559,39.5 37,40.0596441 37,40.75 C37,41.3972087 36.5081253,41.9295339 35.8778052,41.9935464 L35.75,42 L12.25,42 C11.5596441,42 11,41.4403559 11,40.75 C11,40.1027913 11.4918747,39.5704661 12.1221948,39.5064536 L12.25,39.5 L35.75,39.5 L12.25,39.5 Z M23.6221948,6.00645361 L23.75,6 C24.3972087,6 24.9295339,6.49187466 24.9935464,7.12219476 L25,7.25 L25,31.54 L30.6466793,25.8942911 C31.1348346,25.4061358 31.9262909,25.4061358 32.4144462,25.8942911 C32.9026016,26.3824465 32.9026016,27.1739027 32.4144462,27.6620581 L24.6362716,35.4402327 C24.1481163,35.928388 23.35666,35.928388 22.8685047,35.4402327 L15.0903301,27.6620581 C14.6021747,27.1739027 14.6021747,26.3824465 15.0903301,25.8942911 C15.5784855,25.4061358 16.3699417,25.4061358 16.858097,25.8942911 L22.5,31.536 L22.5,7.25 C22.5,6.60279131 22.9918747,6.0704661 23.6221948,6.00645361 L23.75,6 L23.6221948,6.00645361 Z</StreamGeometry>
         <StreamGeometry x:Key="ChevronLeftRegular">M31.8839 8.36612C32.372 8.85427 32.372 9.64573 31.8839 10.1339L18.0178 24L31.8839 37.8661C32.372 38.3543 32.372 39.1457 31.8839 39.6339C31.3957 40.122 30.6043 40.122 30.1161 39.6339L15.3661 24.8839C14.878 24.3957 14.878 23.6043 15.3661 23.1161L30.1161 8.36612C30.6043 7.87796 31.3957 7.87796 31.8839 8.36612Z</StreamGeometry>
-        <StreamGeometry x:Key="SaveRegular">M3 5.75C3 4.23122 4.23122 3 5.75 3H15.7145C16.5764 3 17.4031 3.34241 18.0126 3.9519L20.0481 5.98744C20.6576 6.59693 21 7.42358 21 8.28553V18.25C21 19.7688 19.7688 21 18.25 21H5.75C4.23122 21 3 19.7688 3 18.25V5.75ZM5.75 4.5C5.05964 4.5 4.5 5.05964 4.5 5.75V18.25C4.5 18.9404 5.05964 19.5 5.75 19.5H6V14.25C6 13.0074 7.00736 12 8.25 12H15.75C16.9926 12 18 13.0074 18 14.25V19.5H18.25C18.9404 19.5 19.5 18.9404 19.5 18.25V8.28553C19.5 7.8214 19.3156 7.37629 18.9874 7.0481L16.9519 5.01256C16.6918 4.75246 16.3582 4.58269 16 4.52344V7.25C16 8.49264 14.9926 9.5 13.75 9.5H9.25C8.00736 9.5 7 8.49264 7 7.25V4.5H5.75ZM16.5 19.5V14.25C16.5 13.8358 16.1642 13.5 15.75 13.5H8.25C7.83579 13.5 7.5 13.8358 7.5 14.25V19.5H16.5ZM8.5 4.5V7.25C8.5 7.66421 8.83579 8 9.25 8H13.75C14.1642 8 14.5 7.66421 14.5 7.25V4.5H8.5Z</StreamGeometry>
         <StreamGeometry x:Key="EditOffRegular">M8.93944 10.0001L2.21979 3.28027C1.9269 2.98737 1.9269 2.5125 2.2198 2.21961C2.51269 1.92672 2.98757 1.92672 3.28046 2.21962L21.7802 20.7198C22.0731 21.0127 22.0731 21.4875 21.7802 21.7804C21.4873 22.0733 21.0125 22.0733 20.7196 21.7804L14 15.0608L9.0621 19.9987C8.78522 20.2756 8.44089 20.4754 8.06312 20.5784L2.94743 21.9736C2.38756 22.1263 1.87383 21.6126 2.02652 21.0527L3.42171 15.937C3.52474 15.5593 3.72456 15.2149 4.00144 14.9381L8.93944 10.0001ZM12.9392 13.9999L10.0001 11.0607L5.0621 15.9987C4.96981 16.091 4.9032 16.2058 4.86886 16.3317L3.81901 20.1811L7.66845 19.1313C7.79437 19.097 7.90915 19.0303 8.00144 18.9381L12.9392 13.9999Z M17.9393 8.99963L15.0598 11.8793L16.1207 12.9401L21.0304 8.03039C22.4279 6.63293 22.4279 4.36719 21.0304 2.96973C19.633 1.57227 17.3672 1.57227 15.9698 2.96973L11.0601 7.87943L12.1207 8.94013L15.0003 6.06063L17.9393 8.99963ZM17.0304 4.03039C17.8421 3.21871 19.1581 3.21871 19.9698 4.03039C20.7814 4.84206 20.7814 6.15805 19.9698 6.96973L18.9993 7.93963L16.0603 4.99963L17.0304 4.03039Z</StreamGeometry>
         <StreamGeometry x:Key="EditRegular">M27.3138 4.68622C28.8759 6.24832 28.8759 8.78098 27.3138 10.3431L12.5409 25.116C11.9001 25.7568 11.0972 26.2114 10.218 26.4312L5.63602 27.5767C4.90364 27.7598 4.24025 27.0964 4.42335 26.364L5.56885 21.782C5.78864 20.9028 6.24323 20.0999 6.88402 19.4591L21.6569 4.68622C23.219 3.12412 25.7517 3.12412 27.3138 4.68622ZM20.2426 8.92865L8.29824 20.8734C7.91376 21.2578 7.641 21.7396 7.50913 22.2671L6.76786 25.2322L9.73295 24.4909C10.2604 24.359 10.7422 24.0863 11.1267 23.7018L23.0706 11.7566L20.2426 8.92865ZM23.0712 6.10043L21.6566 7.51465L24.4846 10.3426L25.8996 8.92886C26.6806 8.14781 26.6806 6.88148 25.8996 6.10043C25.1185 5.31939 23.8522 5.31939 23.0712 6.10043Z</StreamGeometry>
         <StreamGeometry x:Key="PredictionsRegular">M12,2 C13.1533411,2 14.239122,2.28925943 15.1887536,2.79918917 C15.112506,3.24499916 14.9646822,3.56044404 14.7625631,3.76256313 C14.651965,3.87316122 14.5073983,3.96747369 14.3258552,4.04282999 C13.6240917,3.69484129 12.8347996,3.5 12,3.5 C9.10050506,3.5 6.75,5.85050506 6.75,8.75 C6.75,10.8881837 8.02822265,12.7278225 9.8622211,13.5464695 C10.5502799,13.8149728 11.1856692,13.9625453 11.7682833,13.9937269 L12,14 C12.6447239,14 13.3574543,13.8508379 14.1372164,13.5477329 C15.0530197,13.1384379 15.8301861,12.4750311 16.3789152,11.6472257 C17.0183307,11.8672416 17.7876826,11.7336231 18.2728071,11.2466813 C17.8577163,12.2895137 17.1901986,13.2039271 16.345851,13.9150872 L17.967289,18.7801589 C18.2335628,19.5789337 17.8932573,20.4540914 17.1573198,20.8631617 C15.7855762,21.6256443 14.0642518,22 12,22 C9.93575073,22 8.214428,21.6256452 6.84268887,20.8631665 C6.10675341,20.4541035 5.76644595,19.5789539 6.03270398,18.7801798 L7.654149,13.9150872 C6.18404803,12.6768801 5.25,10.8225194 5.25,8.75 C5.25,5.02207794 8.27207794,2 12,2 Z M15.0565518,14.7913638 L14.6969316,14.9394573 L14.6788415,14.9475423 C13.9522531,15.2620316 13.1594698,15.452487 12.3271908,15.4922091 C12.3209854,15.4911059 12.3153059,15.4914155 12.3096286,15.4917168 C12.2858058,15.4941022 12.2614052,15.4950751 12.2369716,15.4959181 L12,15.5 L11.804,15.496 L11.6733328,15.4907882 C10.8405302,15.452487 10.0477469,15.2620316 9.32115848,14.9475423 L9.30306837,14.9394573 C9.18403381,14.8929562 9.06416108,14.8435884 8.94344816,14.7913638 L7.45572893,19.2545215 C7.41769197,19.3686323 7.4663069,19.4936526 7.57144272,19.5520914 C8.7000759,20.1794401 10.1740439,20.5 12,20.5 C13.8259583,20.5 15.2999275,20.1794394 16.4285612,19.5520892 C16.533696,19.4936502 16.5823098,19.368631 16.5442682,19.2545129 L15.0565518,14.7913638 Z M11.6898272,15.4930001 L11.804,15.496 L11.8373106,15.4976957 L12,15.5 C11.8960435,15.5 11.7926358,15.49765 11.6898272,15.4930001 Z M17.9924045,1.88020833 L18,2 C18,3.14960906 18.2698654,3.95920521 18.7803301,4.46966991 C19.2515283,4.9408681 19.9776077,5.20705858 20.9907227,5.24522281 L21.25,5.25 C22.2083333,5.25 22.2482639,6.62760417 21.3697917,6.74240451 L21.25,6.75 C20.1003909,6.75 19.2907948,7.01986538 18.7803301,7.53033009 C18.3091319,8.00152827 18.0429414,8.72760769 18.0047772,9.74072273 L18,10 C18,11 16.5,11 16.5,10 C16.5,8.85039094 16.2301346,8.04079479 15.7196699,7.53033009 C15.2484717,7.0591319 14.5223923,6.79294142 13.5092773,6.75477719 L13.25,6.75 C12.2916667,6.75 12.2517361,5.37239583 13.1302083,5.25759549 L13.25,5.25 C14.3996091,5.25 15.2092052,4.98013462 15.7196699,4.46966991 C16.2301346,3.95920521 16.5,3.14960906 16.5,2 C16.5,1.04166667 17.8776042,1.00173611 17.9924045,1.88020833 Z M17.25,4.95250583 L17.1063227,5.15616731 C17.0062588,5.28827689 16.8976229,5.41303729 16.7803301,5.53033009 C16.6043909,5.70626928 16.4116496,5.86273057 16.2025058,6 C16.4116496,6.13726943 16.6043909,6.29373072 16.7803301,6.46966991 C16.9562693,6.64560911 17.1127306,6.8383504 17.25,7.04749417 C17.3872694,6.8383504 17.5437307,6.64560911 17.7196699,6.46966991 C17.8956091,6.29373072 18.0883504,6.13726943 18.2974942,6 C18.0883504,5.86273057 17.8956091,5.70626928 17.7196699,5.53033009 C17.6023771,5.41303729 17.4937412,5.28827689 17.3936773,5.15616731 L17.25,4.95250583 Z</StreamGeometry>
@@ -33,411 +32,414 @@
         <StreamGeometry x:Key="PresenceOfflineRegular">M10.7071 5.29289C11.0976 5.68342 11.0976 6.31658 10.7071 6.70711L9.41421 8L10.7071 9.29289C11.0976 9.68342 11.0976 10.3166 10.7071 10.7071C10.3166 11.0976 9.68342 11.0976 9.29289 10.7071L8 9.41421L6.70711 10.7071C6.31658 11.0976 5.68342 11.0976 5.29289 10.7071C4.90237 10.3166 4.90237 9.68342 5.29289 9.29289L6.58579 8L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L8 6.58579L9.29289 5.29289C9.68342 4.90237 10.3166 4.90237 10.7071 5.29289Z M0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8ZM8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14C11.3137 14 14 11.3137 14 8C14 4.68629 11.3137 2 8 2Z</StreamGeometry>
         <StreamGeometry x:Key="SelectObjectRegular">M7 5C7 6.10457 6.10457 7 5 7C3.89543 7 3 6.10457 3 5C3 3.89543 3.89543 3 5 3C6.10457 3 7 3.89543 7 5Z M8 4.75C8 5.16421 8.33579 5.5 8.75 5.5L15.25 5.5C15.6642 5.5 16 5.16421 16 4.75C16 4.33579 15.6642 4 15.25 4L8.75 4C8.33579 4 8 4.33579 8 4.75Z M4.75 8C4.33579 8 4 8.33579 4 8.75V15.25C4 15.6642 4.33579 16 4.75 16C5.16421 16 5.5 15.6642 5.5 15.25V8.75C5.5 8.33579 5.16421 8 4.75 8Z M19.25 8C18.8358 8 18.5 8.33579 18.5 8.75V15.25C18.5 15.6642 18.8358 16 19.25 16C19.6642 16 20 15.6642 20 15.25V8.75C20 8.33579 19.6642 8 19.25 8Z M8.75 20C8.33579 20 8 19.6642 8 19.25C8 18.8358 8.33579 18.5 8.75 18.5H15.25C15.6642 18.5 16 18.8358 16 19.25C16 19.6642 15.6642 20 15.25 20H8.75Z M5 21C6.10457 21 7 20.1046 7 19C7 17.8954 6.10457 17 5 17C3.89543 17 3 17.8954 3 19C3 20.1046 3.89543 21 5 21Z M21 5C21 6.10457 20.1046 7 19 7C17.8954 7 17 6.10457 17 5C17 3.89543 17.8954 3 19 3C20.1046 3 21 3.89543 21 5Z M19 21C20.1046 21 21 20.1046 21 19C21 17.8954 20.1046 17 19 17C17.8954 17 17 17.8954 17 19C17 20.1046 17.8954 21 19 21Z</StreamGeometry>
     </UserControl.Resources>
-    <Carousel Margin="5" Name="MainCarousel">
-        <Carousel.PageTransition>
-            <CompositePageTransition>
-                <CrossFade Duration="0:00:00.25" FadeInEasing="SineEaseIn" FadeOutEasing="SineEaseOut" />
-                <PageSlide Duration="0:00:00.25" Orientation="Horizontal" SlideInEasing="SineEaseIn"
-                           SlideOutEasing="SineEaseOut" />
-            </CompositePageTransition>
-        </Carousel.PageTransition>
-        <Panel Name="LoadingPanel">
-            <DockPanel Margin="5">
-                <StackPanel DockPanel.Dock="Top">
-                    <ui:ProgressRing Width="80"
-                                     Height="80"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Top"
-                                     IsIndeterminate="True"
-                                     Margin="020" IsVisible="{CompiledBinding !#ErrorPanel.IsVisible}"
-                                     Name="LoadingProgress" />
-                    <Button Content="{x:Static lang:Lang.MainView_Cancel}" Click="GoBack"
-                            IsVisible="{CompiledBinding !#ErrorPanel.IsVisible}"
-                            HorizontalAlignment="Center" />
-                </StackPanel>
-                <DockPanel IsVisible="False" Name="ErrorPanel">
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
-                        <Button Content="{x:Static lang:Lang.NoteScreen_SaveLogToFile}" Click="SaveLogToFileClick" />
-                        <Button Content="{x:Static lang:Lang.NoteScreen_Close}" Click="GoBack" />
-                    </StackPanel>
-                    <TextBox Name="LogText" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" />
-                </DockPanel>
-            </DockPanel>
-        </Panel>
-        <DockPanel Name="ContentPanel" IsEnabled="{CompiledBinding !$parent[views:NoteScreen].Bank.IsSaving}">
-            <StackPanel DockPanel.Dock="Top">
-                <DockPanel>
-                    <Button DockPanel.Dock="Right" Background="Transparent"
-                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_Save}"
-                            IsEnabled="{CompiledBinding $parent[views:NoteScreen].Bank.NeedsSaving}"
-                            IsVisible="{CompiledBinding $self.IsEnabled}"
-                            Click="SaveClicked">
-                        <Path Fill="{DynamicResource ButtonForeground}"
-                              Data="{StaticResource SaveRegular}" Stretch="Uniform" Width="24"
-                              Height="{CompiledBinding $self.Bounds.Width}" />
-                    </Button>
-                    <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
-                        <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent"
-                                ToolTip.Tip="{x:Static lang:Lang.GoBack}">
-                            <Path Data="{StaticResource ChevronLeftRegular}"
-                                  Fill="{DynamicResource TextControlForeground}"
-                                  Stretch="Uniform"
-                                  Height="24" />
-                        </Button>
-                        <TextBox FontSize="20" FontWeight="Bold" IsReadOnly="{CompiledBinding !#EditName.IsChecked}"
-                                 Text="{CompiledBinding $parent[views:NoteScreen].Bank.Name, Mode=TwoWay}"
-                                 VerticalAlignment="Center">
-                            <TextBox.Styles>
-                                <Style Selector="TextBox[IsReadOnly=True]">
-                                    <Setter Property="BorderBrush" Value="{x:Null}" />
-                                    <Setter Property="BorderThickness" Value="0" />
-                                </Style>
-                                <Style Selector="TextBox[IsReadOnly=True]:focus">
-                                    <Style Selector="^ /template/ Border#PART_BorderElement">
-                                        <Setter Property="IsVisible" Value="False" />
-                                    </Style>
-                                    <Setter Property="BorderBrush" Value="{x:Null}" />
-                                    <Setter Property="BorderThickness" Value="0" />
-                                </Style>
-                            </TextBox.Styles>
-                        </TextBox>
-                        <ToggleButton Name="EditName" Background="Transparent"
-                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_EditName}">
-                            <Path Data="{StaticResource EditRegular}" Height="24" Stretch="Uniform"
-                                  Fill="{DynamicResource TextControlForeground}" />
-                        </ToggleButton>
-                    </StackPanel>
-                </DockPanel>
-                <Separator />
-            </StackPanel>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
             <DockPanel>
-                <ProgressBar DockPanel.Dock="Top" IsIndeterminate="True" Margin="5" Name="SavingProgressBar"
-                             IsVisible="{CompiledBinding $parent[views:NoteScreen].Bank.IsSaving}" />
-                <Grid ColumnDefinitions="*,*" DockPanel.Dock="Top">
-                    <ScrollViewer>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Name="CheckAll" IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
-                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SelectAll}"
-                                      IsEnabled="{CompiledBinding $self.IsVisible}"
-                                      IsCheckedChanged="CheckAll_OnIsCheckedChanged" />
-                            <Button Background="Transparent"
-                                    IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
-                                    Click="InvertSelection"
-                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_InvertSelection}"
-                                    IsEnabled="{CompiledBinding $self.IsVisible}">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource ArrowSyncCircleRegular}" Stretch="Uniform" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}" />
-                            </Button>
-                            <Button IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}" Background="Transparent"
-                                    Click="RemoveSelected"
-                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_RemoveSelected}"
-                                    IsEnabled="{CompiledBinding $self.IsVisible}">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource DeleteRegular}" Stretch="Uniform" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}" />
-                            </Button>
-                            <Button Background="Transparent"
-                                    IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
-                                    Click="ExportSelected"
-                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_ExportSelected}"
-                                    IsEnabled="{CompiledBinding $self.IsVisible}">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource ArrowUploadRegular}" Stretch="Uniform" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}" />
-                            </Button>
-                            <ToggleButton Name="SelectionEnabled" Background="Transparent">
-                                <ToolTip.Tip>
-                                    <Panel>
-                                        <TextBlock TextWrapping="Wrap"
-                                                   IsVisible="{CompiledBinding $parent[ToggleButton].IsChecked}"
-                                                   Text="{x:Static lang:Lang.ToolTip_Note_SelectItemsExit}" />
-                                        <TextBlock TextWrapping="Wrap"
-                                                   IsVisible="{CompiledBinding !$parent[ToggleButton].IsChecked}"
-                                                   Text="{x:Static lang:Lang.ToolTip_Note_SelectItems}" />
-                                    </Panel>
-                                </ToolTip.Tip>
-                                <Grid RowDefinitions="*,Auto,*" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}">
-                                    <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
-                                          Data="{StaticResource SelectObjectRegular}"
-                                          IsVisible="{CompiledBinding !$parent[ToggleButton].IsChecked}"
-                                          Stretch="Uniform" />
-                                    <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
-                                          Data="{StaticResource PresenceOfflineRegular}"
-                                          IsVisible="{CompiledBinding $parent[ToggleButton].IsChecked}"
-                                          Stretch="Uniform" />
-                                </Grid>
-                            </ToggleButton>
-                            <ToggleButton IsVisible="{CompiledBinding $self.IsEnabled}"
-                                          IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked, Mode=OneWay}"
-                                          Name="ReorderEnabled" Background="Transparent">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource ArrowMaximizeVerticalRegular}" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}"
-                                      Stretch="Uniform" />
-                            </ToggleButton>
-                        </StackPanel>
-                    </ScrollViewer>
-                    <ScrollViewer Grid.Column="1">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Name="Import" Click="ImportFromFile"
-                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_Import}" Background="Transparent">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource ArrowDownloadRegular}" Stretch="Uniform" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}" />
-                            </Button>
-                            <ToggleButton Name="RandomPick"
-                                          ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_RandomButton}"
-                                          Background="Transparent">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource DiceRegular}" Stretch="Uniform" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}" />
-                            </ToggleButton>
-                            <ToggleButton Name="Search" ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchButton}"
-                                          Background="Transparent">
-                                <Path Fill="{DynamicResource ButtonForeground}"
-                                      Data="{StaticResource SearchRegular}" Stretch="Uniform" Width="24"
-                                      Height="{CompiledBinding $self.Bounds.Width}" />
-                            </ToggleButton>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-
-                <DockPanel DockPanel.Dock="Top" IsEnabled="{CompiledBinding #RandomPick.IsChecked}"
-                           IsVisible="{CompiledBinding $self.IsEnabled}">
-                    <ToggleButton IsCheckedChanged="PickRandomCheckedChanged" DockPanel.Dock="Right"
-                                  HorizontalAlignment="Stretch" Background="Transparent"
-                                  ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_RandomPick}"
-                                  HorizontalContentAlignment="Center">
-                        <Grid ColumnDefinitions="*,Auto,*" Width="24"
-                              Height="{CompiledBinding $self.Bounds.Width}">
-                            <Path Grid.Column="1" Fill="{DynamicResource ButtonForeground}"
-                                  Data="{StaticResource PredictionsRegular}" Stretch="Uniform" />
-                        </Grid>
-                    </ToggleButton>
-                    <DockPanel>
-                        <TextBlock Text="{CompiledBinding #RandomPickSlider.LowerSelectedValue}" DockPanel.Dock="Left"
-                                   VerticalAlignment="Center" Margin="5 0" />
-                        <TextBlock Text="{CompiledBinding #RandomPickSlider.UpperSelectedValue}" DockPanel.Dock="Right"
-                                   VerticalAlignment="Center" Margin="5 0" />
-                        <rs:RangeSlider Name="RandomPickSlider" IsSnapToTickEnabled="True" IsThumbOverlap="True"
-                                        MoveWholeRange="True" TickFrequency="1"
-                                        UpperSelectedValue="{CompiledBinding $self.Maximum, Mode=OneTime}"
-                                        Maximum="{CompiledBinding $parent[views:NoteScreen].Bank.VisibleCount}" />
-                    </DockPanel>
-                </DockPanel>
-
-                <DockPanel DockPanel.Dock="Top" IsVisible="{CompiledBinding #Search.IsChecked}"
-                           IsEnabled="{CompiledBinding $self.IsVisible}">
-                    <ToggleButton IsCheckedChanged="SearchCaseSensitivityCheckedChanged" Name="SearchCaseSensitivity"
-                                  DockPanel.Dock="Right" Content="Cc" Background="Transparent"
-                                  ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchCaseSensitive}" />
-                    <ToggleButton IsCheckedChanged="SearchUseRegexCheckedChanged" Name="SearchUseRegex"
-                                  DockPanel.Dock="Right" Content=".*" Background="Transparent"
-                                  ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchUseRegex}" />
-                    <TextBox TextChanged="SearchBoxTextChanged" Name="SearchBox" Margin="5 0" />
-                </DockPanel>
-
-                <DockPanel DockPanel.Dock="Bottom" Name="TagsPanel" IsVisible="{CompiledBinding #Tags.IsChecked}"
-                           IsEnabled="{CompiledBinding $self.IsVisible}">
-                    <Button Background="Transparent" DockPanel.Dock="Left" Margin="5 0" Click="ManageTagsClicked">
-                        <Path Data="{StaticResource SettingsRegular}"
+                <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
+                    <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent"
+                            ToolTip.Tip="{x:Static lang:Lang.GoBack}" HotKey="Escape">
+                        <Path Data="{StaticResource ChevronLeftRegular}"
                               Fill="{DynamicResource TextControlForeground}"
                               Stretch="Uniform"
                               Height="24" />
                     </Button>
-                    <ItemsControl ItemsSource="{CompiledBinding $parent[views:NoteEditUserControl].Bank.Tags}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="backend:Tag">
-                                <views:TagControl IsCheckedChanged="AllTagsCheckedChanged" Tag="{CompiledBinding Self}"
-                                                  TagObject="{CompiledBinding Self}" CornerRadius="50"
-                                                  IsChecked="{CompiledBinding Checked, Mode=TwoWay}"
-                                                  Color="{CompiledBinding Color}" AllowChecking="True">
+                    <TextBox FontSize="20" FontWeight="Bold" IsReadOnly="{CompiledBinding !#EditName.IsChecked}"
+                             Text="{CompiledBinding $parent[views:NoteScreen].Bank.Name, Mode=TwoWay}"
+                             VerticalAlignment="Center">
+                        <TextBox.Styles>
+                            <Style Selector="TextBox[IsReadOnly=True]">
+                                <Setter Property="BorderBrush" Value="{x:Null}" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Style>
+                            <Style Selector="TextBox[IsReadOnly=True]:focus">
+                                <Style Selector="^ /template/ Border#PART_BorderElement">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </Style>
+                                <Setter Property="BorderBrush" Value="{x:Null}" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Style>
+                        </TextBox.Styles>
+                    </TextBox>
+                    <ToggleButton Name="EditName" Background="Transparent"
+                                  ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_EditName}">
+                        <Path Data="{StaticResource EditRegular}" Height="24" Stretch="Uniform"
+                              Fill="{DynamicResource TextControlForeground}" />
+                    </ToggleButton>
+                </StackPanel>
+            </DockPanel>
+            <Separator />
+        </StackPanel>
+        <Carousel Margin="5" Name="MainCarousel">
+            <Carousel.PageTransition>
+                <CompositePageTransition>
+                    <CrossFade Duration="0:00:00.25" FadeInEasing="SineEaseIn" FadeOutEasing="SineEaseOut" />
+                    <PageSlide Duration="0:00:00.25" Orientation="Horizontal" SlideInEasing="SineEaseIn"
+                               SlideOutEasing="SineEaseOut" />
+                </CompositePageTransition>
+            </Carousel.PageTransition>
+            <Panel Name="LoadingPanel">
+                <DockPanel Margin="5">
+                    <StackPanel DockPanel.Dock="Top">
+                        <ui:ProgressRing Width="80"
+                                         Height="80"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top"
+                                         IsIndeterminate="True"
+                                         Margin="020" IsVisible="{CompiledBinding !#ErrorPanel.IsVisible}"
+                                         Name="LoadingProgress" />
+                    </StackPanel>
+                    <DockPanel IsVisible="False" Name="ErrorPanel">
+                        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center"
+                                Content="{x:Static lang:Lang.NoteScreen_SaveLogToFile}" Click="SaveLogToFileClick" />
+                        <TextBox Name="LogText" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" />
+                    </DockPanel>
+                </DockPanel>
+            </Panel>
+            <DockPanel Name="ContentPanel" IsEnabled="{CompiledBinding !$parent[views:NoteScreen].Bank.IsSaving}">
+                <DockPanel>
+                    <ProgressBar DockPanel.Dock="Top" IsIndeterminate="True" Margin="5" Name="SavingProgressBar"
+                                 IsVisible="{CompiledBinding $parent[views:NoteScreen].Bank.IsSaving}" />
+                    <Grid ColumnDefinitions="*,*" DockPanel.Dock="Top">
+                        <ScrollViewer>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox HotKey="Ctrl+A" Name="CheckAll" IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
+                                          ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SelectAll}"
+                                          IsEnabled="{CompiledBinding $self.IsVisible}"
+                                          IsCheckedChanged="CheckAll_OnIsCheckedChanged" />
+                                <Button HotKey="Ctrl+W" Background="Transparent"
+                                        IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
+                                        Click="InvertSelection"
+                                        ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_InvertSelection}"
+                                        IsEnabled="{CompiledBinding $self.IsVisible}">
+                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                          Data="{StaticResource ArrowSyncCircleRegular}" Stretch="Uniform" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}" />
+                                </Button>
+                                <Button HotKey="Ctrl+R" IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
+                                        Background="Transparent"
+                                        Click="RemoveSelected"
+                                        ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_RemoveSelected}"
+                                        IsEnabled="{CompiledBinding $self.IsVisible}">
+                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                          Data="{StaticResource DeleteRegular}" Stretch="Uniform" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}" />
+                                </Button>
+                                <Button HotKey="Ctrl+E" Background="Transparent"
+                                        IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
+                                        Click="ExportSelected"
+                                        ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_ExportSelected}"
+                                        IsEnabled="{CompiledBinding $self.IsVisible}">
+                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                          Data="{StaticResource ArrowUploadRegular}" Stretch="Uniform" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}" />
+                                </Button>
+                                <ToggleButton HotKey="Ctrl+S" Name="SelectionEnabled" Background="Transparent">
                                     <ToolTip.Tip>
                                         <Panel>
-                                            <TextBlock
-                                                IsVisible="{CompiledBinding !$parent[views:TagControl].TagObject.Checked, FallbackValue=True}"
-                                                Text="{x:Static lang:Lang.ToolTip_Note_TagMenuTagOff}"
-                                                TextWrapping="Wrap" />
-                                            <TextBlock
-                                                IsVisible="{CompiledBinding $parent[views:TagControl].TagObject.Checked, FallbackValue=False}"
-                                                Text="{x:Static lang:Lang.ToolTip_Note_TagMenuTagOn}"
-                                                TextWrapping="Wrap" />
+                                            <TextBlock TextWrapping="Wrap"
+                                                       IsVisible="{CompiledBinding $parent[ToggleButton].IsChecked}"
+                                                       Text="{x:Static lang:Lang.ToolTip_Note_SelectItemsExit}" />
+                                            <TextBlock TextWrapping="Wrap"
+                                                       IsVisible="{CompiledBinding !$parent[ToggleButton].IsChecked}"
+                                                       Text="{x:Static lang:Lang.ToolTip_Note_SelectItems}" />
                                         </Panel>
                                     </ToolTip.Tip>
-                                </views:TagControl>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </DockPanel>
+                                    <Grid RowDefinitions="*,Auto,*" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}">
+                                        <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
+                                              Data="{StaticResource SelectObjectRegular}"
+                                              IsVisible="{CompiledBinding !$parent[ToggleButton].IsChecked}"
+                                              Stretch="Uniform" />
+                                        <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
+                                              Data="{StaticResource PresenceOfflineRegular}"
+                                              IsVisible="{CompiledBinding $parent[ToggleButton].IsChecked}"
+                                              Stretch="Uniform" />
+                                    </Grid>
+                                </ToggleButton>
+                                <ToggleButton HotKey="Ctrl+M" IsVisible="{CompiledBinding $self.IsEnabled}"
+                                              IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked, Mode=OneWay}"
+                                              Name="ReorderEnabled" Background="Transparent">
+                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                          Data="{StaticResource ArrowMaximizeVerticalRegular}" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}"
+                                          Stretch="Uniform" />
+                                </ToggleButton>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <ScrollViewer Grid.Column="1">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button HotKey="Ctrl+I" Name="Import" Click="ImportFromFile"
+                                        ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_Import}" Background="Transparent">
+                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                          Data="{StaticResource ArrowDownloadRegular}" Stretch="Uniform" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}" />
+                                </Button>
+                                <ToggleButton HotKey="Ctrl+G" Name="RandomPick"
+                                              ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_RandomButton}"
+                                              Background="Transparent">
+                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                          Data="{StaticResource DiceRegular}" Stretch="Uniform" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}" />
+                                </ToggleButton>
+                                <ToggleButton HotKey="Ctrl+F" Name="Search"
+                                              ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchButton}"
+                                              Background="Transparent">
+                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                          Data="{StaticResource SearchRegular}" Stretch="Uniform" Width="24"
+                                          Height="{CompiledBinding $self.Bounds.Width}" />
+                                </ToggleButton>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
 
-                <DockPanel DockPanel.Dock="Bottom"
-                           IsEnabled="{CompiledBinding $parent[views:NoteEditUserControl].Bank.CanWrite}">
-                    <Button DockPanel.Dock="Right" VerticalAlignment="Bottom" Click="AddNewNoteClicked"
-                            Background="Transparent" IsVisible="{CompiledBinding !$parent[views:NoteScreen].EditMode}"
-                            IsEnabled="{CompiledBinding $self.IsVisible}"
-                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_Send}">
-                        <Path Fill="{DynamicResource ButtonForeground}" Data="{StaticResource SendRegular}"
-                              Stretch="Uniform" Width="24" Height="{CompiledBinding $self.Width}" />
-                    </Button>
-                    <Button DockPanel.Dock="Right" IsVisible="{CompiledBinding $parent[views:NoteScreen].EditMode}"
-                            Click="NoteItemEditOffOnClick"
-                            IsEnabled="{CompiledBinding $self.IsVisible}" Background="Transparent">
-                        <Path Data="{StaticResource EditOffRegular}" Width="24"
-                              Height="{CompiledBinding $self.Bounds.Width}" Fill="{DynamicResource ButtonForeground}"
-                              Stretch="Uniform" />
-                    </Button>
-                    <ToggleButton Name="Tags" ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_TagMenuButton}"
-                                  Background="Transparent">
-                        <Path Fill="{DynamicResource ButtonForeground}"
-                              Data="{StaticResource TagRegular}" Stretch="Uniform" Width="24"
-                              Height="{CompiledBinding $self.Bounds.Width}" />
-                    </ToggleButton>
-                    <ToggleButton Name="PreviewToggle" DockPanel.Dock="Left" Background="Transparent"
-                                  VerticalAlignment="Bottom">
-                        <ToolTip.Tip>
-                            <Panel>
-                                <TextBlock TextWrapping="Wrap" Text="{x:Static lang:Lang.ToolTip_Note_PreviewOn}"
-                                           IsVisible="{CompiledBinding $parent[ToggleButton].IsChecked}" />
-                                <TextBlock TextWrapping="Wrap" Text="{x:Static lang:Lang.ToolTip_Note_PreviewOff}"
-                                           IsVisible="{CompiledBinding !$parent[ToggleButton].IsChecked}" />
-                            </Panel>
-                        </ToolTip.Tip>
-                        <Grid RowDefinitions="*,Auto,*" Width="24" Height="{CompiledBinding $self.Bounds.Width}">
-                            <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
-                                  Data="{StaticResource EyeShowRegular}"
-                                  IsVisible="{CompiledBinding #PreviewToggle.IsChecked}" Stretch="Uniform" />
-                            <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
-                                  Data="{StaticResource EyeHideRegular}"
-                                  IsVisible="{CompiledBinding !#PreviewToggle.IsChecked}" Stretch="Uniform" />
-                        </Grid>
-                    </ToggleButton>
-                    <ToggleButton Name="PowerMode" DockPanel.Dock="Left" Background="Transparent"
-                                  ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_PowerMode}"
-                                  IsChecked="{CompiledBinding $parent[views:NUC].Settings.KeepText, Mode=TwoWay}">
-                        <Path Data="{StaticResource TopSpeedRegular}" Width="24"
-                              Height="{CompiledBinding $self.Bounds.Width}" Fill="{DynamicResource ButtonForeground}"
-                              Stretch="Uniform" />
-                    </ToggleButton>
-                    <ScrollViewer>
-                        <Panel Margin="5 0">
-                            <TextBox TextChanged="NewText_OnTextChanged" Name="NewText"
-                                     IsReadOnly="{CompiledBinding #PreviewToggle.IsChecked}"
-                                     AcceptsReturn="True" AcceptsTab="True">
-                                <TextBox.Styles>
-                                    <Style Selector="TextBox[IsReadOnly=True]">
-                                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                                        <Setter Property="BorderThickness" Value="0" />
-                                    </Style>
-                                    <Style Selector="TextBox[IsReadOnly=True]:focus">
-                                        <Style Selector="^ /template/ Border#PART_BorderElement">
-                                            <Setter Property="IsVisible" Value="False" />
-                                        </Style>
-                                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                                        <Setter Property="BorderThickness" Value="0" />
-                                    </Style>
-                                </TextBox.Styles>
-                            </TextBox>
-                        </Panel>
-                    </ScrollViewer>
-                </DockPanel>
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <Panel>
-                        <Canvas Name="DragDropCanvas" />
-                        <ItemsControl Name="NotesIc"
-                                      ItemsSource="{CompiledBinding $parent[views:NoteScreen].Bank.Notes}">
+                    <DockPanel DockPanel.Dock="Top" IsEnabled="{CompiledBinding #RandomPick.IsChecked}"
+                               IsVisible="{CompiledBinding $self.IsEnabled}">
+                        <ToggleButton HotKey="Ctrl+Y" IsCheckedChanged="PickRandomCheckedChanged" DockPanel.Dock="Right"
+                                      HorizontalAlignment="Stretch" Background="Transparent"
+                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_RandomPick}"
+                                      HorizontalContentAlignment="Center">
+                            <Grid ColumnDefinitions="*,Auto,*" Width="24"
+                                  Height="{CompiledBinding $self.Bounds.Width}">
+                                <Path Grid.Column="1" Fill="{DynamicResource ButtonForeground}"
+                                      Data="{StaticResource PredictionsRegular}" Stretch="Uniform" />
+                            </Grid>
+                        </ToggleButton>
+                        <DockPanel>
+                            <TextBlock Text="{CompiledBinding #RandomPickSlider.LowerSelectedValue}"
+                                       DockPanel.Dock="Left"
+                                       VerticalAlignment="Center" Margin="5 0" />
+                            <TextBlock Text="{CompiledBinding #RandomPickSlider.UpperSelectedValue}"
+                                       DockPanel.Dock="Right"
+                                       VerticalAlignment="Center" Margin="5 0" />
+                            <rs:RangeSlider Name="RandomPickSlider" IsSnapToTickEnabled="True" IsThumbOverlap="True"
+                                            MoveWholeRange="True" TickFrequency="1"
+                                            UpperSelectedValue="{CompiledBinding $self.Maximum, Mode=OneTime}"
+                                            Maximum="{CompiledBinding $parent[views:NoteScreen].Bank.VisibleCount}" />
+                        </DockPanel>
+                    </DockPanel>
+
+                    <DockPanel DockPanel.Dock="Top" IsVisible="{CompiledBinding #Search.IsChecked}"
+                               IsEnabled="{CompiledBinding $self.IsVisible}">
+                        <ToggleButton HotKey="Ctrl+N" IsCheckedChanged="SearchCaseSensitivityCheckedChanged"
+                                      Name="SearchCaseSensitivity"
+                                      DockPanel.Dock="Right" Content="Cc" Background="Transparent"
+                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchCaseSensitive}" />
+                        <ToggleButton HotKey="Ctrl+M" IsCheckedChanged="SearchUseRegexCheckedChanged" Name="SearchUseRegex"
+                                      DockPanel.Dock="Right" Content=".*" Background="Transparent"
+                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchUseRegex}" />
+                        <TextBox TextChanged="SearchBoxTextChanged" Name="SearchBox" Margin="5 0" />
+                    </DockPanel>
+
+                    <DockPanel DockPanel.Dock="Bottom" Name="TagsPanel" IsVisible="{CompiledBinding #Tags.IsChecked}"
+                               IsEnabled="{CompiledBinding $self.IsVisible}">
+                        <Button HotKey="Ctrl+Alt+M"  Background="Transparent" DockPanel.Dock="Left" Margin="5 0" Click="ManageTagsClicked">
+                            <Path Data="{StaticResource SettingsRegular}"
+                                  Fill="{DynamicResource TextControlForeground}"
+                                  Stretch="Uniform"
+                                  Height="24" />
+                        </Button>
+                        <ItemsControl ItemsSource="{CompiledBinding $parent[views:NoteEditUserControl].Bank.Tags}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Name="DragDropPanel" Orientation="Vertical" Spacing="5"
-                                                DragDrop.AllowDrop="True" />
+                                    <StackPanel Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate x:DataType="backend:Note">
-                                    <Border IsVisible="{CompiledBinding Visible}" Margin="0 10 0 0" CornerRadius="5"
-                                            Background="{DynamicResource ButtonBackground}" BorderThickness="1"
-                                            Tag="{CompiledBinding Self}">
-                                        <Border.Styles>
-                                            <Style Selector="Border">
-                                                <Style.Animations>
-                                                    <Animation Duration="0:0:0.5" IterationCount="1"
-                                                               Easing="BounceEaseIn">
-                                                        <KeyFrame Cue="0%">
-                                                            <Setter Property="Opacity" Value="0" />
-                                                        </KeyFrame>
-                                                        <KeyFrame Cue="100%">
-                                                            <Setter Property="Opacity" Value="1" />
-                                                        </KeyFrame>
-                                                    </Animation>
-                                                </Style.Animations>
-                                            </Style>
-                                        </Border.Styles>
-                                        <DockPanel>
-                                            <Grid IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked}"
-                                                  IsVisible="{CompiledBinding $self.IsEnabled}" DockPanel.Dock="Left"
-                                                  RowDefinitions="*,Auto,*">
-                                                <Button IsVisible="{CompiledBinding #ReorderEnabled.IsChecked}"
-                                                        Grid.Row="0" Tag="{CompiledBinding Self}" Click="MoveItemUp"
-                                                        IsEnabled="{CompiledBinding !IsOnTop}"
-                                                        Background="Transparent">
-                                                    <Grid RowDefinitions="*,Auto" Width="24"
-                                                          Height="{CompiledBinding $self.Bounds.Width}">
-                                                        <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
-                                                              Stretch="Uniform" DockPanel.Dock="Top"
-                                                              Data="{StaticResource CaretUpRegular}" />
-                                                    </Grid>
-                                                </Button>
-                                                <Button IsVisible="{CompiledBinding #ReorderEnabled.IsChecked}"
-                                                        Grid.Row="2" Background="Transparent" Click="MoveItemDown"
-                                                        IsEnabled="{CompiledBinding !IsOnBottom}"
-                                                        Tag="{CompiledBinding Self}">
-                                                    <Grid RowDefinitions="Auto,*" Width="24"
-                                                          Height="{CompiledBinding $self.Bounds.Width}">
-                                                        <Path Fill="{DynamicResource ButtonForeground}"
-                                                              Stretch="Uniform" Grid.Row="0"
-                                                              Data="{StaticResource CaretDownRegular}" />
-                                                    </Grid>
-                                                </Button>
-                                            </Grid>
-                                            <CheckBox DockPanel.Dock="Left" Margin="5"
+                                <DataTemplate x:DataType="backend:Tag">
+                                    <views:TagControl IsCheckedChanged="AllTagsCheckedChanged"
+                                                      Tag="{CompiledBinding Self}"
+                                                      TagObject="{CompiledBinding Self}" CornerRadius="50"
                                                       IsChecked="{CompiledBinding Checked, Mode=TwoWay}"
-                                                      IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
-                                                      IsEnabled="{CompiledBinding $self.IsVisible}" />
-                                            <TextBlock Text="{CompiledBinding DateAsString}" x:DataType="backend:Note"
-                                                       DockPanel.Dock="Top"
-                                                       HorizontalAlignment="Left" />
-                                            <Button Name="NoteItemEditMode" DockPanel.Dock="Right"
-                                                    Click="NoteItemEditMode_OnClick"
-                                                    Background="Transparent"
-                                                    IsVisible="{CompiledBinding !$parent[views:NoteScreen].EditMode}"
-                                                    IsEnabled="{CompiledBinding $self.IsEnabled}"
-                                                    ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_EditNoteOff}"
-                                                    Tag="{CompiledBinding Self}"
-                                                    VerticalAlignment="Top">
-                                                <Path Fill="{DynamicResource ButtonForeground}"
-                                                      Stretch="Uniform" Width="24"
-                                                      Height="{CompiledBinding $self.Bounds.Width}"
-                                                      Data="{StaticResource EditRegular}" />
-                                            </Button>
-
-                                            <TextBlock
-                                                TextWrapping="Wrap" Margin="5 5"
-                                                Text="{CompiledBinding Text, Mode=TwoWay}" Name="NoteText"
-                                                x:DataType="backend:Note" />
-                                        </DockPanel>
-                                    </Border>
+                                                      Color="{CompiledBinding Color}" AllowChecking="True">
+                                        <ToolTip.Tip>
+                                            <Panel>
+                                                <TextBlock
+                                                    IsVisible="{CompiledBinding !$parent[views:TagControl].TagObject.Checked, FallbackValue=True}"
+                                                    Text="{x:Static lang:Lang.ToolTip_Note_TagMenuTagOff}"
+                                                    TextWrapping="Wrap" />
+                                                <TextBlock
+                                                    IsVisible="{CompiledBinding $parent[views:TagControl].TagObject.Checked, FallbackValue=False}"
+                                                    Text="{x:Static lang:Lang.ToolTip_Note_TagMenuTagOn}"
+                                                    TextWrapping="Wrap" />
+                                            </Panel>
+                                        </ToolTip.Tip>
+                                    </views:TagControl>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </Panel>
-                </ScrollViewer>
+                    </DockPanel>
+
+                    <DockPanel DockPanel.Dock="Bottom"
+                               IsEnabled="{CompiledBinding $parent[views:NoteEditUserControl].Bank.CanWrite}">
+                        <Button HotKey="Ctrl+Enter" DockPanel.Dock="Right" VerticalAlignment="Bottom" Click="AddNewNoteClicked"
+                                Background="Transparent"
+                                IsVisible="{CompiledBinding !$parent[views:NoteScreen].EditMode}"
+                                IsEnabled="{CompiledBinding $self.IsVisible}"
+                                ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_Send}">
+                            <Path Fill="{DynamicResource ButtonForeground}" Data="{StaticResource SendRegular}"
+                                  Stretch="Uniform" Width="24" Height="{CompiledBinding $self.Width}" />
+                        </Button>
+                        <Button HotKey="Ctrl+Escape"  DockPanel.Dock="Right" IsVisible="{CompiledBinding $parent[views:NoteScreen].EditMode}"
+                                Click="NoteItemEditOffOnClick"
+                                IsEnabled="{CompiledBinding $self.IsVisible}" Background="Transparent">
+                            <Path Data="{StaticResource EditOffRegular}" Width="24"
+                                  Height="{CompiledBinding $self.Bounds.Width}"
+                                  Fill="{DynamicResource ButtonForeground}"
+                                  Stretch="Uniform" />
+                        </Button>
+                        <ToggleButton HotKey="Ctrl+Alt+T" Name="Tags" ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_TagMenuButton}"
+                                      Background="Transparent">
+                            <Path Fill="{DynamicResource ButtonForeground}"
+                                  Data="{StaticResource TagRegular}" Stretch="Uniform" Width="24"
+                                  Height="{CompiledBinding $self.Bounds.Width}" />
+                        </ToggleButton>
+                        <ToggleButton HotKey="Ctrl+Alt+P"  Name="PreviewToggle" DockPanel.Dock="Left" Background="Transparent"
+                                      VerticalAlignment="Bottom">
+                            <ToolTip.Tip>
+                                <Panel>
+                                    <TextBlock TextWrapping="Wrap" Text="{x:Static lang:Lang.ToolTip_Note_PreviewOn}"
+                                               IsVisible="{CompiledBinding $parent[ToggleButton].IsChecked}" />
+                                    <TextBlock TextWrapping="Wrap" Text="{x:Static lang:Lang.ToolTip_Note_PreviewOff}"
+                                               IsVisible="{CompiledBinding !$parent[ToggleButton].IsChecked}" />
+                                </Panel>
+                            </ToolTip.Tip>
+                            <Grid RowDefinitions="*,Auto,*" Width="24" Height="{CompiledBinding $self.Bounds.Width}">
+                                <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
+                                      Data="{StaticResource EyeShowRegular}"
+                                      IsVisible="{CompiledBinding #PreviewToggle.IsChecked}" Stretch="Uniform" />
+                                <Path Grid.Row="1" Fill="{DynamicResource ButtonForeground}"
+                                      Data="{StaticResource EyeHideRegular}"
+                                      IsVisible="{CompiledBinding !#PreviewToggle.IsChecked}" Stretch="Uniform" />
+                            </Grid>
+                        </ToggleButton>
+                        <ToggleButton HotKey="Ctrl+P" Name="PowerMode" DockPanel.Dock="Left" Background="Transparent"
+                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_PowerMode}"
+                                      IsChecked="{CompiledBinding $parent[views:NUC].Settings.KeepText, Mode=TwoWay}">
+                            <Path Data="{StaticResource TopSpeedRegular}" Width="24"
+                                  Height="{CompiledBinding $self.Bounds.Width}"
+                                  Fill="{DynamicResource ButtonForeground}"
+                                  Stretch="Uniform" />
+                        </ToggleButton>
+                        <ScrollViewer>
+                            <Panel Margin="5 0">
+                                <TextBox TextChanged="NewText_OnTextChanged" Name="NewText"
+                                         IsReadOnly="{CompiledBinding #PreviewToggle.IsChecked}"
+                                         AcceptsReturn="True" AcceptsTab="True">
+                                    <TextBox.Styles>
+                                        <Style Selector="TextBox[IsReadOnly=True]">
+                                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                        </Style>
+                                        <Style Selector="TextBox[IsReadOnly=True]:focus">
+                                            <Style Selector="^ /template/ Border#PART_BorderElement">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </Style>
+                                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                        </Style>
+                                    </TextBox.Styles>
+                                </TextBox>
+                            </Panel>
+                        </ScrollViewer>
+                    </DockPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <Panel>
+                            <Canvas Name="DragDropCanvas" />
+                            <ItemsControl Name="NotesIc"
+                                          ItemsSource="{CompiledBinding $parent[views:NoteScreen].Bank.Notes}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Name="DragDropPanel" Orientation="Vertical" Spacing="5"
+                                                    DragDrop.AllowDrop="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="backend:Note">
+                                        <Border IsVisible="{CompiledBinding Visible}" Margin="0 10 0 0"
+                                                CornerRadius="5"
+                                                Background="{DynamicResource ButtonBackground}" BorderThickness="1"
+                                                Tag="{CompiledBinding Self}">
+                                            <Border.Styles>
+                                                <Style Selector="Border">
+                                                    <Style.Animations>
+                                                        <Animation Duration="0:0:0.5" IterationCount="1"
+                                                                   Easing="BounceEaseIn">
+                                                            <KeyFrame Cue="0%">
+                                                                <Setter Property="Opacity" Value="0" />
+                                                            </KeyFrame>
+                                                            <KeyFrame Cue="100%">
+                                                                <Setter Property="Opacity" Value="1" />
+                                                            </KeyFrame>
+                                                        </Animation>
+                                                    </Style.Animations>
+                                                </Style>
+                                            </Border.Styles>
+                                            <DockPanel>
+                                                <Grid IsEnabled="{CompiledBinding !#SelectionEnabled.IsChecked}"
+                                                      IsVisible="{CompiledBinding $self.IsEnabled}"
+                                                      DockPanel.Dock="Left"
+                                                      RowDefinitions="*,Auto,*">
+                                                    <Button IsVisible="{CompiledBinding #ReorderEnabled.IsChecked}"
+                                                            Grid.Row="0" Tag="{CompiledBinding Self}"
+                                                            Click="MoveItemUp"
+                                                            IsEnabled="{CompiledBinding !IsOnTop}"
+                                                            Background="Transparent">
+                                                        <Grid RowDefinitions="*,Auto" Width="24"
+                                                              Height="{CompiledBinding $self.Bounds.Width}">
+                                                            <Path Grid.Row="1"
+                                                                  Fill="{DynamicResource ButtonForeground}"
+                                                                  Stretch="Uniform" DockPanel.Dock="Top"
+                                                                  Data="{StaticResource CaretUpRegular}" />
+                                                        </Grid>
+                                                    </Button>
+                                                    <Button IsVisible="{CompiledBinding #ReorderEnabled.IsChecked}"
+                                                            Grid.Row="2" Background="Transparent" Click="MoveItemDown"
+                                                            IsEnabled="{CompiledBinding !IsOnBottom}"
+                                                            Tag="{CompiledBinding Self}">
+                                                        <Grid RowDefinitions="Auto,*" Width="24"
+                                                              Height="{CompiledBinding $self.Bounds.Width}">
+                                                            <Path Fill="{DynamicResource ButtonForeground}"
+                                                                  Stretch="Uniform" Grid.Row="0"
+                                                                  Data="{StaticResource CaretDownRegular}" />
+                                                        </Grid>
+                                                    </Button>
+                                                </Grid>
+                                                <CheckBox DockPanel.Dock="Left" Margin="5"
+                                                          IsChecked="{CompiledBinding Checked, Mode=TwoWay}"
+                                                          IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
+                                                          IsEnabled="{CompiledBinding $self.IsVisible}" />
+                                                <TextBlock Text="{CompiledBinding DateAsString}"
+                                                           x:DataType="backend:Note"
+                                                           DockPanel.Dock="Top"
+                                                           HorizontalAlignment="Left" />
+                                                <Button Name="NoteItemEditMode" DockPanel.Dock="Right"
+                                                        Click="NoteItemEditMode_OnClick"
+                                                        Background="Transparent"
+                                                        IsVisible="{CompiledBinding !$parent[views:NoteScreen].EditMode}"
+                                                        IsEnabled="{CompiledBinding $self.IsEnabled}"
+                                                        ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_EditNoteOff}"
+                                                        Tag="{CompiledBinding Self}"
+                                                        VerticalAlignment="Top">
+                                                    <Path Fill="{DynamicResource ButtonForeground}"
+                                                          Stretch="Uniform" Width="24"
+                                                          Height="{CompiledBinding $self.Bounds.Width}"
+                                                          Data="{StaticResource EditRegular}" />
+                                                </Button>
+
+                                                <TextBlock
+                                                    TextWrapping="Wrap" Margin="5 5"
+                                                    Text="{CompiledBinding Text, Mode=TwoWay}" Name="NoteText"
+                                                    x:DataType="backend:Note" />
+                                            </DockPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Panel>
+                    </ScrollViewer>
+                </DockPanel>
             </DockPanel>
-        </DockPanel>
-    </Carousel>
+        </Carousel>
+
+    </DockPanel>
 </UserControl>

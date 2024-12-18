@@ -82,14 +82,12 @@ public partial class TagEditor : NoteEditUserControl
     private void InvertSelection(object? sender, RoutedEventArgs e)
     {
         foreach (var obj in TagsItemsControl.Items)
-        {
-            if (obj is Tag tag) tag.Checked = !tag.Checked;
-        }
+            if (obj is Tag tag)
+                tag.Checked = !tag.Checked;
     }
 
     private void DeleteSelected(object? sender, RoutedEventArgs e)
     {
         Bank.RemoveAll(it => it.Checked);
     }
-
 }

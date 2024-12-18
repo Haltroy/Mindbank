@@ -59,7 +59,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         set
         {
             _save = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NeedsSaving)));
+            if (value) Write();
         }
     }
 
