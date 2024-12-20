@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Set-up Xcode
-      - uses: maxim-lobanov/setup-xcode@v1
+        uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
       - name: Setup workloads
@@ -25,6 +25,7 @@ jobs:
         run: dotnet restore ./src/Mindbank.macOS/Mindbank.macOS.csproj
       - name: Build
         run: dotnet build --no-restore ./src/Mindbank.macOS/Mindbank.macOS.csproj
+
       # macOS Intel
       - name: Publish (macOS Intel)
         run: |
