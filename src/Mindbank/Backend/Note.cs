@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using Avalonia.Media;
 using Mindbank.Backend.Exceptions;
 
@@ -60,7 +59,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         set
         {
             _save = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NeedsSaving)));
+            if (value) Write();
         }
     }
 
@@ -84,16 +83,16 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     public int VisibleCount
     {
-        get { return _notes.Count(n => n.Visible); }
+        get { return _notes.Count(it => it is { Visible: true }); }
     }
 
-    public int TagCount => _tags.Count;
 
     public Tag[] Tags => _tags.ToArray();
 
     public bool VersionMatch => Version == Settings.Version;
+    public bool ReadOnly { get; set; }
     public bool LimitNotReached => Count < int.MaxValue;
-    public bool CanWrite => VersionMatch && LimitNotReached;
+    public bool CanWrite => VersionMatch && LimitNotReached && !ReadOnly;
 
     public bool IsExample { get; set; }
 
@@ -108,7 +107,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
             FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "example")
         };
         bank.Add(new Note("This is a test.", [], DateTime.Now, bank));
-        var tag1 = new Tag("Test1", Colors.Gold, bank);
+        var tag1 = new Tag("Test1", Colors.DodgerBlue, bank);
         bank.Add(tag1);
         bank.Add(new Note("This is a test with a tag.", [tag1], DateTime.Now, bank));
         return bank;
@@ -117,7 +116,8 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
     public void Unload()
     {
         _init = true;
-        foreach (var note in _notes) note.Bank = null;
+        foreach (var n in _notes)
+            n.Bank = null;
         _notes.Clear();
         foreach (var tag in _tags) tag.Bank = null;
         _tags.Clear();
@@ -139,7 +139,8 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         if (!CanWrite) return;
         _tags.Add(tag);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-        foreach (var note in _notes) note.RequestPropertyChangeInvoke();
+        foreach (var n in _notes)
+            n.RequestPropertyChangeInvoke();
         if (!_init) NeedsSaving = true;
     }
 
@@ -156,7 +157,8 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         if (!CanWrite) return;
         _tags.AddRange(tags);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-        foreach (var note in _notes) note.RequestPropertyChangeInvoke();
+        foreach (var n in _notes)
+            n.RequestPropertyChangeInvoke();
         if (!_init) NeedsSaving = true;
     }
 
@@ -247,7 +249,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         if (!_init) NeedsSaving = true;
     }
 
-    public void RemoveAll(Predicate<Note> predicate)
+    public void RemoveAll(Predicate<INote> predicate)
     {
         if (!CanWrite) return;
         _notes.RemoveAll(predicate);
@@ -288,42 +290,52 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     public async void Read()
     {
-        _init = true;
-        if (IsExample)
+        try
         {
-            Thread.Sleep(5000);
-            return;
-        }
+            _init = true;
+            if (IsExample) return;
 
-        await using var fileStream =
-            new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite);
-        _notes.AddRange(LoadFromStream(fileStream, this, out var v));
-        Version = v;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
-        foreach (var n in Notes)
-            n.RequestPropertyChangeInvoke();
-        _init = false;
+            await using var fileStream =
+                new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite);
+            _notes.AddRange(LoadFromStream(fileStream, this, out var v));
+            Version = v;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
+            foreach (var n in Notes)
+                n.RequestPropertyChangeInvoke();
+            _init = false;
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     public async void Write()
     {
-        IsSaving = true;
-        if (!CanWrite) return;
-        await using var fileStream = !File.Exists(FilePath)
-            ? File.Create(FilePath)
-            : File.Open(FilePath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
-        SaveToStream(fileStream, Notes);
-        NeedsSaving = false;
-        IsSaving = false;
+        try
+        {
+            IsSaving = true;
+            if (!CanWrite) return;
+            await using var fileStream = !File.Exists(FilePath)
+                ? File.Create(FilePath)
+                : File.Open(FilePath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
+            SaveToStream(fileStream, Notes);
+            NeedsSaving = false;
+            IsSaving = false;
+        }
+        catch (Exception)
+        {
+            //ignored
+        }
     }
 
     internal static Note[] LoadFromStream(Stream stream, Bank bank, out int version)
     {
         version = stream.ReadByte();
         if (version < 0) throw new MindbankEndOfFileException(0, nameof(stream));
-        var rHasTags = Tools.isBitSet((byte)version, 7);
+        var rHasTags = Tools.IsBitSet(version, 7);
         if (rHasTags) version -= 128;
-        var rHasItems = Tools.isBitSet((byte)version, 6);
+        var rHasItems = Tools.IsBitSet(version, 6);
         if (rHasItems) version -= 64;
         Tag[] loadedTags = [];
         if (rHasTags)
@@ -347,7 +359,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
             Tag[] tags = [];
             var type = stream.ReadByte();
             if (type < 0) throw new MindbankEndOfFileException(7, "" + i);
-            var hasTags = Tools.isBitSet((byte)type, 7);
+            var hasTags = Tools.IsBitSet(type, 7);
             if (hasTags)
             {
                 type -= 128;
@@ -380,8 +392,8 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
     {
         var version = Settings.Version;
         List<Tag> tags = [];
-        foreach (var note in notes)
-        foreach (var tag in note.Tags)
+        foreach (var n in notes)
+        foreach (var tag in n.Tags)
             if (!tags.Contains(tag))
                 tags.Add(tag);
         if (notes.Length > 0) version += 64;
@@ -420,8 +432,8 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 public sealed class Tag : INotifyPropertyChanged
 {
     private readonly bool _init;
+    private bool _checked;
     private Color _color;
-    private bool _newNoteChecked;
     private string _text = string.Empty;
 
     public Tag(string text, Color color, Bank? bank)
@@ -460,13 +472,13 @@ public sealed class Tag : INotifyPropertyChanged
     public Bank? Bank { get; internal set; }
     public int Index => Bank?.IndexOf(this) ?? -1;
 
-    public bool NewNoteChecked
+    public bool Checked
     {
-        get => _newNoteChecked;
+        get => _checked;
         set
         {
-            _newNoteChecked = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NewNoteChecked)));
+            _checked = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Checked)));
         }
     }
 
@@ -479,7 +491,15 @@ public record NoteTag(Note Note, Tag Tag)
     public bool NoteHasTag => Note.Tags.Contains(Tag);
 }
 
-public sealed class Note : INotifyPropertyChanged
+public interface INote
+{
+}
+
+public abstract class DragDropNote : INote
+{
+}
+
+public sealed class Note : INote, INotifyPropertyChanged
 {
     private readonly DateTime _date = DateTime.MinValue;
     private readonly bool _init;
@@ -565,6 +585,9 @@ public sealed class Note : INotifyPropertyChanged
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Checked)));
         }
     }
+
+    public bool IsOnTop => Bank != null && Bank.IndexOf(this) == 0;
+    public bool IsOnBottom => Bank != null && Bank.IndexOf(this) == Bank.Count - 1;
 
 
     public string DateAsString => Date.ToString("f");

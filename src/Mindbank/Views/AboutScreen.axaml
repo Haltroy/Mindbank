@@ -3,16 +3,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lang="clr-namespace:Mindbank.Lang"
+             xmlns:views="clr-namespace:Mindbank.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Mindbank.Views.AboutScreen">
     <UserControl.Resources>
-        <StreamGeometry x:Key="chevron_left_regular">M31.8839 8.36612C32.372 8.85427 32.372 9.64573 31.8839 10.1339L18.0178 24L31.8839 37.8661C32.372 38.3543 32.372 39.1457 31.8839 39.6339C31.3957 40.122 30.6043 40.122 30.1161 39.6339L15.3661 24.8839C14.878 24.3957 14.878 23.6043 15.3661 23.1161L30.1161 8.36612C30.6043 7.87796 31.3957 7.87796 31.8839 8.36612Z</StreamGeometry>
+        <StreamGeometry x:Key="ChevronLeftRegular">M31.8839 8.36612C32.372 8.85427 32.372 9.64573 31.8839 10.1339L18.0178 24L31.8839 37.8661C32.372 38.3543 32.372 39.1457 31.8839 39.6339C31.3957 40.122 30.6043 40.122 30.1161 39.6339L15.3661 24.8839C14.878 24.3957 14.878 23.6043 15.3661 23.1161L30.1161 8.36612C30.6043 7.87796 31.3957 7.87796 31.8839 8.36612Z</StreamGeometry>
     </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
-                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent">
-                    <Path Data="{StaticResource chevron_left_regular}" Fill="{DynamicResource TextControlForeground}"
+                <Button VerticalAlignment="Center" Click="GoBack" Background="Transparent" HotKey="Escape"
+                        ToolTip.Tip="{x:Static lang:Lang.GoBack}">
+                    <Path Data="{StaticResource ChevronLeftRegular}" Fill="{DynamicResource TextControlForeground}"
                           Stretch="UniformToFill" />
                 </Button>
                 <TextBlock FontSize="20" FontWeight="Bold" Text="{x:Static lang:Lang.About_About}"
@@ -42,14 +44,21 @@
             <DockPanel LastChildFill="True">
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0 10 0 0"
                             HorizontalAlignment="Center">
-                    <Button Content="{x:Static lang:Lang.About_About}" Tag="{CompiledBinding #About}"
+                    <Button Content="{x:Static lang:Lang.About_About}" Tag="{CompiledBinding #About}" HotKey="Ctrl+I"
                             Click="CarouselButton_Click" />
                     <Button Content="{x:Static lang:Lang.About_License}" Tag="{CompiledBinding #LicenseBox}"
+                            HotKey="Ctrl+L"
                             Click="CarouselButton_Click" />
                     <Button Content="{x:Static lang:Lang.About_TechUsed}" Tag="{CompiledBinding #Credits}"
+                            HotKey="Ctrl+T"
                             Click="CarouselButton_Click" />
                 </StackPanel>
                 <Carousel Name="CarouselMenu" Margin="20 10 20 0">
+                    <Carousel.PageTransition>
+                        <CompositePageTransition>
+                            <CrossFade Duration="0:00:00.25" FadeInEasing="SineEaseIn" FadeOutEasing="SineEaseOut" />
+                        </CompositePageTransition>
+                    </Carousel.PageTransition>
                     <Panel Name="About">
                         <SelectableTextBlock
                             VerticalAlignment="Center"
@@ -62,24 +71,25 @@
                              HorizontalAlignment="Center" />
                     <Panel Name="Credits">
                         <ScrollViewer>
-                            <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
-                                <StackPanel Orientation="Horizontal" Spacing="10">
-                                    <TextBlock Text="● Avalonia UI" VerticalAlignment="Center" FontSize="15" />
-                                    <Button Content="{x:Static lang:Lang.About_Visit}" Click="Navigate"
-                                            Tag="https://avaloniaui.net/" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Spacing="10">
-                                    <TextBlock Text="● Avalonia Fluent Icons" VerticalAlignment="Center" FontSize="15" />
-                                    <Button Content="{x:Static lang:Lang.About_Visit}" Click="Navigate"
-                                            Tag="http://avaloniaui.github.io/icons.html" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Spacing="10">
-                                    <TextBlock Text="● .NET" VerticalAlignment="Center" FontSize="15" />
-                                    <Button Content="{x:Static lang:Lang.About_Visit}" Click="Navigate"
-                                            Tag="https://dotnet.microsoft.com/" />
-                                </StackPanel>
-                            </StackPanel>
+                            <ItemsControl ItemsSource="{CompiledBinding $parent[views:AboutScreen].TechnologyList}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="views:TechnologyLink">
+                                        <StackPanel Orientation="Horizontal" Spacing="10">
+                                            <TextBlock Text="●" VerticalAlignment="Center" FontSize="15" />
+                                            <TextBlock Text="{CompiledBinding Name}" VerticalAlignment="Center"
+                                                       FontSize="15" />
+                                            <Button Content="{x:Static lang:Lang.About_Visit}" Click="Navigate"
+                                                    Tag="{CompiledBinding Link}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </ScrollViewer>
                     </Panel>
                 </Carousel>

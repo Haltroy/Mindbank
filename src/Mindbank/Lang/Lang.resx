@@ -48,12 +48,6 @@
     <data name="ImportExportFileType" xml:space="preserve">
         <value>Mindbank Bank</value>
     </data>
-    <data name="ShowApp" xml:space="preserve">
-        <value>Show Mindbank...</value>
-    </data>
-    <data name="ExitApp" xml:space="preserve">
-        <value>Exit Mindbank...</value>
-    </data>
     <data name="MainView_NewBank" xml:space="preserve">
         <value>New Bank...</value>
     </data>
@@ -92,12 +86,6 @@ To continue working on notes, click on the note name.</value>
     <data name="NoteScreen_SaveLogToFileTitle" xml:space="preserve">
         <value>Save log to a file...</value>
     </data>
-    <data name="NoteScreen_Loading" xml:space="preserve">
-        <value>Loading...</value>
-    </data>
-    <data name="NoteScreen_Close" xml:space="preserve">
-        <value>Close</value>
-    </data>
     <data name="NoteScreen_SaveLogToFile" xml:space="preserve">
         <value>Save log to a file</value>
     </data>
@@ -107,32 +95,8 @@ To continue working on notes, click on the note name.</value>
     <data name="NoteScreen_NewTag_Add" xml:space="preserve">
         <value>Add...</value>
     </data>
-    <data name="NoteScreen_Random_Max" xml:space="preserve">
-        <value>Maximum:</value>
-    </data>
-    <data name="NoteScreen_Random_Min" xml:space="preserve">
-        <value>Minimum:</value>
-    </data>
-    <data name="Settings_Settings" xml:space="preserve">
-        <value>Settings</value>
-    </data>
-    <data name="Settings_Main" xml:space="preserve">
-        <value>Main</value>
-    </data>
-    <data name="Settings_HideToTray" xml:space="preserve">
-        <value>Hide to system tray</value>
-    </data>
-    <data name="Settings_StartInTray" xml:space="preserve">
-        <value>Start app in system tray</value>
-    </data>
-    <data name="Settings_KeepText" xml:space="preserve">
-        <value>Keep text and selected tags after creating a ote</value>
-    </data>
     <data name="Settings_Theme" xml:space="preserve">
         <value>Theme:</value>
-    </data>
-    <data name="Settings_Theming" xml:space="preserve">
-        <value>Theming</value>
     </data>
     <data name="Settings_ThemeDefault" xml:space="preserve">
         <value>System default</value>
@@ -147,7 +111,7 @@ To continue working on notes, click on the note name.</value>
         <value>Use background blur</value>
     </data>
     <data name="Settings_BlurLevel" xml:space="preserve">
-        <value>Blur level:</value>
+        <value>Opaque level:</value>
     </data>
     <data name="MainView_OK" xml:space="preserve">
         <value>OK</value>
@@ -176,4 +140,115 @@ To continue working on notes, click on the note name.</value>
     <data name="Update_4" xml:space="preserve">
         <value>Would you like to update?</value>
     </data>
+    <data name="GoBack" xml:space="preserve">
+        <value>Go back...</value>
+    </data>
+    <data name="ToolTip_UpdatesAvailable" xml:space="preserve">
+        <value>You have updates available for this app. Click/touch this button to update.</value>
+    </data>
+    <data name="ToolTip_CheckingForUpdates" xml:space="preserve">
+        <value>Please wait while we are checking for updates...</value>
+    </data>
+    <data name="ToolTip_UpToDate" xml:space="preserve">
+        <value>Your software is up to date. Press/touch this button to perform an update checking.</value>
+    </data>
+    <data name="ToolTip_Settings" xml:space="preserve">
+        <value>Click/touch here to go to Settings.</value>
+    </data>
+    <data name="ToolTip_About" xml:space="preserve">
+        <value>Click/touch here to see Abouts page.</value>
+    </data>
+    <data name="ToolTip_NewNoteGroup" xml:space="preserve">
+        <value>Banks are groups of notes. Click/touch here to create a new bank.</value>
+    </data>
+    <data name="ToolTip_Note_EditName" xml:space="preserve">
+        <value>Click/touch here to toggle the ability to change the name  of this bank.</value>
+    </data>
+    <data name="ToolTip_Note_SelectItems" xml:space="preserve">
+        <value>Click/touch to enable selection mode.</value>
+    </data>
+    <data name="ToolTip_Note_SelectItemsExit" xml:space="preserve">
+        <value>Click/touch to exit out of selection mode.</value>
+    </data>
+    <data name="ToolTip_Note_SelectAll" xml:space="preserve">
+        <value>Click/touch to select/unselect all notes.</value>
+    </data>
+    <data name="ToolTip_Note_RemoveSelected" xml:space="preserve">
+        <value>Click/touch this button to remove all selected notes.</value>
+    </data>
+    <data name="ToolTip_Note_ExportSelected" xml:space="preserve">
+        <value>Click/touch here to export the selected notes.</value>
+    </data>
+    <data name="ToolTip_Note_InvertSelection" xml:space="preserve">
+        <value>Click/touch here to select the unselected items and unselect the selected items.</value>
+    </data>
+    <data name="ToolTip_Note_Import" xml:space="preserve">
+        <value>Click/touch here to import notes.</value>
+    </data>
+    <data name="ToolTip_Note_RandomButton" xml:space="preserve">
+        <value>Click/touch to show/hide the random picker panel.</value>
+    </data>
+    <data name="ToolTip_Note_RandomPick" xml:space="preserve">
+        <value>Click/touch to decide only to show the random picked note or all.</value>
+    </data>
+    <data name="ToolTip_Note_SearchButton" xml:space="preserve">
+        <value>Click/touch to show/hide the search panel.</value>
+    </data>
+    <data name="ToolTip_Note_SearchUseRegex" xml:space="preserve">
+        <value>Click/touch to toggle regular expression mode.</value>
+    </data>
+    <data name="ToolTip_Note_SearchCaseSensitive" xml:space="preserve">
+        <value>Click/touch to toggle case sensitivity mode.</value>
+    </data>
+    <data name="ToolTip_Note_EditNoteOff" xml:space="preserve">
+        <value>Click/touch here to edit this note.</value>
+    </data>
+    <data name="ToolTip_Note_Send" xml:space="preserve">
+        <value>Click/touch to add the new note.</value>
+    </data>
+    <data name="ToolTip_Note_PowerMode" xml:space="preserve">
+        <value>Power Mode: Text and tags stay after adding a new note. Click/touch this button to toggle it.</value>
+    </data>
+    <data name="ToolTip_Note_PreviewOn" xml:space="preserve">
+        <value>Click/touch this to disable the preview.</value>
+    </data>
+    <data name="ToolTip_Note_PreviewOff" xml:space="preserve">
+        <value>Click/touch this to enable the preview.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagColor" xml:space="preserve">
+        <value>This determines the color of the tag.</value>
+    </data>
+    <data name="ToolTip_Note_NewItemTagColorRandom" xml:space="preserve">
+        <value>Click/touch here to assign a random color ofr this tag.</value>
+    </data>
+    <data name="ToolTip_Note_TagMenuButton" xml:space="preserve">
+        <value>Click/touch to show/hide the tags panel.</value>
+    </data>
+    <data name="ToolTip_Note_TagMenuTagOn" xml:space="preserve">
+        <value>Click/touch to show all notes.</value>
+    </data>
+    <data name="ToolTip_Note_TagMenuTagOff" xml:space="preserve">
+        <value>Click/touch to only show notes with this tag.</value>
+    </data>
+    <data name="Tools_IsBitSet_Error" xml:space="preserve">
+        <value>Must be between 0 and {0}.</value>
+    </data>
+    <data name="Tools_GenerateRandomTextError" xml:space="preserve">
+        <value>"length" must be greater than 0.</value>
+    </data>
+    <data name="Tools_GenerateRandomTextError2" xml:space="preserve">
+        <value>"length" must be smaller than the 32-bit integer limit.</value>
+    </data>
+    <data name="CLI_Import_FileNotFound" xml:space="preserve">
+        <value>Error: File "{0}" does not exists. Skipped.</value>
+    </data>
+    <data name="CLI_Open_FileNotFound" xml:space="preserve">
+        <value>Error: File "{0}" does not exists. Closing.</value>
+    </data>
+    <data name="CLI_Help_1" xml:space="preserve"><value>Mindbank version %ver% by haltroy</value></data>
+    <data name="CLI_Help_2" xml:space="preserve"><value>USAGE: Mindbank [options] [file path or bank name]</value></data>
+    <data name="CLI_Help_3" xml:space="preserve"><value>Shows this screen and closes.</value></data>
+    <data name="CLI_Help_4" xml:space="preserve"><value>Runs on command-line only.</value></data>
+    <data name="CLI_Help_5" xml:space="preserve"><value>Imports files instead. Supports multiple file paths as arguments.</value></data>
+    <data name="CLI_Help_6" xml:space="preserve"><value>When run with multiple paths and/or names, app picks the last one to display.</value></data>
 </root>

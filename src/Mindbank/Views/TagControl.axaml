@@ -11,7 +11,7 @@
                 <Style Selector="^ Border">
                     <Setter Property="BorderBrush"
                             Value="{CompiledBinding  $parent[views:TagControl].TextColorBrush}" />
-                    <Setter Property="Background" Value="{CompiledBinding $parent[views:TagControl].ColorBrush}" />
+                    <Setter Property="Background" Value="Transparent" />
                     <Style Selector="^:pointerover">
                         <Setter Property="BorderBrush"
                                 Value="{CompiledBinding  $parent[views:TagControl].TextColorBrushIsPointerOver}" />
@@ -24,7 +24,7 @@
                         <Setter Property="BorderBrush"
                                 Value="{CompiledBinding  $parent[views:TagControl].TextColorBrushIsChecked}" />
                         <Setter Property="Background"
-                                Value="{CompiledBinding $parent[views:TagControl].ColorBrushIsChecked}" />
+                                Value="{CompiledBinding $parent[views:TagControl].ColorBrush}" />
                         <Style Selector="^:pointerover">
                             <Setter Property="BorderBrush"
                                     Value="{CompiledBinding  $parent[views:TagControl].TextColorBrushIsCheckedIsPointerOver}" />
@@ -37,7 +37,7 @@
         </Styles>
     </UserControl.Styles>
     <Panel>
-        <Border BorderThickness="1" Name="MainBorder"
+        <Border BorderThickness="3" Name="MainBorder"
                 CornerRadius="{CompiledBinding $parent[views:TagControl].CornerRadius}">
             <Border.Transitions>
                 <Transitions>
@@ -45,7 +45,8 @@
                     <BrushTransition Property="Background" Duration="0:0:0.1" />
                 </Transitions>
             </Border.Transitions>
-            <TextBlock Margin="5" Text="{CompiledBinding $parent[views:TagControl].TagObject.Text}"
+            <TextBlock FontWeight="Heavy" Margin="5"
+                       Text="{CompiledBinding $parent[views:TagControl].TagObject.Text, FallbackValue=''}"
                        Foreground="{CompiledBinding #MainBorder.BorderBrush}" />
         </Border>
     </Panel>

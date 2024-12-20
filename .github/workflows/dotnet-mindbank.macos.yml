@@ -1,0 +1,47 @@
+name: Mindbank macOS
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Set-up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Setup workloads
+        run: dotnet workload restore ./Mindbank.sln
+      - name: Restore dependencies
+        run: dotnet restore ./src/Mindbank.macOS/Mindbank.macOS.csproj
+      - name: Build
+        run: dotnet build --no-restore ./src/Mindbank.macOS/Mindbank.macOS.csproj
+
+      # macOS Intel
+      - name: Publish (macOS Intel)
+        run: |
+          dotnet publish -c Release -r osx-x64 -o ./publish/osx-x64/ ./src/Mindbank.macOS/Mindbank.macOS.csproj
+      - name: Upload Artifact (macOS Intel)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank macOS Intel
+          path: ./publish/osx-x64/
+
+      # macOS ARM
+      - name: Publish (macOS ARM)
+        run: |
+          dotnet publish -c Release -r osx-arm64 -o ./publish/osx-arm64/ ./src/Mindbank.macOS/Mindbank.macOS.csproj
+      - name: Upload Artifact (macOS ARM)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mindbank macOS ARM
+          path: ./publish/osx-arm64/

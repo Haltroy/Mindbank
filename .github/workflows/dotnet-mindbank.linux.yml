@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: 8.0.x
-      - name: Set-up some packages for packaging
+      - name: Set-up Alien
         run: |
           sudo apt update
           sudo apt install alien -y
@@ -33,18 +33,60 @@ jobs:
           dotnet publish -c Release -r linux-musl-x64 -o ./publish/linux-musl-x64/ ./src/Mindbank.Linux/Mindbank.Linux.csproj
           rm ./publish/linux-musl-x64/*.dbg
           tar czf ./publish/mindbank-linux-musl-x64.tar.gz ./publish/linux-musl-x64/
-      - name: Set-up cross-compiling AArch64
+      - name: Check Apt sources
+        run: |
+          cat /etc/apt/sources.list
+
+      - name: Setup DEB822 Repos
+        run: |
+          if [[ $ImageOS == "ubuntu24" ]]; then
+            cat <<EOF > deb822sources
+          Types: deb
+          URIs: https://archive.ubuntu.com/ubuntu/
+          Suites: noble
+          Components: main restricted universe
+          Architectures: amd64
+
+          Types: deb
+          URIs: https://security.ubuntu.com/ubuntu/
+          Suites: noble-security
+          Components: main restricted universe
+          Architectures: amd64
+
+          Types: deb
+          URIs: https://archive.ubuntu.com/ubuntu/
+          Suites: noble-updates
+          Components: main restricted universe
+          Architectures: amd64
+
+          Types: deb
+          URIs: https://azure.ports.ubuntu.com/ubuntu-ports/
+          Suites: noble
+          Components: main restricted multiverse universe
+          Architectures: arm64
+
+          Types: deb
+          URIs: https://azure.ports.ubuntu.com/ubuntu-ports/
+          Suites: noble-updates
+          Components: main restricted multiverse universe
+          Architectures: arm64
+          EOF
+
+            sudo mv deb822sources /etc/apt/sources.list.d/ubuntu.sources
+          else
+            sudo mv config/crosscomp-sources.list /etc/apt/sources.list
+          fi
+
+      - name: Add ARM64
         run: |
           sudo dpkg --add-architecture arm64
-          sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
-          deb [arch=arm64] https://ports.ubuntu.com/ubuntu-ports/ jammy main restricted
-          deb [arch=arm64] https://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted
-          deb [arch=arm64] https://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
-          EOF'
-          sudo sed -i -e 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list
-          sudo sed -i -e 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list
+
+      - name: Update System
+        run: |
           sudo apt update
-          sudo apt install clang llvm zlib1g-dev:arm64 zlib1g-dev gcc-aarch64-linux-gnu g++-aarch64-linux-gnu binutils-aarch64-linux-gnu -y
+          sudo apt upgrade -y
+      - name: Install Dependencies
+        run: sudo apt install clang llvm zlib1g-dev:arm64 zlib1g-dev gcc-aarch64-linux-gnu g++-aarch64-linux-gnu binutils-aarch64-linux-gnu -y
       # Linux ARM64
       - name: Publish (Linux ARM64)
         run: |

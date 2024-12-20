@@ -5,7 +5,7 @@
         xmlns:views="clr-namespace:Mindbank.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Mindbank.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/logo.ico"
         TransparencyLevelHint="AcrylicBlur,Blur,Transparent,None"
         Closing="Window_OnClosing"
         Title="Mindbank">

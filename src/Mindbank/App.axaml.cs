@@ -2,6 +2,7 @@ using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Mindbank.Backend;
 using Mindbank.Views;
 
 namespace Mindbank;
@@ -13,12 +14,14 @@ public class App : Application
         AvaloniaXamlLoader.Load(this);
     }
 
+
     public override void OnFrameworkInitializationCompleted()
     {
         switch (ApplicationLifetime)
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
-                desktop.MainWindow = new MainWindow();
+                desktop.Startup += DesktopOnStartup;
+                desktop.MainWindow = new MainWindow { ThisIsTheSingleton = !Settings.IsInstanceRunning };
                 break;
             case ISingleViewApplicationLifetime singleViewPlatform:
                 singleViewPlatform.MainView = new MainView();
@@ -28,20 +31,14 @@ public class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    private void ShowApp(object? sender, EventArgs e)
+    private void DesktopOnStartup(object? sender, ControlledApplicationLifetimeStartupEventArgs e)
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime
-            {
-                MainWindow: MainWindow mw
-            }) mw.Show();
-    }
-
-    private void ExitApp(object? sender, EventArgs e)
-    {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime { MainWindow: MainWindow mw } desktop)
+        if (Settings.IsInstanceRunning)
         {
-            mw.AllowClosing = true;
-            desktop.Shutdown();
+            Environment.Exit(0);
+            return;
         }
+
+        Settings.SetupSingleton();
     }
 }

@@ -1,19 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
+using Avalonia.Styling;
 using Avalonia.Threading;
 using DialogHostAvalonia;
 using Mindbank.Backend;
+using Path = Avalonia.Controls.Shapes.Path;
 
 namespace Mindbank.Views;
 
@@ -37,10 +42,97 @@ public partial class MainView : UserControl
     internal static readonly StyledProperty<bool> UpdateAvailableProperty =
         AvaloniaProperty.Register<MainView, bool>(nameof(UpdateAvailable));
 
+    private bool _initializingSettings = true;
+
     public MainView()
     {
-        InitializeComponent();
         Settings.Load();
+        InitializeComponent();
+        if (Application.Current is
+            { ApplicationLifetime: IClassicDesktopStyleApplicationLifetime { Args: { Length: > 0 } args } })
+        {
+            var noGui = false;
+            var importMode = false;
+            List<string> files = [];
+            foreach (var arg in args)
+                switch (arg)
+                {
+                    default:
+                        files.Add(arg);
+                        break;
+                    case "--no-gui":
+                        noGui = true;
+                        break;
+                    case "-i":
+                        importMode = true;
+                        break;
+                    case "--help":
+                    case "-h":
+                    case "/?":
+                        // ReSharper disable LocalizableElement
+                        Console.WriteLine(
+                            $"{Lang.Lang.CLI_Help_1.Replace("%ver%", Tools.GetVersion())}{Environment.NewLine}" +
+                            $"{Lang.Lang.CLI_Help_2}{Environment.NewLine}" +
+                            $"-h{Environment.NewLine}" +
+                            $"/?{Environment.NewLine}" +
+                            $"--help              {Lang.Lang.CLI_Help_3}{Environment.NewLine}" +
+                            $"--no-gui            {Lang.Lang.CLI_Help_4}{Environment.NewLine}" +
+                            $"-i                  {Lang.Lang.CLI_Help_5}{Environment.NewLine}" +
+                            Lang.Lang.CLI_Help_6);
+                        // ReSharper restore LocalizableElement
+                        Environment.Exit(0);
+                        break;
+                }
+
+            if (importMode)
+            {
+                foreach (var note in files)
+                {
+                    if (!File.Exists(note))
+                    {
+                        Console.WriteLine(Lang.Lang.CLI_Import_FileNotFound, note);
+                        continue;
+                    }
+
+                    Settings.ImportNote(File.OpenRead(note));
+                }
+            }
+            else
+            {
+                var lastItem = files[^1];
+                var item = Settings.Banks.FirstOrDefault(it => it.Name == lastItem);
+                Bank? bank;
+                if (item is not null)
+                {
+                    bank = item;
+                }
+                else
+                {
+                    if (!File.Exists(lastItem))
+                    {
+                        Console.Error.WriteLine(Lang.Lang.CLI_Open_FileNotFound, lastItem);
+                        Environment.Exit(1);
+                        return;
+                    }
+
+                    bank = new Bank(null)
+                    {
+                        FilePath = lastItem,
+                        ReadOnly = true
+                    };
+                    bank.Read();
+                }
+
+                var ns = new NoteScreen { Bank = bank, Main = this };
+                MainCarousel.Items.Add(ns);
+                MainCarousel.SelectedItem = ns;
+                DisableOthers();
+                ns.Focus();
+            }
+
+            if (noGui) Environment.Exit(0);
+        }
+
         CheckForUpdates();
     }
 
@@ -177,12 +269,22 @@ public partial class MainView : UserControl
     private void NoteGroupButtonClicked(object? sender, RoutedEventArgs e)
     {
         if (sender is not Control { Tag: Control c } || !MainCarousel.Items.Contains(c)) return;
+        c.IsEnabled = true;
         MainCarousel.SelectedItem = c;
+        c.Focus();
+        DisableOthers();
     }
 
     private void Init(object? sender, EventArgs e)
     {
+        _initializingSettings = true;
         Settings.Load();
+        if (Settings.Theme == ThemeVariant.Default && DefaultTheme != null) DefaultTheme.IsChecked = true;
+        if (Settings.Theme == ThemeVariant.Dark && DarkTheme != null) DarkTheme.IsChecked = true;
+        if (Settings.Theme == ThemeVariant.Light && LightTheme != null) LightTheme.IsChecked = true;
+        if (UseBlur != null) UseBlur.IsChecked = Settings.UseBlur;
+        if (BlurLevel != null) BlurLevel.Value = Settings.BlurLevel;
+        _initializingSettings = false;
     }
 
 
@@ -193,8 +295,6 @@ public partial class MainView : UserControl
 
         if (IsOnDesktop is not true || DesktopContainer == null) return;
         DesktopContainer.SetOpacity(Settings.UseBlur ? Settings.BlurLevel : 100);
-        if (Settings.HideToSysTray) DesktopContainer.AllowClosing = false;
-        if (Settings.StartInTray) DesktopContainer.Hide();
     }
 
     private void BankClicked(object? sender, RoutedEventArgs e)
@@ -203,6 +303,8 @@ public partial class MainView : UserControl
         var ns = new NoteScreen { Bank = bank, Main = this };
         MainCarousel.Items.Add(ns);
         MainCarousel.SelectedItem = ns;
+        DisableOthers();
+        ns.Focus();
     }
 
     private void DeleteNoteSourceClicked(object? sender, RoutedEventArgs e)
@@ -266,15 +368,26 @@ public partial class MainView : UserControl
     {
         if (MainCarousel is null || MainPanel is null || !MainCarousel.Items.Contains(MainPanel)) return;
         MainCarousel.SelectedItem = MainPanel;
+        MainPanel.Focus();
+        DisableOthers();
         var l = new List<object?>();
         foreach (var control in MainCarousel.Items)
         {
-            if (Equals(control, MainPanel) || Equals(control, SettingsView) || Equals(control, AboutView)) continue;
+            if (Equals(control, MainPanel) || Equals(control, AboutView)) continue;
             l.Add(control);
             if (control is NoteScreen ns) ns.Main = null;
         }
 
         foreach (var obj in l) MainCarousel.Items.Remove(obj);
+    }
+
+    private void DisableOthers()
+    {
+        foreach (var c in MainCarousel.Items)
+        {
+            if (c is not Control control) continue;
+            control.IsEnabled = Equals(MainCarousel.SelectedItem, control);
+        }
     }
 
     private void CreateNewNoteClicked(object? sender, RoutedEventArgs e)
@@ -284,6 +397,8 @@ public partial class MainView : UserControl
         var ns = new NoteScreen { Bank = bank, Main = this };
         MainCarousel.Items.Add(ns);
         MainCarousel.SelectedItem = ns;
+        ns.Focus();
+        DisableOthers();
         NewNoteGroupName.Text = string.Empty;
         DialogHost.Close(null);
     }
@@ -294,8 +409,25 @@ public partial class MainView : UserControl
         {
             await Dispatcher.UIThread.InvokeAsync(async () =>
             {
-                if (Parent is not TopLevel { StorageProvider.CanOpen: true } top) return;
-                var files = await top.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                IStorageProvider? storageProvider = null;
+                switch (IsOnDesktop)
+                {
+                    case true:
+                    {
+                        if (DesktopContainer is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                    default:
+                    {
+                        if (TopLevel.GetTopLevel(this) is { StorageProvider: { CanSave: true } sp })
+                            storageProvider = sp;
+                        break;
+                    }
+                }
+
+                if (storageProvider is null) return;
+                var files = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
                 {
                     Title = Lang.Lang.ImportNoteTitle,
                     AllowMultiple = true,
@@ -322,7 +454,7 @@ public partial class MainView : UserControl
 
     private void UpdateApp(object? sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo("https://haltroy.com/en/fluxion#fluxion-viewer") { UseShellExecute = true });
+        Process.Start(new ProcessStartInfo("https://haltroy.com/en/mindbank") { UseShellExecute = true });
     }
 
     private void UpdateButtonClicked(object? sender, RoutedEventArgs e)
@@ -343,5 +475,54 @@ public partial class MainView : UserControl
     private void CloseDialogHost(object? s, RoutedEventArgs e)
     {
         MainDialogHost.CurrentSession?.Close();
+    }
+
+    private void SystemThemeChecked(object? sender, RoutedEventArgs e)
+    {
+        if (_initializingSettings || sender is not RadioButton { IsChecked: true } ||
+            Application.Current is not { } app) return;
+        app.RequestedThemeVariant = ThemeVariant.Default;
+        Settings.Theme = ThemeVariant.Default;
+        if (BlurLevel is { Value: var v } && DesktopContainer is not null && UseBlur is { IsChecked: var useBlur })
+            DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
+    }
+
+    private void LightThemeChecked(object? sender, RoutedEventArgs e)
+    {
+        if (_initializingSettings || sender is not RadioButton { IsChecked: true } ||
+            Application.Current is not { } app) return;
+        app.RequestedThemeVariant = ThemeVariant.Light;
+        Settings.Theme = ThemeVariant.Light;
+        if (BlurLevel is { Value: var v } && DesktopContainer is not null && UseBlur is { IsChecked: var useBlur })
+            DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
+    }
+
+    private void DarkThemeChecked(object? sender, RoutedEventArgs e)
+    {
+        if (_initializingSettings || sender is not RadioButton { IsChecked: true } ||
+            Application.Current is not { } app) return;
+        app.RequestedThemeVariant = ThemeVariant.Dark;
+        Settings.Theme = ThemeVariant.Dark;
+        if (BlurLevel is { Value: var v } && DesktopContainer is not null && UseBlur is { IsChecked: var useBlur })
+            DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
+    }
+
+    private void BlurLevelValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
+    {
+        if (_initializingSettings || sender is not Slider { Value: var v } || DesktopContainer is null ||
+            UseBlur is not { IsChecked: var useBlur }) return;
+        DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
+    }
+
+    private void UseBlurCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        if (_initializingSettings || BlurLevel is not { Value: var v } || DesktopContainer is null ||
+            UseBlur is not { IsChecked: var useBlur }) return;
+        DesktopContainer.SetOpacity(useBlur is true ? v : 100);
+        if (!Design.IsDesignMode) Settings.Save();
     }
 }
