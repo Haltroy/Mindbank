@@ -25,7 +25,6 @@ jobs:
         run: dotnet restore ./src/Mindbank.macOS/Mindbank.macOS.csproj
       - name: Build
         run: dotnet build --no-restore ./src/Mindbank.macOS/Mindbank.macOS.csproj
-
       # macOS Intel
       - name: Publish (macOS Intel)
         run: |
