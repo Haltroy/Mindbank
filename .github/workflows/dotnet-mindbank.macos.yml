@@ -30,7 +30,6 @@ jobs:
       - name: Publish (macOS Intel)
         run: |
           dotnet publish -c Release -r osx-x64 -o ./publish/osx-x64/ ./src/Mindbank.macOS/Mindbank.macOS.csproj
-          rm ./publish/osx-x64/*.dbg
       - name: Upload Artifact (macOS Intel)
         uses: actions/upload-artifact@v4
         with:
@@ -41,7 +40,6 @@ jobs:
       - name: Publish (macOS ARM)
         run: |
           dotnet publish -c Release -r osx-arm64 -o ./publish/osx-arm64/ ./src/Mindbank.macOS/Mindbank.macOS.csproj
-          rm ./publish/osx-arm64/*.dbg
       - name: Upload Artifact (macOS ARM)
         uses: actions/upload-artifact@v4
         with:
