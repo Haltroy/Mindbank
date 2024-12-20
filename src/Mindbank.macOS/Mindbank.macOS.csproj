@@ -14,4 +14,8 @@
     <ItemGroup>
         <ProjectReference Include="..\Mindbank\Mindbank.csproj"/>
     </ItemGroup>
+    <ItemGroup>
+        <None Include="Info.plist" Pack="true" PackagePath="Contents/"/>
+        <None Include="logo.icns" Pack="true" PackagePath="Contents/Resources/"/>
+    </ItemGroup>
 </Project>
