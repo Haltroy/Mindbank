@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
-using Avalonia.Controls.Shapes;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -16,6 +18,7 @@ using Avalonia.Styling;
 using Avalonia.Threading;
 using DialogHostAvalonia;
 using Mindbank.Backend;
+using Path = Avalonia.Controls.Shapes.Path;
 
 namespace Mindbank.Views;
 
@@ -43,21 +46,94 @@ public partial class MainView : UserControl
 
     public MainView()
     {
-        InitializeComponent();
         Settings.Load();
-        CheckForUpdates();
-    }
-
-    public static bool IsDebugMode
-    {
-        get
+        InitializeComponent();
+        if (Application.Current is
+            { ApplicationLifetime: IClassicDesktopStyleApplicationLifetime { Args: { Length: > 0 } args } })
         {
-#if DEBUG
-            return true;
-#else
-            return false;
-#endif
+            var noGui = false;
+            var importMode = false;
+            List<string> files = [];
+            foreach (var arg in args)
+                switch (arg)
+                {
+                    default:
+                        files.Add(arg);
+                        break;
+                    case "--no-gui":
+                        noGui = true;
+                        break;
+                    case "-i":
+                        importMode = true;
+                        break;
+                    case "--help":
+                    case "-h":
+                    case "/?":
+                        // ReSharper disable LocalizableElement
+                        Console.WriteLine(
+                            $"{Lang.Lang.CLI_Help_1.Replace("%ver%", Tools.GetVersion())}{Environment.NewLine}" +
+                            $"{Lang.Lang.CLI_Help_2}{Environment.NewLine}" +
+                            $"-h{Environment.NewLine}" +
+                            $"/?{Environment.NewLine}" +
+                            $"--help              {Lang.Lang.CLI_Help_3}{Environment.NewLine}" +
+                            $"--no-gui            {Lang.Lang.CLI_Help_4}{Environment.NewLine}" +
+                            $"-i                  {Lang.Lang.CLI_Help_5}{Environment.NewLine}" +
+                            Lang.Lang.CLI_Help_6);
+                        // ReSharper restore LocalizableElement
+                        Environment.Exit(0);
+                        break;
+                }
+
+            if (importMode)
+            {
+                foreach (var note in files)
+                {
+                    if (!File.Exists(note))
+                    {
+                        Console.WriteLine(Lang.Lang.CLI_Import_FileNotFound, note);
+                        continue;
+                    }
+
+                    Settings.ImportNote(File.OpenRead(note));
+                }
+            }
+            else
+            {
+                var lastItem = files[^1];
+                var item = Settings.Banks.FirstOrDefault(it => it.Name == lastItem);
+                Bank? bank;
+                if (item is not null)
+                {
+                    bank = item;
+                }
+                else
+                {
+                    if (!File.Exists(lastItem))
+                    {
+                        Console.Error.WriteLine(Lang.Lang.CLI_Open_FileNotFound, lastItem);
+                        Environment.Exit(1);
+                        return;
+                    }
+
+                    bank = new Bank(null)
+                    {
+                        FilePath = lastItem,
+                        ReadOnly = true
+                    };
+                    bank.Read();
+                }
+
+                var ns = new NoteScreen { Bank = bank, Main = this };
+                MainCarousel.Items.Add(ns);
+                MainCarousel.SelectedItem = ns;
+                DisableOthers();
+                ns.Focus();
+            }
+
+            if (noGui) Environment.Exit(0);
         }
+
+        CheckForUpdates();
     }
 
     public bool CheckingForUpdates

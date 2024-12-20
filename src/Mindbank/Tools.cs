@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Avalonia.Media;
 
 namespace Mindbank;
@@ -16,6 +17,18 @@ public static class Tools
             !IsBright(c) ? (byte)AddIfNeeded(c.R, value, byte.MaxValue) : (byte)SubtractIfNeeded(c.R, value),
             !IsBright(c) ? (byte)AddIfNeeded(c.G, value, byte.MaxValue) : (byte)SubtractIfNeeded(c.G, value),
             !IsBright(c) ? (byte)AddIfNeeded(c.B, value, byte.MaxValue) : (byte)SubtractIfNeeded(c.B, value));
+    }
+
+    internal static string GetVersion()
+    {
+        return Assembly.GetExecutingAssembly() is { } ass
+               && ass.GetName() is { } name
+               && name.Version != null
+            ? "" + (name.Version.Major > 0 ? name.Version.Major : "") +
+              (name.Version.Minor > 0 ? "." + name.Version.Minor : "") +
+              (name.Version.Build > 0 ? "." + name.Version.Build : "") +
+              (name.Version.Revision > 0 ? "." + name.Version.Revision : "")
+            : "?";
     }
 
     internal static int Brightness(Color c)

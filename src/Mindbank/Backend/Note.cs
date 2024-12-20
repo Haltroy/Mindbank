@@ -90,8 +90,9 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
     public Tag[] Tags => _tags.ToArray();
 
     public bool VersionMatch => Version == Settings.Version;
+    public bool ReadOnly { get; set; }
     public bool LimitNotReached => Count < int.MaxValue;
-    public bool CanWrite => VersionMatch && LimitNotReached;
+    public bool CanWrite => VersionMatch && LimitNotReached && !ReadOnly;
 
     public bool IsExample { get; set; }
 

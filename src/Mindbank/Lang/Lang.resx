@@ -95,14 +95,8 @@ To continue working on notes, click on the note name.</value>
     <data name="NoteScreen_NewTag_Add" xml:space="preserve">
         <value>Add...</value>
     </data>
-    <data name="Settings_Settings" xml:space="preserve">
-        <value>Settings</value>
-    </data>
     <data name="Settings_Theme" xml:space="preserve">
         <value>Theme:</value>
-    </data>
-    <data name="Settings_Theming" xml:space="preserve">
-        <value>Theming</value>
     </data>
     <data name="Settings_ThemeDefault" xml:space="preserve">
         <value>System default</value>
@@ -245,4 +239,16 @@ To continue working on notes, click on the note name.</value>
     <data name="Tools_GenerateRandomTextError2" xml:space="preserve">
         <value>"length" must be smaller than the 32-bit integer limit.</value>
     </data>
+    <data name="CLI_Import_FileNotFound" xml:space="preserve">
+        <value>Error: File "{0}" does not exists. Skipped.</value>
+    </data>
+    <data name="CLI_Open_FileNotFound" xml:space="preserve">
+        <value>Error: File "{0}" does not exists. Closing.</value>
+    </data>
+    <data name="CLI_Help_1" xml:space="preserve"><value>Mindbank version %ver% by haltroy</value></data>
+    <data name="CLI_Help_2" xml:space="preserve"><value>USAGE: Mindbank [options] [file path or bank name]</value></data>
+    <data name="CLI_Help_3" xml:space="preserve"><value>Shows this screen and closes.</value></data>
+    <data name="CLI_Help_4" xml:space="preserve"><value>Runs on command-line only.</value></data>
+    <data name="CLI_Help_5" xml:space="preserve"><value>Imports files instead. Supports multiple file paths as arguments.</value></data>
+    <data name="CLI_Help_6" xml:space="preserve"><value>When run with multiple paths and/or names, app picks the last one to display.</value></data>
 </root>

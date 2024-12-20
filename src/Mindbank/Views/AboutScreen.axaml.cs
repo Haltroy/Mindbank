@@ -15,17 +15,7 @@ public partial class AboutScreen : NUC
     public AboutScreen()
     {
         InitializeComponent();
-        Version.Text = "v"
-                       + (
-                           Assembly.GetExecutingAssembly() is { } ass
-                           && ass.GetName() is { } name
-                           && name.Version != null
-                               ? "" + (name.Version.Major > 0 ? name.Version.Major : "") +
-                                 (name.Version.Minor > 0 ? "." + name.Version.Minor : "") +
-                                 (name.Version.Build > 0 ? "." + name.Version.Build : "") +
-                                 (name.Version.Revision > 0 ? "." + name.Version.Revision : "")
-                               : "?"
-                       );
+        Version.Text = "v" + Tools.GetVersion();
         LicenseBox.Text = ReadResource("LICENSE");
     }
 

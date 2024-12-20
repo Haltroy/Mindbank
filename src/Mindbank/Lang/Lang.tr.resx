@@ -89,9 +89,6 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     <data name="Settings_BlurLevel" xml:space="preserve">
         <value>Opaklık seviyesi:</value>
     </data>
-    <data name="Settings_Settings" xml:space="preserve">
-        <value>Ayarlar</value>
-    </data>
     <data name="Settings_Theme" xml:space="preserve">
         <value>Tema:</value>
     </data>
@@ -103,9 +100,6 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     </data>
     <data name="Settings_ThemeLight" xml:space="preserve">
         <value>Açık</value>
-    </data>
-    <data name="Settings_Theming" xml:space="preserve">
-        <value>Temalama</value>
     </data>
     <data name="Settings_UseBlur" xml:space="preserve">
         <value>Arkaplanı bulanıklaştır</value>
@@ -236,4 +230,16 @@ Bir not üzerinde çalışmaya devam etmek için o notun ismine tıklayınız.</
     <data name="Tools_GenerateRandomTextError2" xml:space="preserve">
         <value>"length" bir 32-bit sayının maksimum değerini aşmamalıdır.</value>
     </data>
+    <data name="CLI_Import_FileNotFound" xml:space="preserve">
+        <value>Hata: Dosya "{0}" bulunamadı. Atlandı. </value>
+    </data>
+    <data name="CLI_Open_FileNotFound" xml:space="preserve">
+        <value>Hata: Dosya "{0}" bulunamadı. Kapatıldı. </value>
+    </data>
+    <data name="CLI_Help_1" xml:space="preserve"><value>Mindbank sürüm %ver% by haltroy</value></data>
+    <data name="CLI_Help_2" xml:space="preserve"><value>KULLANIM: Mindbank [seçenekler] [dosya konumu yada banka adı]</value></data>
+    <data name="CLI_Help_3" xml:space="preserve"><value>Bu mesajı gösterip kapanır.</value></data>
+    <data name="CLI_Help_4" xml:space="preserve"><value>Sadece komutları çalıştırır.</value></data>
+    <data name="CLI_Help_5" xml:space="preserve"><value>Dosyaları içe aktarma moduna geçer. Bİrden fazla dosya konumunu ek argümant olarak destekler.</value></data>
+    <data name="CLI_Help_6" xml:space="preserve"><value>Normal modda çalışırken en son bahsedilen dosya yada bankayı açar.</value></data>
 </root>

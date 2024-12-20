@@ -183,21 +183,9 @@ namespace Mindbank.Lang {
             }
         }
         
-        public static string Settings_Settings {
-            get {
-                return ResourceManager.GetString("Settings_Settings", resourceCulture);
-            }
-        }
-        
         public static string Settings_Theme {
             get {
                 return ResourceManager.GetString("Settings_Theme", resourceCulture);
-            }
-        }
-        
-        public static string Settings_Theming {
-            get {
-                return ResourceManager.GetString("Settings_Theming", resourceCulture);
             }
         }
         
@@ -480,6 +468,54 @@ namespace Mindbank.Lang {
         public static string Tools_GenerateRandomTextError2 {
             get {
                 return ResourceManager.GetString("Tools_GenerateRandomTextError2", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Import_FileNotFound {
+            get {
+                return ResourceManager.GetString("CLI_Import_FileNotFound", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Open_FileNotFound {
+            get {
+                return ResourceManager.GetString("CLI_Open_FileNotFound", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Help_1 {
+            get {
+                return ResourceManager.GetString("CLI_Help_1", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Help_2 {
+            get {
+                return ResourceManager.GetString("CLI_Help_2", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Help_3 {
+            get {
+                return ResourceManager.GetString("CLI_Help_3", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Help_4 {
+            get {
+                return ResourceManager.GetString("CLI_Help_4", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Help_5 {
+            get {
+                return ResourceManager.GetString("CLI_Help_5", resourceCulture);
+            }
+        }
+        
+        public static string CLI_Help_6 {
+            get {
+                return ResourceManager.GetString("CLI_Help_6", resourceCulture);
             }
         }
     }
