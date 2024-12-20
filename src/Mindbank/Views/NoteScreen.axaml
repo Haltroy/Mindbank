@@ -102,7 +102,8 @@
                     <Grid ColumnDefinitions="*,*" DockPanel.Dock="Top">
                         <ScrollViewer>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox HotKey="Ctrl+A" Name="CheckAll" IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
+                                <CheckBox HotKey="Ctrl+A" Name="CheckAll"
+                                          IsVisible="{CompiledBinding #SelectionEnabled.IsChecked}"
                                           ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SelectAll}"
                                           IsEnabled="{CompiledBinding $self.IsVisible}"
                                           IsCheckedChanged="CheckAll_OnIsCheckedChanged" />
@@ -194,7 +195,8 @@
 
                     <DockPanel DockPanel.Dock="Top" IsEnabled="{CompiledBinding #RandomPick.IsChecked}"
                                IsVisible="{CompiledBinding $self.IsEnabled}">
-                        <ToggleButton HotKey="Ctrl+Y" IsCheckedChanged="PickRandomCheckedChanged" DockPanel.Dock="Right"
+                        <ToggleButton HotKey="Ctrl+Y" IsCheckedChanged="PickRandomCheckedChanged"
+                                      DockPanel.Dock="Right"
                                       HorizontalAlignment="Stretch" Background="Transparent"
                                       ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_RandomPick}"
                                       HorizontalContentAlignment="Center">
@@ -224,7 +226,8 @@
                                       Name="SearchCaseSensitivity"
                                       DockPanel.Dock="Right" Content="Cc" Background="Transparent"
                                       ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchCaseSensitive}" />
-                        <ToggleButton HotKey="Ctrl+M" IsCheckedChanged="SearchUseRegexCheckedChanged" Name="SearchUseRegex"
+                        <ToggleButton HotKey="Ctrl+M" IsCheckedChanged="SearchUseRegexCheckedChanged"
+                                      Name="SearchUseRegex"
                                       DockPanel.Dock="Right" Content=".*" Background="Transparent"
                                       ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_SearchUseRegex}" />
                         <TextBox TextChanged="SearchBoxTextChanged" Name="SearchBox" Margin="5 0" />
@@ -232,7 +235,8 @@
 
                     <DockPanel DockPanel.Dock="Bottom" Name="TagsPanel" IsVisible="{CompiledBinding #Tags.IsChecked}"
                                IsEnabled="{CompiledBinding $self.IsVisible}">
-                        <Button HotKey="Ctrl+Alt+M"  Background="Transparent" DockPanel.Dock="Left" Margin="5 0" Click="ManageTagsClicked">
+                        <Button HotKey="Ctrl+Alt+M" Background="Transparent" DockPanel.Dock="Left" Margin="5 0"
+                                Click="ManageTagsClicked">
                             <Path Data="{StaticResource SettingsRegular}"
                                   Fill="{DynamicResource TextControlForeground}"
                                   Stretch="Uniform"
@@ -271,7 +275,8 @@
 
                     <DockPanel DockPanel.Dock="Bottom"
                                IsEnabled="{CompiledBinding $parent[views:NoteEditUserControl].Bank.CanWrite}">
-                        <Button HotKey="Ctrl+Enter" DockPanel.Dock="Right" VerticalAlignment="Bottom" Click="AddNewNoteClicked"
+                        <Button HotKey="Ctrl+Enter" DockPanel.Dock="Right" VerticalAlignment="Bottom"
+                                Click="AddNewNoteClicked"
                                 Background="Transparent"
                                 IsVisible="{CompiledBinding !$parent[views:NoteScreen].EditMode}"
                                 IsEnabled="{CompiledBinding $self.IsVisible}"
@@ -279,7 +284,8 @@
                             <Path Fill="{DynamicResource ButtonForeground}" Data="{StaticResource SendRegular}"
                                   Stretch="Uniform" Width="24" Height="{CompiledBinding $self.Width}" />
                         </Button>
-                        <Button HotKey="Ctrl+Escape"  DockPanel.Dock="Right" IsVisible="{CompiledBinding $parent[views:NoteScreen].EditMode}"
+                        <Button HotKey="Ctrl+Escape" DockPanel.Dock="Right"
+                                IsVisible="{CompiledBinding $parent[views:NoteScreen].EditMode}"
                                 Click="NoteItemEditOffOnClick"
                                 IsEnabled="{CompiledBinding $self.IsVisible}" Background="Transparent">
                             <Path Data="{StaticResource EditOffRegular}" Width="24"
@@ -287,13 +293,15 @@
                                   Fill="{DynamicResource ButtonForeground}"
                                   Stretch="Uniform" />
                         </Button>
-                        <ToggleButton HotKey="Ctrl+Alt+T" Name="Tags" ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_TagMenuButton}"
+                        <ToggleButton HotKey="Ctrl+Alt+T" Name="Tags"
+                                      ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_TagMenuButton}"
                                       Background="Transparent">
                             <Path Fill="{DynamicResource ButtonForeground}"
                                   Data="{StaticResource TagRegular}" Stretch="Uniform" Width="24"
                                   Height="{CompiledBinding $self.Bounds.Width}" />
                         </ToggleButton>
-                        <ToggleButton HotKey="Ctrl+Alt+P"  Name="PreviewToggle" DockPanel.Dock="Left" Background="Transparent"
+                        <ToggleButton HotKey="Ctrl+Alt+P" Name="PreviewToggle" DockPanel.Dock="Left"
+                                      Background="Transparent"
                                       VerticalAlignment="Bottom">
                             <ToolTip.Tip>
                                 <Panel>
@@ -314,7 +322,7 @@
                         </ToggleButton>
                         <ToggleButton HotKey="Ctrl+P" Name="PowerMode" DockPanel.Dock="Left" Background="Transparent"
                                       ToolTip.Tip="{x:Static lang:Lang.ToolTip_Note_PowerMode}"
-                                      IsChecked="{CompiledBinding $parent[views:NUC].Settings.KeepText, Mode=TwoWay}">
+                                      IsChecked="{CompiledBinding $parent[views:NUC].Settings.PowerMode, Mode=TwoWay}">
                             <Path Data="{StaticResource TopSpeedRegular}" Width="24"
                                   Height="{CompiledBinding $self.Bounds.Width}"
                                   Fill="{DynamicResource ButtonForeground}"

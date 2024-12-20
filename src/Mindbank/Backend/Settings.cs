@@ -12,7 +12,7 @@ public sealed class Settings : INotifyPropertyChanged
     private bool _alreadyLoaded;
     private byte _blurLevel = 75;
     private bool _isLoading;
-    private bool _keepText;
+    private bool _powerMode;
     private ThemeVariant _theme = ThemeVariant.Default;
     private bool _useBlur = true;
 
@@ -44,15 +44,13 @@ public sealed class Settings : INotifyPropertyChanged
 
     private Bank this[int index] => _banks[index];
 
-    public bool KeepText
+    public bool PowerMode
     {
-        get => _keepText;
+        get => _powerMode;
         set
         {
-            _keepText = value;
-            if (!_isLoading)
-                Save();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KeepText)));
+            _powerMode = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PowerMode)));
         }
     }
 
@@ -113,10 +111,10 @@ public sealed class Settings : INotifyPropertyChanged
         var version = stream.ReadByte();
         if (version < 0 || version > Version) return;
         var theme = stream.ReadByte();
+        theme -= Tools.IsBitSet(theme, 3) ? 8 : 0;
+        theme -= Tools.IsBitSet(theme, 4) ? 16 : 0;
         UseBlur = Tools.IsBitSet(theme, 2);
         theme -= UseBlur ? 4 : 0;
-        KeepText = Tools.IsBitSet(theme, 4);
-        theme -= KeepText ? 16 : 0;
         switch (theme)
         {
             case 0:
@@ -163,7 +161,6 @@ public sealed class Settings : INotifyPropertyChanged
         else if (Theme == ThemeVariant.Light)
             booleans = 2;
         booleans += (byte)(UseBlur ? 4 : 0);
-        booleans += (byte)(KeepText ? 16 : 0);
         stream.WriteByte(booleans);
         stream.WriteByte(_blurLevel);
 

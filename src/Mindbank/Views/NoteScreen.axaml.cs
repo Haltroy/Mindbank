@@ -331,7 +331,7 @@ public partial class NoteScreen : NoteEditUserControl
     {
         if (NewText is not { Text: var text } || string.IsNullOrWhiteSpace(text)) return;
         Bank.Add(new Note(text, _newNoteTags.ToArray(), DateTime.Now, Bank));
-        if (Settings.KeepText) return;
+        if (Settings.PowerMode) return;
         NewText.Text = string.Empty;
         _newNoteTags.Clear();
     }
