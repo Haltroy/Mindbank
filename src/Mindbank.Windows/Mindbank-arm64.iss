@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mindbank"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1.0.0"
 #define MyAppPublisher "haltroy"
 #define MyAppURL "https://haltroy.com/"
 #define MyAppExeName "Mindbank.exe"
