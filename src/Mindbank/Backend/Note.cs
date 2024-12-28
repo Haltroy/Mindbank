@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Avalonia.Media;
 using Mindbank.Backend.Exceptions;
+using Enumerable = System.Linq.Enumerable;
 
 namespace Mindbank.Backend;
 
@@ -22,7 +22,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     private bool _save;
 
-    public Settings? Settings { get; } = settings;
+    private Settings? Settings { get; } = settings;
     public Bank Self => this;
 
     /// <summary>
@@ -83,18 +83,18 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     public int VisibleCount
     {
-        get { return _notes.Count(it => it is { Visible: true }); }
+        get { return Enumerable.Count(_notes, it => it is { Visible: true }); }
     }
 
 
     public Tag[] Tags => _tags.ToArray();
 
-    public bool VersionMatch => Version == Settings.Version;
-    public bool ReadOnly { get; set; }
-    public bool LimitNotReached => Count < int.MaxValue;
+    private bool VersionMatch => Version == Settings.Version;
+    public bool ReadOnly { get; init; }
+    private bool LimitNotReached => Count < int.MaxValue;
     public bool CanWrite => VersionMatch && LimitNotReached && !ReadOnly;
 
-    public bool IsExample { get; set; }
+    private bool IsExample { get; init; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -347,8 +347,25 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
                 var color = Tools.DecodeVarUInt(stream);
                 var text = Encoding.Unicode.GetString(Tools.DecodeByteArrWithVarInt(stream));
                 loadedTags[i] = new Tag(text, Color.FromUInt32(color), bank);
+                if (version <= 0) continue;
+                var childrenCount = Tools.DecodeVarInt(stream);
+                if (childrenCount <= 0) continue;
+                for (var ci = 0; ci < childrenCount; ci++)
+                    loadedTags[i].Add(new TagReferenceObject { Index = Tools.DecodeVarInt(stream) });
             }
         }
+
+        if (version > 0)
+            foreach (var tag in loadedTags)
+                for (var i = 0; i < tag.Children.Length; i++)
+                {
+                    var iTag = tag.Children[i];
+                    if (iTag is TagReferenceObject refObj &&
+                        refObj.Index < loadedTags.Length && refObj.Index >= 0 &&
+                        loadedTags[refObj.Index] is { } referencedObj)
+                        tag[i] = referencedObj;
+                }
+
 
         if (!rHasItems) return [];
 
@@ -406,6 +423,18 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
             {
                 Tools.WriteVarUInt(stream, tag.Color.ToUInt32());
                 Tools.WriteByteArrWithVarInt(stream, Encoding.Unicode.GetBytes(tag.Text));
+                Tools.WriteVarInt(stream, tag.Count);
+                if (tag.Count <= 0) continue;
+                foreach (var childTag in tag.Children)
+                    switch (childTag)
+                    {
+                        case TagReferenceObject refObj:
+                            Tools.WriteVarInt(stream, refObj.Index);
+                            break;
+                        case Tag tagObj:
+                            Tools.WriteVarInt(stream, tagObj.Index);
+                            break;
+                    }
             }
         }
 
@@ -429,11 +458,45 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
     }
 }
 
-public sealed class Tag : INotifyPropertyChanged
+public abstract class TagAbstract
+{
+    private readonly List<TagAbstract> _children = [];
+
+    public TagAbstract this[int index]
+    {
+        get => _children[index];
+        set => _children[index] = value;
+    }
+
+    public TagAbstract[] Children => _children.ToArray();
+    protected TagAbstract? Parent { get; private set; }
+    public int Count => _children.Count;
+
+    public void Add(TagAbstract tag)
+    {
+        tag.Parent?.Remove(tag);
+        _children.Add(tag);
+        tag.Parent = this;
+    }
+
+    public void Remove(TagAbstract tag)
+    {
+        _children.Remove(tag);
+        tag.Parent = null;
+    }
+}
+
+public sealed class TagReferenceObject : TagAbstract
+{
+    public int Index { get; init; }
+}
+
+public sealed class Tag : TagAbstract, INotifyPropertyChanged
 {
     private readonly bool _init;
     private bool _checked;
     private Color _color;
+    private bool _showParent = true;
     private string _text = string.Empty;
 
     public Tag(string text, Color color, Bank? bank)
@@ -447,9 +510,19 @@ public sealed class Tag : INotifyPropertyChanged
 
     public Tag Self => this;
 
+    public bool ShowParent
+    {
+        get => _showParent;
+        set
+        {
+            _showParent = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Text)));
+        }
+    }
+
     public string Text
     {
-        get => _text;
+        get => (ShowParent && Parent is Tag tag ? tag.Text + ":" : "") + _text;
         set
         {
             _text = value;
@@ -488,14 +561,10 @@ public sealed class Tag : INotifyPropertyChanged
 public record NoteTag(Note Note, Tag Tag)
 {
     public NoteTag Self => this;
-    public bool NoteHasTag => Note.Tags.Contains(Tag);
+    public bool NoteHasTag => Enumerable.Contains(Note.Tags, Tag);
 }
 
 public interface INote
-{
-}
-
-public abstract class DragDropNote : INote
 {
 }
 
@@ -521,6 +590,7 @@ public sealed class Note : INote, INotifyPropertyChanged
     }
 
     public Note Self => this;
+
 
     public string Text
     {

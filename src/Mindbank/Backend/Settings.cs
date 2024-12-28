@@ -88,7 +88,7 @@ public sealed class Settings : INotifyPropertyChanged
 
     public static bool IsInstanceRunning => File.Exists(LockFile);
 
-    public static byte Version => 0;
+    public static byte Version => 1;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
