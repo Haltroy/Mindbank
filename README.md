@@ -30,8 +30,7 @@ Releases for Windows (Intel, AMD, ARM), Android (as APK) and generic binaries an
 For Arch-based Linux users, download the PKGBUILD files and put them in a folder. Then run `makepkg -i` inside that folder to build & install Mindbank.
  - [Normal](https://raw.githubusercontent.com/Haltroy/Mindbank/refs/heads/main/linux/arch/main/PKGBUILD) (builds the latest release) [`mindbank`]
  - [Binary](https://raw.githubusercontent.com/Haltroy/Mindbank/refs/heads/main/linux/arch/bin/PKGBUILD) (skips building the latest release, downloads and repackages the generic binaries) [`mindbank-bin`]
-
-Mindbank will check for updates for you. However, installing it is a task up to the you (the user).
+ - [Development](https://raw.githubusercontent.com/Haltroy/Mindbank/refs/heads/main/linux/arch/dev/PKGBUILD) (builds the main branch) [`mindbank-git`]
 
 ## Build
 

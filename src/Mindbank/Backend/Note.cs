@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using Avalonia.Media;
 using Mindbank.Backend.Exceptions;
+using Enumerable = System.Linq.Enumerable;
 
 namespace Mindbank.Backend;
 
@@ -82,16 +83,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     public int VisibleCount
     {
-        get
-        {
-            var count = 0;
-            foreach (var n in _notes)
-            {
-                if (n.Visible) count++;
-            }
-
-            return count;
-        }
+        get { return Enumerable.Count(_notes, it => it is { Visible: true }); }
     }
 
 
@@ -569,18 +561,7 @@ public sealed class Tag : TagAbstract, INotifyPropertyChanged
 public record NoteTag(Note Note, Tag Tag)
 {
     public NoteTag Self => this;
-    public bool NoteHasTag
-    {
-        get
-        {
-            foreach (var tag in Note.Tags)
-            {
-                if (tag == Tag) return true;
-            }
-
-            return false;
-        }
-    }
+    public bool NoteHasTag => Enumerable.Contains(Note.Tags, Tag);
 }
 
 public interface INote
