@@ -2,10 +2,8 @@ name: Build
 
 on:
   workflow_run:
-    workflows:
-      - devskim
-    types:
-      - completed
+    workflows: [DevSkim]
+    types: [completed]
 
 jobs:
   build:
