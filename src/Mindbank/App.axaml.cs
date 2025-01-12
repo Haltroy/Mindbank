@@ -17,28 +17,23 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        switch (ApplicationLifetime)
-        {
-            case IClassicDesktopStyleApplicationLifetime desktop:
-                desktop.Startup += DesktopOnStartup;
-                desktop.MainWindow = new MainWindow { ThisIsTheSingleton = !Settings.IsInstanceRunning };
-                break;
-            case ISingleViewApplicationLifetime singleViewPlatform:
-                singleViewPlatform.MainView = new MainView();
-                break;
-        }
-
-        base.OnFrameworkInitializationCompleted();
-    }
-
-    private void DesktopOnStartup(object? sender, ControlledApplicationLifetimeStartupEventArgs e)
-    {
+        Settings.SetupSingleton();
         if (Settings.IsInstanceRunning)
         {
             Environment.Exit(0);
             return;
         }
+        switch (ApplicationLifetime)
+        {
+            case IClassicDesktopStyleApplicationLifetime desktop:
+                desktop.Exit += (_, _) => { Settings.RemoveSingleton(); };
+                desktop.MainWindow = new MainWindow { ThisIsTheSingleton = true };
+                break;
+            case ISingleViewApplicationLifetime singleViewPlatform:
+                singleViewPlatform.MainView = new MainView { IsOnDesktop = false };
+                break;
+        }
 
-        Settings.SetupSingleton();
+        base.OnFrameworkInitializationCompleted();
     }
 }

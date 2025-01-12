@@ -1,9 +1,12 @@
 name: Mindbank Windows
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    branches:
+      - main
+  workflow_run:
+    workflows: [Build]
+    types: [completed]
+
 jobs:
   build:
     runs-on: windows-latest

@@ -7,20 +7,31 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Mindbank.Backend;
 
 namespace Mindbank.Views;
 
-public partial class NoteScreen : NoteEditUserControl
+public partial class NoteScreen : NUC
 {
+    public static readonly StyledProperty<Bank> BankProperty =
+        AvaloniaProperty.Register<NoteScreen, Bank>(nameof(Bank), Bank.GenerateExampleBank());
+
     public static readonly StyledProperty<bool> EditModeProperty =
         AvaloniaProperty.Register<NoteScreen, bool>(nameof(EditMode));
 
     public static readonly StyledProperty<Note?> EditNoteProperty =
         AvaloniaProperty.Register<NoteScreen, Note?>(nameof(EditNote));
+
+    public static readonly StyledProperty<Color> NewTagColorProperty =
+        AvaloniaProperty.Register<NoteScreen, Color>(nameof(NewTagColor), Colors.CornflowerBlue);
+
+    public static readonly StyledProperty<string> NewTagTextProperty =
+        AvaloniaProperty.Register<NoteScreen, string>(nameof(NewTagColor), string.Empty);
 
     private readonly List<Tag> _newNoteTags = [];
 
@@ -32,6 +43,12 @@ public partial class NoteScreen : NoteEditUserControl
     {
         InitializeComponent();
         Task.Run(LoadNote);
+    }
+
+    public Bank Bank
+    {
+        get => GetValue(BankProperty);
+        set => SetValue(BankProperty, value);
     }
 
     public Note? EditNote
@@ -47,6 +64,18 @@ public partial class NoteScreen : NoteEditUserControl
     }
 
     private Predicate<Note> GetPredicate => SearchConditionIsMet;
+
+    public Color NewTagColor
+    {
+        get => GetValue(NewTagColorProperty);
+        set => SetValue(NewTagColorProperty, value);
+    }
+
+    public string NewTagText
+    {
+        get => GetValue(NewTagTextProperty);
+        set => SetValue(NewTagTextProperty, value);
+    }
 
     private async void LoadNote()
     {
@@ -361,24 +390,6 @@ public partial class NoteScreen : NoteEditUserControl
         Bank.Insert(index, note);
     }
 
-    private void ManageTagsClicked(object? sender, RoutedEventArgs e)
-    {
-        if (MainCarousel is null) return;
-        var tagEditor = new TagEditor
-        {
-            [!BankProperty] = this[!BankProperty]
-        };
-        tagEditor.OkClick += TagEditorMenu_OnOKClick;
-        MainCarousel.Items.Add(tagEditor);
-        MainCarousel.SelectedItem = tagEditor;
-    }
-
-    private void TagEditorMenu_OnOKClick(object? sender, RoutedEventArgs e)
-    {
-        if (MainCarousel is null) return;
-        MainCarousel.SelectedIndex = 1;
-    }
-
     private void NoteItemEditMode_OnClick(object? sender, RoutedEventArgs e)
     {
         if (sender is not Control { Tag: Note note }) return;
@@ -416,5 +427,56 @@ public partial class NoteScreen : NoteEditUserControl
                 tag.Checked = false;
         _newNoteTags.Clear();
         DoSearch(GetPredicate);
+    }
+
+    private void TagControl_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        if (sender is not Control { ContextFlyout: { } flyout } c) return;
+        var point = e.GetCurrentPoint(c);
+        if (point.Properties.IsRightButtonPressed) flyout.ShowAt(c);
+    }
+
+    private void TagControl_OnHolding(object? sender, HoldingRoutedEventArgs e)
+    {
+        if (sender is not Control { ContextFlyout: { } flyout } c) return;
+        flyout.ShowAt(c);
+    }
+
+    private void TagControl_OnDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        if (sender is not Control { ContextFlyout: { } flyout } c) return;
+        flyout.ShowAt(c);
+    }
+
+    private void DeleteSelected(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Control { Tag: Tag tag }) return;
+        Bank.Remove(tag);
+    }
+
+    private void RandomColorClick(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Control) return;
+        switch (sender)
+        {
+            case Control { Tag: "NewTag" }:
+            {
+                var rnd = new Random();
+                NewTagColor = Color.FromRgb((byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256));
+                break;
+            }
+            case Control { Tag: Tag tag }:
+            {
+                var rnd = new Random();
+                tag.Color = Color.FromRgb((byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256));
+                break;
+            }
+        }
+    }
+
+    private void NewTagClicked(object? sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(NewTagText)) return;
+        Bank.Add(new Tag(NewTagText, NewTagColor, Bank));
     }
 }

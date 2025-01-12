@@ -191,6 +191,11 @@
                     </Button>
                     <Button HotKey="Ctrl+S" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                             ToolTip.Tip="{x:Static lang:Lang.ToolTip_Settings}" Background="Transparent"
+                            Tag="{CompiledBinding #TestNote}" Click="NoteGroupButtonClicked"
+                            DockPanel.Dock="Right" Content="Test Note"
+                            IsEnabled="{CompiledBinding $self.IsVisible}" />
+                    <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                            ToolTip.Tip="{x:Static lang:Lang.ToolTip_Settings}" Background="Transparent"
                             DockPanel.Dock="Right">
                         <Path Data="{StaticResource SettingsRegular}" Fill="{DynamicResource TextControlForeground}" />
                         <Button.Flyout>
@@ -312,6 +317,10 @@
                            Text="{x:Static lang:Lang.MainView_Welcome}" />
             </DockPanel>
             <views:AboutScreen IsEnabled="False" Name="AboutView" Main="{CompiledBinding $parent[views:MainView]}" />
+            <views:NoteScreen Name="TestNote" IsOnDesktop="{CompiledBinding $parent[views:MainView].IsOnDesktop}"
+                              DesktopContainer="{CompiledBinding $parent[views:MainView].DesktopContainer}"
+                              Settings="{CompiledBinding $parent[views:MainView].Settings}"
+                              Main="{CompiledBinding $parent[views:MainView]}" />
         </Carousel>
     </dialogHost:DialogHost>
 </UserControl>
