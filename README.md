@@ -32,6 +32,9 @@ For Arch-based Linux users, download the PKGBUILD files and put them in a folder
  - [Binary](https://raw.githubusercontent.com/Haltroy/Mindbank/refs/heads/main/linux/arch/bin/PKGBUILD) (skips building the latest release, downloads and repackages the generic binaries) [`mindbank-bin`]
  - [Development](https://raw.githubusercontent.com/Haltroy/Mindbank/refs/heads/main/linux/arch/dev/PKGBUILD) (builds the main branch) [`mindbank-git`]
 
+
+Mindbank will check for updates for you. However, installing it is a task up to you (the user).
+
 ## Build
 
 Requires [.NET SDK](https://dotnet.microsoft.com) (latest LTS available).
