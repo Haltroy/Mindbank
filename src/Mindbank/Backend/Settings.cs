@@ -8,6 +8,7 @@ namespace Mindbank.Backend;
 
 public sealed class Settings : INotifyPropertyChanged
 {
+    private static Stream? _settingsFileStream;
     private readonly List<Bank> _banks = [];
     private bool _alreadyLoaded;
     private byte _blurLevel = 75;
@@ -84,9 +85,8 @@ public sealed class Settings : INotifyPropertyChanged
 
     private static string SettingsFile => Path.Combine(AppFolder, "settings");
     private static string SourcesFolder => Path.Combine(AppFolder, "sources");
-    private static string LockFile => Path.Combine(AppFolder, "lock");
 
-    public static bool IsInstanceRunning => File.Exists(LockFile);
+    public static bool IsInstanceRunning { get; private set; }
 
     public static byte Version => 0;
 
@@ -94,19 +94,30 @@ public sealed class Settings : INotifyPropertyChanged
 
     public static void SetupSingleton()
     {
-        File.Create(LockFile);
+        try
+        {
+            _settingsFileStream =
+                new FileStream(SettingsFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+        }
+        catch (Exception)
+        {
+            IsInstanceRunning = true;
+        }
     }
 
     public static void RemoveSingleton()
     {
-        File.Delete(LockFile);
+        if (_settingsFileStream is null) return;
+        _settingsFileStream.Close();
+        _settingsFileStream.Dispose();
+        _settingsFileStream = null;
     }
 
     public void Load(bool force = false)
     {
         if (_alreadyLoaded && !force) return;
         if (!Directory.Exists(AppFolder) || !File.Exists(SettingsFile)) return;
-        using var stream = new FileStream(SettingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        if (_settingsFileStream is not { } stream) return;
         _isLoading = true;
         var version = stream.ReadByte();
         if (version < 0 || version > Version) return;
@@ -149,9 +160,8 @@ public sealed class Settings : INotifyPropertyChanged
     {
         if (_isLoading) return;
         if (!Directory.Exists(AppFolder)) Directory.CreateDirectory(AppFolder);
-        using var stream = File.Exists(SettingsFile)
-            ? new FileStream(SettingsFile, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite)
-            : File.Create(SettingsFile);
+        if (_settingsFileStream is not { } stream) return;
+        stream.SetLength(0);
         stream.WriteByte(Version);
         byte booleans = 0;
         if (Theme == ThemeVariant.Default)
