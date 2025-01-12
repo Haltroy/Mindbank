@@ -22,12 +22,9 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     private bool _save;
 
-    public Settings? Settings { get; } = settings;
+    private Settings? Settings { get; } = settings;
     public Bank Self => this;
 
-    /// <summary>
-    ///     The name of the bank.
-    /// </summary>
     public string Name
     {
         get => _name;
@@ -38,10 +35,6 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
             Settings?.Save();
         }
     }
-
-    /// <summary>
-    ///     The file path of the bank.
-    /// </summary>
     public string FilePath
     {
         get => _path;
@@ -76,9 +69,6 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
     private int Version { get; set; }
     public Note[] Notes => _notes.ToArray();
 
-    public Note this[int index] => _notes[index];
-    public Tag this[int index, bool isTag = true] => _tags[index];
-
     public int Count => _notes.Count;
 
     public int VisibleCount
@@ -89,12 +79,12 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
 
     public Tag[] Tags => _tags.ToArray();
 
-    public bool VersionMatch => Version == Settings.Version;
-    public bool ReadOnly { get; set; }
-    public bool LimitNotReached => Count < int.MaxValue;
+    private bool VersionMatch => Version == Settings.Version;
+    public bool ReadOnly { get; init; }
+    private bool LimitNotReached => Count < int.MaxValue;
     public bool CanWrite => VersionMatch && LimitNotReached && !ReadOnly;
 
-    public bool IsExample { get; set; }
+    private bool IsExample { get; init; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -152,16 +142,6 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         if (!_init) NeedsSaving = true;
     }
 
-    public void AddRange(IEnumerable<Tag> tags)
-    {
-        if (!CanWrite) return;
-        _tags.AddRange(tags);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-        foreach (var n in _notes)
-            n.RequestPropertyChangeInvoke();
-        if (!_init) NeedsSaving = true;
-    }
-
     public void Insert(int index, Note note)
     {
         if (!CanWrite) return;
@@ -170,99 +150,11 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         if (!_init) NeedsSaving = true;
     }
 
-    public void InsertRange(int index, IEnumerable<Note> notes)
-    {
-        if (!CanWrite) return;
-        _notes.InsertRange(index, notes);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
-        if (!_init) NeedsSaving = true;
-    }
-
-    public void Insert(int index, Tag tag)
-    {
-        if (!CanWrite) return;
-        _tags.Insert(index, tag);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-        foreach (var note in _notes) note.RequestPropertyChangeInvoke();
-        if (!_init) NeedsSaving = true;
-    }
-
-    public void InsertRange(int index, IEnumerable<Tag> tags)
-    {
-        if (!CanWrite) return;
-        _tags.InsertRange(index, tags);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-        foreach (var note in _notes) note.RequestPropertyChangeInvoke();
-        if (!_init) NeedsSaving = true;
-    }
-
     public void Remove(Note note)
     {
         if (!CanWrite) return;
         _notes.Remove(note);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
-        if (!_init) NeedsSaving = true;
-    }
-
-    public void Remove(Tag tag)
-    {
-        if (!CanWrite) return;
-        _tags.Remove(tag);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-        foreach (var note in _notes) note.RequestPropertyChangeInvoke();
-        if (!_init) NeedsSaving = true;
-    }
-
-    public void RemoveAt(int index, bool isTag = false)
-    {
-        if (!CanWrite) return;
-        if (isTag)
-        {
-            _tags.RemoveAt(index);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-            foreach (var note in _notes) note.RequestPropertyChangeInvoke();
-        }
-        else
-        {
-            _notes.RemoveAt(index);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
-        }
-
-        if (!_init) NeedsSaving = true;
-    }
-
-    public void RemoveRange(int index, int count, bool isTag = false)
-    {
-        if (!CanWrite) return;
-        if (isTag)
-        {
-            _tags.RemoveRange(index, count);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-            foreach (var note in _notes) note.RequestPropertyChangeInvoke();
-        }
-        else
-        {
-            _notes.RemoveRange(index, count);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
-        }
-
-        if (!_init) NeedsSaving = true;
-    }
-
-    public void RemoveAll(Predicate<INote> predicate)
-    {
-        if (!CanWrite) return;
-        _notes.RemoveAll(predicate);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
-        if (!_init) NeedsSaving = true;
-    }
-
-    public void RemoveAll(Predicate<Tag> predicate)
-    {
-        if (CanWrite)
-            _tags.RemoveAll(predicate);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
-        foreach (var note in _notes) note.RequestPropertyChangeInvoke();
         if (!_init) NeedsSaving = true;
     }
 
@@ -314,6 +206,7 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
     {
         try
         {
+            if (IsExample) return;
             IsSaving = true;
             if (!CanWrite) return;
             await using var fileStream = !File.Exists(FilePath)
@@ -485,17 +378,7 @@ public sealed class Tag : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 }
 
-public record NoteTag(Note Note, Tag Tag)
-{
-    public NoteTag Self => this;
-    public bool NoteHasTag => Note.Tags.Contains(Tag);
-}
-
 public interface INote
-{
-}
-
-public abstract class DragDropNote : INote
 {
 }
 
@@ -555,17 +438,6 @@ public sealed class Note : INote, INotifyPropertyChanged
         }
     }
 
-    public NoteTag[] NoteTagCombination
-    {
-        get
-        {
-            if (Bank is null) return [];
-            var tagCombo = new NoteTag[Bank.Tags.Length];
-            for (var i = 0; i < tagCombo.Length; i++) tagCombo[i] = new NoteTag(this, Bank.Tags[i]);
-            return tagCombo;
-        }
-    }
-
     public bool Visible
     {
         get => _visible;
@@ -597,7 +469,6 @@ public sealed class Note : INote, INotifyPropertyChanged
 
     public void RequestPropertyChangeInvoke()
     {
-        _ = NoteTagCombination;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NoteTagCombination)));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Note)));
     }
 }
