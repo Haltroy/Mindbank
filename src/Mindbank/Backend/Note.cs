@@ -157,6 +157,13 @@ public sealed class Bank(Settings? settings) : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Notes)));
         if (!_init) NeedsSaving = true;
     }
+    public void Remove(Tag tag)
+    {
+        if (!CanWrite) return;
+        _tags.Remove(tag);
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tags)));
+        if (!_init) NeedsSaving = true;
+    }
 
     public int IndexOf(Note note)
     {
